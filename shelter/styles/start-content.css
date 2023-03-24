@@ -1,0 +1,56 @@
+.start-content {
+  padding-top: 10px;
+  height: 728px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 40px;
+}
+.start-text {
+  align-self: center;
+  width: 460px;
+  height: 322px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.start-text h2 {
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 130%;
+  /* or 57px */
+  color: #fff;
+  /* display: flex;
+  align-items: center; */
+}
+.start-text p {
+  font-family: "arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  /* or 24px */
+  color: #cdcdcd;
+  /* display: flex;
+  align-items: center; */
+}
+.start-text button {
+  width: 207px;
+  height: 52px;
+
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 130%;
+  /* identical to box height, or 22px */
+
+  letter-spacing: 0.06em;
+  color: #292929;
+
+  background: #f1cdb3;
+  border-radius: 100px;
+}
