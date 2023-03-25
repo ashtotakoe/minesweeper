@@ -9,6 +9,12 @@
   margin: 0px;
   padding: 0px;
 }
+html {
+  scroll-behavior: smooth;
+}
+button {
+  cursor: pointer;
+}
 .start-screen {
   min-height: 908px;
   background: url(assets/images/noise_transparent@2x.png),

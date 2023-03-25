@@ -19,6 +19,7 @@
   gap: 20px;
 }
 .donation-header {
+  width: 300px;
   font-family: "georgia";
   font-style: normal;
   font-weight: 400;
@@ -63,7 +64,7 @@
 .credit-number {
   /* h4 */
 
-  font-family: "Georgia";
+  font-family: "georgia";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;

@@ -34,6 +34,18 @@
   background: #f1cdb3;
   border-radius: 100px;
   border: none;
+
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 130%;
+  /* identical to box height, or 22px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-3xl */
+
   color: #292929;
 }
 .pets-block > .wrapper-block {
@@ -64,6 +76,7 @@
   align-items: center;
   gap: 30px;
   border-radius: 9px;
+  overflow: hidden;
 }
 .card-image {
   border-radius: 9px 9px 0px 0px;
@@ -115,6 +128,12 @@
   back */
 
   transform: rotate(180deg);
+}
+.arrow-right img {
+  transform: translate(0px, -2px);
+}
+.arrow-left img {
+  transform: translate(0px, -2px);
 }
 .arrow {
   width: 52px;

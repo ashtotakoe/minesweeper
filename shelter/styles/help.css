@@ -13,14 +13,14 @@
 }
 .help-header {
   /* h3 */
-
+  width: 310px;
   font-family: "georgia";
   font-style: normal;
   font-weight: 400;
   font-size: 35px;
   line-height: 130%;
   /* or 45px */
-
+  text-align: center;
   letter-spacing: 0.06em;
 
   /* color-dark-l */
@@ -28,20 +28,17 @@
   color: #545454;
 }
 .help-list {
-  width: 80vw;
-  min-height: 281px;
+  max-width: 1030px;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 70px;
+  gap: 120px;
+  row-gap: 55px;
   justify-content: center;
   align-items: center;
-  align-content: center;
 }
 
 .help-card {
-  width: 130px;
-  height: 113px;
+  gap: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

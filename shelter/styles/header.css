@@ -1,4 +1,15 @@
 @import "fonts.css";
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
 .header {
   height: 60px;
   margin: 0px 40px;
@@ -8,6 +19,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .navigation {
   display: flex;
   flex-direction: row;
@@ -27,8 +39,20 @@
   line-height: 160%;
 }
 .navigation li:nth-child(1) {
+  transform: translate(0px, 4px);
   color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 7px;
 }
+.navigation li:nth-child(1) span {
+  display: inline-block;
+  width: 114px;
+  height: 3px;
+  background: #f1cdb3;
+}
+
 .logo h3 {
   color: #f1cdb3;
   margin-bottom: 10px;
