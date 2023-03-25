@@ -1,0 +1,64 @@
+@import "fonts.css";
+.help-block {
+  margin-top: 80px;
+  margin-bottom: 100px;
+  width: 93vw;
+  min-height: 431px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+.help-header {
+  /* h3 */
+
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  /* or 45px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
+.help-list {
+  width: 80vw;
+  min-height: 281px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 70px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.help-card {
+  width: 130px;
+  height: 113px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.help-card h4 {
+  font-family: "georgia";
+  font-style: normal;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
