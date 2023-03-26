@@ -2,10 +2,13 @@
 .start-content {
   padding-top: 10px;
   height: 728px;
+  max-width: 1200px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0px 40px;
+  align-self: center;
+  gap: 40px;
 }
 .start-text {
   width: 460px;
@@ -55,4 +58,7 @@
 
   background: #f1cdb3;
   border-radius: 100px;
+}
+.start-text button:hover {
+  background: #eaddd3;
 }

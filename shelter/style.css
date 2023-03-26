@@ -14,6 +14,19 @@ html {
 }
 button {
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.arrow:hover {
+  background: #f1cdb3;
+  color: white !important;
+}
+
+.arrow-back {
+  border-color: #cdcdcd;
+  color: #cdcdcd !important;
+}
+.arrow-main {
+  background-color: #f1cdb3;
 }
 .start-screen {
   min-height: 908px;

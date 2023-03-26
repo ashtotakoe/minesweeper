@@ -1,6 +1,7 @@
 @import "fonts.css";
 .pets-block {
   width: 93vw;
+  max-width: 1200px;
   margin: auto;
   padding-top: 80px;
   min-height: 697px;
@@ -48,6 +49,9 @@
 
   color: #292929;
 }
+.pets-button:hover {
+  background-color: #eaddd3;
+}
 .pets-block > .wrapper-block {
   width: 100%;
 
@@ -56,8 +60,9 @@
   align-items: center;
   justify-content: space-between;
 }
-.wrapper-block > .card-wrapper {
+.card-wrapper {
   width: 77vw;
+  max-width: 990px;
   min-height: 430px;
   display: flex;
   flex-direction: row;
@@ -77,6 +82,13 @@
   gap: 30px;
   border-radius: 9px;
   overflow: hidden;
+  transition: width 0.2s linear, height 0.3s ease, box-shadow 0.2s linear;
+}
+.card:hover {
+  cursor: pointer;
+  width: 300px;
+  height: 450px;
+  box-shadow: 1px 2px 4px #c9c4c4;
 }
 .card-image {
   border-radius: 9px 9px 0px 0px;
@@ -104,8 +116,6 @@
   width: 187px;
   height: 52px;
 
-  /* color-primary */
-
   border: 2px solid #f1cdb3;
   border-radius: 100px;
 
@@ -121,6 +131,10 @@
   /* color-dark-3xl */
 
   color: #292929;
+}
+.card-button:hover {
+  background-color: #f1cdb3;
+  color: #fafafa;
 }
 .arrow-right {
   /* background-image: url("../assets/images/button-arrow.svg");

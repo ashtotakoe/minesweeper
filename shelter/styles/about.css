@@ -1,6 +1,7 @@
 @import "fonts.css";
 .about-block {
   margin: 80px 0px 40px 0px;
+  max-width: 1200px;
   min-height: 408px;
   width: 93%;
   display: flex;

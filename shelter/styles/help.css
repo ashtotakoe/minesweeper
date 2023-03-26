@@ -1,6 +1,7 @@
 @import "fonts.css";
 .help-block {
   margin-top: 80px;
+  max-width: 1200px;
   margin-bottom: 100px;
   width: 93vw;
   min-height: 431px;

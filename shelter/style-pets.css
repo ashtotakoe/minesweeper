@@ -1,0 +1,97 @@
+@import "./styles/header.css";
+@import "./styles/pets.css";
+@import "./styles/footer.css";
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logo h1,
+.navigation li {
+  color: #545454;
+}
+.logo p,
+#selected-page {
+  color: #292929;
+}
+.logo {
+  cursor: pointer;
+  transform: translate(0px, -4px);
+}
+.logo p {
+  transform: translate(1px, -4px);
+}
+
+.pets-block {
+  padding-top: 50px;
+  max-width: inherit;
+}
+.card {
+  gap: 27px;
+}
+.pets-header {
+  margin: 35px 0px 0px 0px;
+}
+.card-wrapper {
+  flex-wrap: wrap;
+  width: 100%;
+  row-gap: 30px;
+  max-width: inherit;
+  max-width: 1190px;
+}
+.card-text {
+  margin: 0px;
+}
+
+.pets-navigation {
+  margin-bottom: 102px;
+  display: flex;
+  gap: 20px;
+}
+.arrow {
+  background-color: inherit;
+}
+.arrow {
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-3xl */
+
+  color: #292929;
+}
+.arrow {
+  margin: 0;
+}
+
+.arrow:hover {
+  background: #f1cdb3;
+  color: white !important;
+}
+
+.arrow-back {
+  border-color: #cdcdcd;
+  color: #cdcdcd !important;
+}
+.arrow-main {
+  background-color: #f1cdb3;
+}
+.footer {
+  min-height: 350px;
+
+  background: url(assets/images/noise_transparent@2x.png),
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%)
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #211f20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-block {
+  padding-top: 43px;
+}

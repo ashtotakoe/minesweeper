@@ -3,6 +3,7 @@
 .donation-block {
   margin-top: 80px;
   min-height: 282px;
+  max-width: 915px;
   width: 75%;
   max-width: 915px;
   display: flex;
