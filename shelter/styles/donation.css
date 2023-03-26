@@ -1,0 +1,97 @@
+@import "fonts.css";
+
+.donation-block {
+  margin-top: 80px;
+  min-height: 282px;
+  max-width: 915px;
+  width: 75%;
+  max-width: 915px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.donation-text {
+  min-height: 282px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.donation-header {
+  width: 300px;
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  /* or 45px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
+.donation-text h5 {
+  /* h5 */
+
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 110%;
+  /* identical to box height, or 17px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
+
+.donation-credit {
+  width: 349px;
+  height: 43px;
+  background: #f1cdb3;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.credit-number {
+  /* h4 */
+
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
+.card-image img {
+  transform: translate(0px, 2px);
+}
+.donation-text > p {
+  /* donation-description */
+
+  font-family: "arial";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  /* or 150% */
+
+  /* color-dark-m */
+
+  color: #b2b2b2;
+}
