@@ -1,7 +1,7 @@
-@import "fonts.css";
+@import "fonts";
 .start-content {
   padding-top: 10px;
-  height: 728px;
+  min-height: 728px;
   max-width: 1200px;
   display: flex;
   flex-direction: row;
@@ -59,6 +59,44 @@
   background: #f1cdb3;
   border-radius: 100px;
 }
+.burger-button {
+  display: none;
+  width: 30px;
+  height: 22px;
+
+  span {
+    width: 30px;
+    height: 0px;
+    border: 2px solid #f1cdb3;
+  }
+}
+
 .start-text button:hover {
   background: #eaddd3;
+}
+.start-image {
+  width: 698px;
+  height: 728px;
+}
+.start-image img {
+  height: 100%;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .start-content {
+    flex-direction: column;
+    align-items: center;
+    .start-text {
+      margin-top: 20px;
+    }
+    button {
+      align-self: center;
+    }
+    .start-image {
+      margin-left: 127px;
+      margin-top: 60px;
+      width: 569px;
+      height: 593px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-@import "fonts.css";
+@import "fonts";
 .about-block {
   margin: 80px 0px 40px 0px;
   max-width: 1200px;
@@ -53,4 +53,17 @@
   /* color-dark-xl */
 
   color: #4c4c4c;
+}
+
+@media (max-width: 1050px) {
+  .about-block {
+    flex-direction: column;
+    .about-text {
+      order: 1;
+    }
+    .about-image {
+      order: 2;
+      margin-left: 20px;
+    }
+  }
 }

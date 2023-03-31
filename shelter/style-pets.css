@@ -1,6 +1,13 @@
-@import "fonts.css";
-@import "fonts.css";
-@import "fonts.css";
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 a:link {
   text-decoration: inherit;
   color: inherit;
@@ -86,6 +93,16 @@ a:visited {
   transform: translate(0px, -4px);
 }
 
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 .pets-block {
   width: 93vw;
   max-width: 1200px;
@@ -240,6 +257,24 @@ a:visited {
   border-radius: 100px;
 }
 
+@media (max-width: 1110px) {
+  .card-wrapper .card:nth-child(2) {
+    display: none;
+  }
+  .pets-block {
+    margin-top: 65px;
+  }
+}
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 .footer-block {
   min-height: 310px;
   max-width: 1280px;

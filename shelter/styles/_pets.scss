@@ -1,4 +1,4 @@
-@import "fonts.css";
+@import "fonts";
 .pets-block {
   width: 93vw;
   max-width: 1200px;
@@ -155,4 +155,13 @@
 
   border: 2px solid #f1cdb3;
   border-radius: 100px;
+}
+
+@media (max-width: 1110px) {
+  .card-wrapper .card:nth-child(2) {
+    display: none;
+  }
+  .pets-block {
+    margin-top: 65px;
+  }
 }
