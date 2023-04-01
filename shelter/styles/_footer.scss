@@ -10,6 +10,15 @@
   align-items: flex-start;
   justify-content: space-between;
 }
+.footer-info {
+  display: flex;
+  flex-basis: 709px;
+
+  justify-content: space-between;
+}
+.footer-image {
+  margin-left: 230px;
+}
 .footer-contacts {
   width: 283px;
   height: 234px;
@@ -66,4 +75,9 @@
   /* color-light-xl */
 
   color: #ffffff;
+}
+@media (max-width: 1015px) {
+  .footer-block {
+    flex-direction: column;
+  }
 }

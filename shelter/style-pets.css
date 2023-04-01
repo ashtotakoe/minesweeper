@@ -286,6 +286,16 @@ a:visited {
   justify-content: space-between;
 }
 
+.footer-info {
+  display: flex;
+  flex-basis: 709px;
+  justify-content: space-between;
+}
+
+.footer-image {
+  margin-left: 230px;
+}
+
 .footer-contacts {
   width: 283px;
   height: 234px;
@@ -340,6 +350,11 @@ a:visited {
   color: #ffffff;
 }
 
+@media (max-width: 1015px) {
+  .footer-block {
+    flex-direction: column;
+  }
+}
 button {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
