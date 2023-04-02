@@ -1,4 +1,20 @@
 @import "fonts";
+
+%h4 {
+  font-family: "georgia";
+  font-style: normal;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
 .help-block {
   margin-top: 80px;
   max-width: 1200px;
@@ -49,17 +65,49 @@
   justify-content: space-between;
 }
 .help-card h4 {
-  font-family: "georgia";
-  font-style: normal;
-  width: fit-content;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 115%;
-  /* identical to box height, or 23px */
-  text-align: center;
-  letter-spacing: 0.06em;
+  @extend %h4;
+}
 
-  /* color-dark-l */
+@media (max-width: 875px) {
+  .help-list {
+    gap: 60px;
+    h4 {
+      font-size: 20px;
+      line-height: 115%;
+    }
+  }
+  .help-card {
+    width: 170px;
+    height: 113px;
+  }
+}
+@media (max-width: 530px) {
+  .help-block {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    gap: 45px;
+  }
 
-  color: #545454;
+  .help-header {
+    font-size: 25px;
+    line-height: 130%;
+    margin-top: 5px;
+  }
+  .help-list {
+    justify-content: space-between;
+    gap: 30px;
+    h4 {
+      font-size: 15px;
+      line-height: 110%;
+    }
+  }
+
+  .help-card {
+    width: 130px;
+    height: 87px;
+    gap: 0px;
+    img {
+      height: 50px;
+    }
+  }
 }

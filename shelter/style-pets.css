@@ -93,6 +93,31 @@ a:visited {
   transform: translate(0px, -4px);
 }
 
+.burger-button {
+  display: none;
+  width: 30px;
+  height: 22px;
+}
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: 2px solid #f1cdb3;
+}
+
+@media (max-width: 720px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -241,6 +266,10 @@ a:visited {
   transform: rotate(180deg);
 }
 
+.mobile-arrows {
+  display: none;
+}
+
 .arrow-right img {
   transform: translate(0px, -2px);
 }
@@ -257,12 +286,54 @@ a:visited {
   border-radius: 100px;
 }
 
-@media (max-width: 1110px) {
+@media (max-width: 1110px) and (min-width: 720px) {
   .card-wrapper .card:nth-child(2) {
     display: none;
   }
   .pets-block {
     margin-top: 65px;
+  }
+}
+@media (max-width: 720px) {
+  .pets {
+    min-height: 791px !important;
+  }
+  .pets-block {
+    padding-top: 33px;
+    gap: 50px;
+  }
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+  }
+  .wrapper-block .arrow {
+    display: none;
+  }
+  .wrapper-block .mobile-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 79px;
+    margin-top: 10px;
+  }
+  .wrapper-block .mobile-buttons .mobile-arrows {
+    display: inline-block;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card {
+    gap: 16px;
+  }
+  .card-wrapper .card .card-button {
+    margin-top: 20px;
+  }
+  .card-wrapper .card:nth-child(2),
+  .card-wrapper .card:nth-child(3) {
+    display: none;
   }
 }
 @font-face {

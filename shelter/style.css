@@ -93,6 +93,31 @@ a:visited {
   transform: translate(0px, -4px);
 }
 
+.burger-button {
+  display: none;
+  width: 30px;
+  height: 22px;
+}
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: 2px solid #f1cdb3;
+}
+
+@media (max-width: 720px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -116,7 +141,7 @@ a:visited {
 }
 
 .start-text {
-  width: 460px;
+  max-width: 460px;
   margin-top: 163px;
   height: 322px;
   display: flex;
@@ -165,17 +190,6 @@ a:visited {
   border-radius: 100px;
 }
 
-.burger-button {
-  display: none;
-  width: 30px;
-  height: 22px;
-}
-.burger-button span {
-  width: 30px;
-  height: 0px;
-  border: 2px solid #f1cdb3;
-}
-
 .start-text button:hover {
   background: #eaddd3;
 }
@@ -190,7 +204,7 @@ a:visited {
   width: 100%;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 700px) {
   .start-content {
     flex-direction: column;
     align-items: center;
@@ -206,6 +220,38 @@ a:visited {
     margin-top: 60px;
     width: 569px;
     height: 593px;
+  }
+}
+@media (max-width: 700px) {
+  .start-screen {
+    min-height: 823px !important;
+  }
+  .start-content {
+    flex-direction: column;
+    padding-top: 0px;
+  }
+  .start-content .start-text {
+    align-items: center;
+    margin-top: 0px;
+    margin-left: 10px;
+    width: 93%;
+    text-align: center;
+  }
+  .start-content .start-text h2 {
+    font-size: 25px;
+    line-height: 130%;
+    width: 200px;
+    margin-top: 30px;
+  }
+  .start-content button {
+    align-self: center;
+  }
+  .start-content .start-image {
+    margin-left: 18vw;
+    margin-top: 60px;
+    width: 260px;
+    height: 271.77px;
+    margin-bottom: 30px;
   }
 }
 @font-face {
@@ -273,7 +319,7 @@ a:visited {
   color: #4c4c4c;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1050px) and (min-width: 475px) {
   .about-block {
     flex-direction: column;
   }
@@ -283,6 +329,38 @@ a:visited {
   .about-block .about-image {
     order: 2;
     margin-left: 20px;
+  }
+}
+@media (max-width: 475px) {
+  .about {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .about .about-block {
+    margin-top: 15px;
+    flex-direction: column;
+  }
+  .about .about-block .about-text {
+    order: 1;
+    align-items: center;
+  }
+  .about .about-block .about-text h3 {
+    font-size: 25px;
+    line-height: 32.5px;
+    text-align: center;
+  }
+  .about .about-block .about-text p {
+    text-align: justify;
+    width: 84vw;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .about .about-block .about-image {
+    order: 2;
+    margin-left: 20px;
+    margin-top: 18px;
+    width: 260px;
+    height: 353.6px;
   }
 }
 @font-face {
@@ -433,6 +511,10 @@ a:visited {
   transform: rotate(180deg);
 }
 
+.mobile-arrows {
+  display: none;
+}
+
 .arrow-right img {
   transform: translate(0px, -2px);
 }
@@ -449,12 +531,54 @@ a:visited {
   border-radius: 100px;
 }
 
-@media (max-width: 1110px) {
+@media (max-width: 1110px) and (min-width: 720px) {
   .card-wrapper .card:nth-child(2) {
     display: none;
   }
   .pets-block {
     margin-top: 65px;
+  }
+}
+@media (max-width: 720px) {
+  .pets {
+    min-height: 791px !important;
+  }
+  .pets-block {
+    padding-top: 33px;
+    gap: 50px;
+  }
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+  }
+  .wrapper-block .arrow {
+    display: none;
+  }
+  .wrapper-block .mobile-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 79px;
+    margin-top: 10px;
+  }
+  .wrapper-block .mobile-buttons .mobile-arrows {
+    display: inline-block;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card {
+    gap: 16px;
+  }
+  .card-wrapper .card .card-button {
+    margin-top: 20px;
+  }
+  .card-wrapper .card:nth-child(2),
+  .card-wrapper .card:nth-child(3) {
+    display: none;
   }
 }
 @font-face {
@@ -467,6 +591,21 @@ a:visited {
   src: url("./assets/fonts/georgia.ttf");
   font-weight: normal;
 }
+.help-card h4 {
+  font-family: "georgia";
+  font-style: normal;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+  text-align: center;
+  letter-spacing: 0.06em;
+  /* color-dark-l */
+  color: #545454;
+}
+
 .help-block {
   margin-top: 80px;
   max-width: 1200px;
@@ -513,21 +652,47 @@ a:visited {
   justify-content: space-between;
 }
 
-.help-card h4 {
-  font-family: "georgia";
-  font-style: normal;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 115%;
-  /* identical to box height, or 23px */
-  text-align: center;
-  letter-spacing: 0.06em;
-  /* color-dark-l */
-  color: #545454;
+@media (max-width: 875px) {
+  .help-list {
+    gap: 60px;
+  }
+  .help-list h4 {
+    font-size: 20px;
+    line-height: 115%;
+  }
+  .help-card {
+    width: 170px;
+    height: 113px;
+  }
 }
-
+@media (max-width: 530px) {
+  .help-block {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    gap: 45px;
+  }
+  .help-header {
+    font-size: 25px;
+    line-height: 130%;
+    margin-top: 5px;
+  }
+  .help-list {
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .help-list h4 {
+    font-size: 15px;
+    line-height: 110%;
+  }
+  .help-card {
+    width: 130px;
+    height: 87px;
+    gap: 0px;
+  }
+  .help-card img {
+    height: 50px;
+  }
+}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -640,6 +805,37 @@ a:visited {
   .donation-block .donation-text {
     order: 1;
     align-items: flex-start;
+  }
+}
+@media (max-width: 540px) {
+  .donation-text {
+    align-items: center !important;
+  }
+  .donation-text .donation-header {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 220px;
+  }
+  .donation-text .donation-credit {
+    width: 281px;
+  }
+  .donation-text .donation-credit img {
+    height: 23px;
+  }
+  .donation-block {
+    margin-top: 40px;
+  }
+  .donation-block .credit-number {
+    font-size: 15px;
+    line-height: 110%;
+  }
+  .donation-block h5 {
+    font-size: 13px;
+    line-height: 160%;
+  }
+  .donation-block img {
+    height: 135.2px;
   }
 }
 @font-face {
