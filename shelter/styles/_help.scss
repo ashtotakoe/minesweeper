@@ -1,4 +1,20 @@
-@import "fonts.css";
+@import "fonts";
+
+%h4 {
+  font-family: "georgia";
+  font-style: normal;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  /* identical to box height, or 23px */
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  /* color-dark-l */
+
+  color: #545454;
+}
 .help-block {
   margin-top: 80px;
   max-width: 1200px;
@@ -36,6 +52,9 @@
   row-gap: 55px;
   justify-content: center;
   align-items: center;
+
+  // display: grid;
+  // grid-auto-rows: 113px;
 }
 
 .help-card {
@@ -46,17 +65,5 @@
   justify-content: space-between;
 }
 .help-card h4 {
-  font-family: "georgia";
-  font-style: normal;
-  width: fit-content;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 115%;
-  /* identical to box height, or 23px */
-  text-align: center;
-  letter-spacing: 0.06em;
-
-  /* color-dark-l */
-
-  color: #545454;
+  @extend %h4;
 }

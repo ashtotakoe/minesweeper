@@ -1,6 +1,13 @@
-@import "fonts.css";
-@import "fonts.css";
-@import "fonts.css";
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 a:link {
   text-decoration: inherit;
   color: inherit;
@@ -86,6 +93,27 @@ a:visited {
   transform: translate(0px, -4px);
 }
 
+.burger-button {
+  display: none;
+  width: 30px;
+  height: 22px;
+}
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: 2px solid #f1cdb3;
+}
+
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 .pets-block {
   width: 93vw;
   max-width: 1200px;
@@ -164,7 +192,7 @@ a:visited {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   border-radius: 9px;
   overflow: hidden;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
@@ -199,6 +227,7 @@ a:visited {
 .card-button {
   width: 187px;
   height: 52px;
+  background-color: transparent;
   border: 2px solid #f1cdb3;
   border-radius: 100px;
   font-family: "georgia";
@@ -212,7 +241,7 @@ a:visited {
   color: #292929;
 }
 
-.card-button:hover {
+.card:hover .card-button {
   background-color: #f1cdb3;
   color: #fafafa;
 }
@@ -222,6 +251,10 @@ a:visited {
   background-repeat: inherit;
   back */
   transform: rotate(180deg);
+}
+
+.mobile-buttons {
+  display: none;
 }
 
 .arrow-right img {
@@ -240,6 +273,16 @@ a:visited {
   border-radius: 100px;
 }
 
+@font-face {
+  font-family: "arial";
+  src: url("./assets/fonts/arial.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "georgia";
+  src: url("./assets/fonts/georgia.ttf");
+  font-weight: normal;
+}
 .footer-block {
   min-height: 310px;
   max-width: 1280px;
@@ -249,6 +292,20 @@ a:visited {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+}
+
+.footer-info {
+  display: flex;
+  gap: 150px;
+  justify-content: space-between;
+}
+
+.footer-image {
+  margin-left: 160px;
+}
+.footer-image img {
+  height: 100%;
+  width: 100%;
 }
 
 .footer-contacts {
@@ -305,6 +362,128 @@ a:visited {
   color: #ffffff;
 }
 
+@media (max-width: 767px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
+@media (max-width: 1110px) {
+  .pets-block {
+    margin-top: 3px;
+    gap: 33px;
+    max-width: 579px !important;
+  }
+  .card:nth-last-child(1),
+  .card:nth-last-child(2) {
+    display: none;
+  }
+  .pets-navigation {
+    margin-bottom: 79px !important;
+  }
+}
+@media (max-width: 740px) {
+  .pets {
+    min-height: 791px !important;
+  }
+  .pets-block {
+    padding-top: 0px !important;
+    gap: 45px;
+  }
+  .pets-block .card {
+    display: none;
+  }
+  .pets-block .card:nth-child(1),
+  .pets-block .card:nth-child(2),
+  .pets-block .card:nth-child(3) {
+    display: flex;
+  }
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+  }
+  .wrapper-block .arrow {
+    display: none;
+  }
+  .pets-navigation {
+    margin-bottom: 39px !important;
+    gap: 10px !important;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card {
+    gap: 16px;
+  }
+  .card-wrapper .card .card-text {
+    margin-top: 9px;
+  }
+  .card-wrapper .card .card-button {
+    margin-top: 16px;
+  }
+}
+@media (max-width: 1245px) {
+  .footer {
+    min-height: 639px;
+  }
+  .footer-block {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 29px;
+  }
+  .footer-block .footer-info {
+    gap: 57px;
+  }
+  .footer-block .footer-image {
+    margin: 62px 0px 0px 0px;
+  }
+}
+@media (max-width: 687px) {
+  .footer h3 {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 235px;
+  }
+  .footer-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px !important;
+  }
+  .footer-info h4 {
+    font-size: 20px;
+    line-height: 115%;
+  }
+  .footer-contacts {
+    height: 209px;
+    align-items: center;
+  }
+  .footer-location {
+    height: 223px;
+    align-items: center;
+  }
+  .footer-location div:nth-child(3) {
+    width: 270px;
+    align-self: flex-start;
+  }
+  .footer-image {
+    width: 260px;
+    height: 269px;
+    margin-top: 40px !important;
+  }
+}
 button {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -313,6 +492,7 @@ button {
 .logo h1,
 .navigation li {
   color: #545454;
+  transform: translate(8px, 0px);
 }
 
 .logo p,
@@ -322,20 +502,34 @@ button {
 
 .logo {
   cursor: pointer;
-  transform: translate(0px, -4px);
+  transform: translate(-7px, -2px);
 }
 
 .logo p {
   transform: translate(1px, -4px);
 }
 
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: black 2px solid;
+}
+
+.pets {
+  background-color: #fafafa;
+}
+
 .pets-block {
-  padding-top: 50px;
+  padding-top: 42px;
   max-width: inherit;
 }
 
 .card {
   gap: 27px;
+  background-color: white;
+}
+.card img {
+  background-color: white;
 }
 
 .pets-header {
@@ -400,8 +594,4 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.footer-block {
-  padding-top: 43px;
 }/*# sourceMappingURL=style-pets.css.map */

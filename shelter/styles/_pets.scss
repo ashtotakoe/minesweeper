@@ -1,4 +1,4 @@
-@import "fonts.css";
+@import "fonts";
 .pets-block {
   width: 93vw;
   max-width: 1200px;
@@ -79,7 +79,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   border-radius: 9px;
   overflow: hidden;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
@@ -114,6 +114,7 @@
 .card-button {
   width: 187px;
   height: 52px;
+  background-color: transparent;
 
   border: 2px solid #f1cdb3;
   border-radius: 100px;
@@ -131,7 +132,7 @@
 
   color: #292929;
 }
-.card-button:hover {
+.card:hover .card-button {
   background-color: #f1cdb3;
   color: #fafafa;
 }
@@ -142,6 +143,10 @@
 
   transform: rotate(180deg);
 }
+.mobile-buttons {
+  display: none;
+}
+
 .arrow-right img {
   transform: translate(0px, -2px);
 }
