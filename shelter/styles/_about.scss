@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 9vw;
+  gap: 10vw;
 }
 .about-image {
   margin-left: 13vw;
@@ -32,11 +32,12 @@
   font-weight: 400;
   font-size: 35px;
   line-height: 130%;
+  max-width: 350px;
+  letter-spacing: 0.064rem;
   /* or 45px */
 
   display: flex;
   align-items: center;
-  letter-spacing: 0.1em;
 
   /* color-dark-l */
 

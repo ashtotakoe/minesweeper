@@ -192,7 +192,7 @@ a:visited {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   border-radius: 9px;
   overflow: hidden;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
@@ -227,6 +227,7 @@ a:visited {
 .card-button {
   width: 187px;
   height: 52px;
+  background-color: transparent;
   border: 2px solid #f1cdb3;
   border-radius: 100px;
   font-family: "georgia";
@@ -240,7 +241,7 @@ a:visited {
   color: #292929;
 }
 
-.card-button:hover {
+.card:hover .card-button {
   background-color: #f1cdb3;
   color: #fafafa;
 }
@@ -252,7 +253,7 @@ a:visited {
   transform: rotate(180deg);
 }
 
-.mobile-arrows {
+.mobile-buttons {
   display: none;
 }
 
@@ -361,7 +362,7 @@ a:visited {
   color: #ffffff;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 767px) {
   .nav-bar {
     display: none;
   }
@@ -514,6 +515,10 @@ button {
   border: black 2px solid;
 }
 
+.pets {
+  background-color: #fafafa;
+}
+
 .pets-block {
   padding-top: 42px;
   max-width: inherit;
@@ -521,6 +526,10 @@ button {
 
 .card {
   gap: 27px;
+  background-color: white;
+}
+.card img {
+  background-color: white;
 }
 
 .pets-header {

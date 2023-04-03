@@ -259,7 +259,7 @@ a:visited {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 9vw;
+  gap: 10vw;
 }
 
 .about-image {
@@ -286,10 +286,11 @@ a:visited {
   font-weight: 400;
   font-size: 35px;
   line-height: 130%;
+  max-width: 350px;
+  letter-spacing: 0.064rem;
   /* or 45px */
   display: flex;
   align-items: center;
-  letter-spacing: 0.1em;
   /* color-dark-l */
   color: #545454;
 }
@@ -393,7 +394,7 @@ a:visited {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   border-radius: 9px;
   overflow: hidden;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
@@ -428,6 +429,7 @@ a:visited {
 .card-button {
   width: 187px;
   height: 52px;
+  background-color: transparent;
   border: 2px solid #f1cdb3;
   border-radius: 100px;
   font-family: "georgia";
@@ -441,7 +443,7 @@ a:visited {
   color: #292929;
 }
 
-.card-button:hover {
+.card:hover .card-button {
   background-color: #f1cdb3;
   color: #fafafa;
 }
@@ -453,7 +455,7 @@ a:visited {
   transform: rotate(180deg);
 }
 
-.mobile-arrows {
+.mobile-buttons {
   display: none;
 }
 
@@ -771,6 +773,7 @@ a:visited {
     font-size: 25px;
     line-height: 32.5px;
     text-align: center;
+    max-width: 275px;
   }
   .about .about-block .about-text p {
     text-align: justify;
@@ -884,7 +887,7 @@ a:visited {
     margin-top: 40px !important;
   }
 }
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .nav-bar {
     display: none;
   }
@@ -901,6 +904,7 @@ a:visited {
 @media (max-width: 875px) {
   .help-list {
     gap: 60px;
+    row-gap: 55px;
   }
   .help-list h4 {
     font-size: 20px;
