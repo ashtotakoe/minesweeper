@@ -1,6 +1,6 @@
 // header
 
-@media (max-width: 720px) {
+@media (max-width: 750px) {
   .nav-bar {
     display: none;
   }
@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: space-between;
   }
+
   .header {
     margin: 0px 20px;
   }
@@ -32,14 +33,22 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 740px) {
   .pets {
     min-height: 791px !important;
   }
 
   .pets-block {
-    padding-top: 33px;
-    gap: 50px;
+    padding-top: 0px !important;
+    gap: 45px;
+    .card {
+      display: none;
+    }
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3) {
+      display: flex;
+    }
   }
 
   .pets-header {
@@ -52,22 +61,20 @@
     .arrow {
       display: none;
     }
-    .mobile-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 79px;
-      margin-top: 10px;
-      .mobile-arrows {
-        display: inline-block;
-      }
-    }
+  }
+  .pets-navigation {
+    margin-bottom: 39px !important;
+    gap: 10px !important;
   }
   .card-wrapper {
     justify-content: center;
     .card {
       gap: 16px;
+      .card-text {
+        margin-top: 9px;
+      }
       .card-button {
-        margin-top: 20px;
+        margin-top: 16px;
       }
     }
   }

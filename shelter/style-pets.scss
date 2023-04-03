@@ -23,6 +23,11 @@ button {
 .logo p {
   transform: translate(1px, -4px);
 }
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: black 2px solid;
+}
 
 .pets-block {
   padding-top: 42px;

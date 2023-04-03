@@ -361,7 +361,7 @@ a:visited {
   color: #ffffff;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 750px) {
   .nav-bar {
     display: none;
   }
@@ -389,13 +389,21 @@ a:visited {
     margin-bottom: 79px !important;
   }
 }
-@media (max-width: 720px) {
+@media (max-width: 740px) {
   .pets {
     min-height: 791px !important;
   }
   .pets-block {
-    padding-top: 33px;
-    gap: 50px;
+    padding-top: 0px !important;
+    gap: 45px;
+  }
+  .pets-block .card {
+    display: none;
+  }
+  .pets-block .card:nth-child(1),
+  .pets-block .card:nth-child(2),
+  .pets-block .card:nth-child(3) {
+    display: flex;
   }
   .pets-header {
     font-size: 25px;
@@ -408,14 +416,9 @@ a:visited {
   .wrapper-block .arrow {
     display: none;
   }
-  .wrapper-block .mobile-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 79px;
-    margin-top: 10px;
-  }
-  .wrapper-block .mobile-buttons .mobile-arrows {
-    display: inline-block;
+  .pets-navigation {
+    margin-bottom: 39px !important;
+    gap: 10px !important;
   }
   .card-wrapper {
     justify-content: center;
@@ -423,8 +426,11 @@ a:visited {
   .card-wrapper .card {
     gap: 16px;
   }
+  .card-wrapper .card .card-text {
+    margin-top: 9px;
+  }
   .card-wrapper .card .card-button {
-    margin-top: 20px;
+    margin-top: 16px;
   }
 }
 @media (max-width: 1245px) {
@@ -500,6 +506,12 @@ button {
 
 .logo p {
   transform: translate(1px, -4px);
+}
+
+.burger-button span {
+  width: 30px;
+  height: 0px;
+  border: black 2px solid;
 }
 
 .pets-block {
