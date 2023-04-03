@@ -1,4 +1,4 @@
-@import "fonts.css";
+@import "fonts";
 
 .footer-block {
   min-height: 310px;
@@ -9,6 +9,19 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+}
+.footer-info {
+  display: flex;
+  gap: 150px;
+
+  justify-content: space-between;
+}
+.footer-image {
+  margin-left: 160px;
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
 .footer-contacts {
   width: 283px;

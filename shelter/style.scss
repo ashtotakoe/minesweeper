@@ -1,0 +1,69 @@
+@import "./styles/header";
+@import "./styles/start-content";
+@import "./styles/about";
+@import "./styles/pets";
+@import "./styles/help";
+@import "./styles/donation";
+@import "./styles/footer";
+@import "./styles/mixins";
+@import "./styles/fonts";
+@import "./styles/querries-for-main";
+* {
+  margin: 0px;
+  padding: 0px;
+}
+html {
+  scroll-behavior: smooth;
+}
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.arrow:hover {
+  background: #f1cdb3;
+  color: white !important;
+}
+
+.arrow-back {
+  border-color: #cdcdcd;
+  color: #cdcdcd !important;
+}
+.arrow-main {
+  background-color: #f1cdb3;
+}
+.start-screen {
+  min-height: 908px;
+  background: url(assets/images/noise_transparent@2x.png),
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%)
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #211f20;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.about {
+  min-height: 588px;
+  @include flex-center();
+}
+.pets {
+  min-height: 877px;
+  background-color: #f6f6f6;
+}
+.help {
+  min-height: 611px;
+  @include flex-center();
+}
+.donation {
+  min-height: 462px;
+  background-color: #f6f6f6;
+  @include flex-center();
+}
+.footer {
+  min-height: 350px;
+
+  background: url(assets/images/noise_transparent@2x.png),
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%)
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #211f20;
+  @include flex-center();
+}
