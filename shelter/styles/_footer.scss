@@ -12,12 +12,16 @@
 }
 .footer-info {
   display: flex;
-  flex-basis: 709px;
+  gap: 150px;
 
   justify-content: space-between;
 }
 .footer-image {
-  margin-left: 230px;
+  margin-left: 160px;
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
 .footer-contacts {
   width: 283px;
@@ -75,9 +79,4 @@
   /* color-light-xl */
 
   color: #ffffff;
-}
-@media (max-width: 1015px) {
-  .footer-block {
-    flex-direction: column;
-  }
 }

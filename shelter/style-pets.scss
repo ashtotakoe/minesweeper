@@ -1,7 +1,7 @@
 @import "./styles/header";
 @import "./styles/pets";
 @import "./styles/footer";
-
+@import "./styles/querries-for-pets";
 button {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -10,6 +10,7 @@ button {
 .logo h1,
 .navigation li {
   color: #545454;
+  transform: translate(8px, 0px);
 }
 .logo p,
 #selected-page {
@@ -17,14 +18,14 @@ button {
 }
 .logo {
   cursor: pointer;
-  transform: translate(0px, -4px);
+  transform: translate(-7px, -2px);
 }
 .logo p {
   transform: translate(1px, -4px);
 }
 
 .pets-block {
-  padding-top: 50px;
+  padding-top: 42px;
   max-width: inherit;
 }
 .card {
@@ -92,7 +93,4 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.footer-block {
-  padding-top: 43px;
 }

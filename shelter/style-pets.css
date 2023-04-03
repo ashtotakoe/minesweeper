@@ -104,20 +104,6 @@ a:visited {
   border: 2px solid #f1cdb3;
 }
 
-@media (max-width: 720px) {
-  .nav-bar {
-    display: none;
-  }
-  .burger-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header {
-    margin: 0px 20px;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -286,56 +272,6 @@ a:visited {
   border-radius: 100px;
 }
 
-@media (max-width: 1110px) and (min-width: 720px) {
-  .card-wrapper .card:nth-child(2) {
-    display: none;
-  }
-  .pets-block {
-    margin-top: 65px;
-  }
-}
-@media (max-width: 720px) {
-  .pets {
-    min-height: 791px !important;
-  }
-  .pets-block {
-    padding-top: 33px;
-    gap: 50px;
-  }
-  .pets-header {
-    font-size: 25px;
-    line-height: 130%;
-    width: 100%;
-  }
-  .wrapper-block {
-    flex-direction: column !important;
-  }
-  .wrapper-block .arrow {
-    display: none;
-  }
-  .wrapper-block .mobile-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 79px;
-    margin-top: 10px;
-  }
-  .wrapper-block .mobile-buttons .mobile-arrows {
-    display: inline-block;
-  }
-  .card-wrapper {
-    justify-content: center;
-  }
-  .card-wrapper .card {
-    gap: 16px;
-  }
-  .card-wrapper .card .card-button {
-    margin-top: 20px;
-  }
-  .card-wrapper .card:nth-child(2),
-  .card-wrapper .card:nth-child(3) {
-    display: none;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -359,12 +295,16 @@ a:visited {
 
 .footer-info {
   display: flex;
-  flex-basis: 709px;
+  gap: 150px;
   justify-content: space-between;
 }
 
 .footer-image {
-  margin-left: 230px;
+  margin-left: 160px;
+}
+.footer-image img {
+  height: 100%;
+  width: 100%;
 }
 
 .footer-contacts {
@@ -421,9 +361,120 @@ a:visited {
   color: #ffffff;
 }
 
-@media (max-width: 1015px) {
+@media (max-width: 720px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
+@media (max-width: 1110px) {
+  .pets-block {
+    margin-top: 3px;
+    gap: 33px;
+    max-width: 579px !important;
+  }
+  .card:nth-last-child(1),
+  .card:nth-last-child(2) {
+    display: none;
+  }
+  .pets-navigation {
+    margin-bottom: 79px !important;
+  }
+}
+@media (max-width: 720px) {
+  .pets {
+    min-height: 791px !important;
+  }
+  .pets-block {
+    padding-top: 33px;
+    gap: 50px;
+  }
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+  }
+  .wrapper-block .arrow {
+    display: none;
+  }
+  .wrapper-block .mobile-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 79px;
+    margin-top: 10px;
+  }
+  .wrapper-block .mobile-buttons .mobile-arrows {
+    display: inline-block;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card {
+    gap: 16px;
+  }
+  .card-wrapper .card .card-button {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 1245px) {
+  .footer {
+    min-height: 639px;
+  }
   .footer-block {
     flex-direction: column;
+    align-items: center;
+    padding-top: 29px;
+  }
+  .footer-block .footer-info {
+    gap: 57px;
+  }
+  .footer-block .footer-image {
+    margin: 62px 0px 0px 0px;
+  }
+}
+@media (max-width: 687px) {
+  .footer h3 {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 235px;
+  }
+  .footer-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px !important;
+  }
+  .footer-info h4 {
+    font-size: 20px;
+    line-height: 115%;
+  }
+  .footer-contacts {
+    height: 209px;
+    align-items: center;
+  }
+  .footer-location {
+    height: 223px;
+    align-items: center;
+  }
+  .footer-location div:nth-child(3) {
+    width: 270px;
+    align-self: flex-start;
+  }
+  .footer-image {
+    width: 260px;
+    height: 269px;
+    margin-top: 40px !important;
   }
 }
 button {
@@ -434,6 +485,7 @@ button {
 .logo h1,
 .navigation li {
   color: #545454;
+  transform: translate(8px, 0px);
 }
 
 .logo p,
@@ -443,7 +495,7 @@ button {
 
 .logo {
   cursor: pointer;
-  transform: translate(0px, -4px);
+  transform: translate(-7px, -2px);
 }
 
 .logo p {
@@ -451,7 +503,7 @@ button {
 }
 
 .pets-block {
-  padding-top: 50px;
+  padding-top: 42px;
   max-width: inherit;
 }
 
@@ -521,8 +573,4 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.footer-block {
-  padding-top: 43px;
 }/*# sourceMappingURL=style-pets.css.map */

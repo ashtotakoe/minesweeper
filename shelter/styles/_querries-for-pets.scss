@@ -1,0 +1,129 @@
+// header
+
+@media (max-width: 720px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
+
+//pets
+@media (max-width: 1110px) {
+  .pets-block {
+    margin-top: 3px;
+    gap: 33px;
+    max-width: 579px !important;
+  }
+
+  .card:nth-last-child(1),
+  .card:nth-last-child(2) {
+    display: none;
+  }
+  .pets-navigation {
+    margin-bottom: 79px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .pets {
+    min-height: 791px !important;
+  }
+
+  .pets-block {
+    padding-top: 33px;
+    gap: 50px;
+  }
+
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+    .arrow {
+      display: none;
+    }
+    .mobile-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 79px;
+      margin-top: 10px;
+      .mobile-arrows {
+        display: inline-block;
+      }
+    }
+  }
+  .card-wrapper {
+    justify-content: center;
+    .card {
+      gap: 16px;
+      .card-button {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+//footer
+
+@media (max-width: 1245px) {
+  .footer {
+    min-height: 639px;
+  }
+  .footer-block {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 29px;
+    .footer-info {
+      gap: 57px;
+    }
+    .footer-image {
+      margin: 62px 0px 0px 0px;
+    }
+  }
+}
+
+@media (max-width: 687px) {
+  .footer h3 {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 235px;
+  }
+  .footer-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px !important;
+    h4 {
+      font-size: 20px;
+      line-height: 115%;
+    }
+  }
+
+  .footer-contacts {
+    height: 209px;
+    align-items: center;
+  }
+  .footer-location {
+    height: 223px;
+    align-items: center;
+    div:nth-child(3) {
+      width: 270px;
+      align-self: flex-start;
+    }
+  }
+  .footer-image {
+    width: 260px;
+    height: 269px;
+    margin-top: 40px !important;
+  }
+}

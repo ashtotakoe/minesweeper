@@ -104,20 +104,6 @@ a:visited {
   border: 2px solid #f1cdb3;
 }
 
-@media (max-width: 720px) {
-  .nav-bar {
-    display: none;
-  }
-  .burger-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header {
-    margin: 0px 20px;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -319,50 +305,6 @@ a:visited {
   color: #4c4c4c;
 }
 
-@media (max-width: 1050px) and (min-width: 475px) {
-  .about-block {
-    flex-direction: column;
-  }
-  .about-block .about-text {
-    order: 1;
-  }
-  .about-block .about-image {
-    order: 2;
-    margin-left: 20px;
-  }
-}
-@media (max-width: 475px) {
-  .about {
-    height: -moz-fit-content;
-    height: fit-content;
-  }
-  .about .about-block {
-    margin-top: 15px;
-    flex-direction: column;
-  }
-  .about .about-block .about-text {
-    order: 1;
-    align-items: center;
-  }
-  .about .about-block .about-text h3 {
-    font-size: 25px;
-    line-height: 32.5px;
-    text-align: center;
-  }
-  .about .about-block .about-text p {
-    text-align: justify;
-    width: 84vw;
-    font-size: 15px;
-    line-height: 24px;
-  }
-  .about .about-block .about-image {
-    order: 2;
-    margin-left: 20px;
-    margin-top: 18px;
-    width: 260px;
-    height: 353.6px;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -531,56 +473,6 @@ a:visited {
   border-radius: 100px;
 }
 
-@media (max-width: 1110px) and (min-width: 720px) {
-  .card-wrapper .card:nth-child(2) {
-    display: none;
-  }
-  .pets-block {
-    margin-top: 65px;
-  }
-}
-@media (max-width: 720px) {
-  .pets {
-    min-height: 791px !important;
-  }
-  .pets-block {
-    padding-top: 33px;
-    gap: 50px;
-  }
-  .pets-header {
-    font-size: 25px;
-    line-height: 130%;
-    width: 100%;
-  }
-  .wrapper-block {
-    flex-direction: column !important;
-  }
-  .wrapper-block .arrow {
-    display: none;
-  }
-  .wrapper-block .mobile-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 79px;
-    margin-top: 10px;
-  }
-  .wrapper-block .mobile-buttons .mobile-arrows {
-    display: inline-block;
-  }
-  .card-wrapper {
-    justify-content: center;
-  }
-  .card-wrapper .card {
-    gap: 16px;
-  }
-  .card-wrapper .card .card-button {
-    margin-top: 20px;
-  }
-  .card-wrapper .card:nth-child(2),
-  .card-wrapper .card:nth-child(3) {
-    display: none;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -652,47 +544,6 @@ a:visited {
   justify-content: space-between;
 }
 
-@media (max-width: 875px) {
-  .help-list {
-    gap: 60px;
-  }
-  .help-list h4 {
-    font-size: 20px;
-    line-height: 115%;
-  }
-  .help-card {
-    width: 170px;
-    height: 113px;
-  }
-}
-@media (max-width: 530px) {
-  .help-block {
-    margin-top: 30px;
-    margin-bottom: 40px;
-    gap: 45px;
-  }
-  .help-header {
-    font-size: 25px;
-    line-height: 130%;
-    margin-top: 5px;
-  }
-  .help-list {
-    justify-content: space-between;
-    gap: 30px;
-  }
-  .help-list h4 {
-    font-size: 15px;
-    line-height: 110%;
-  }
-  .help-card {
-    width: 130px;
-    height: 87px;
-    gap: 0px;
-  }
-  .help-card img {
-    height: 50px;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -792,52 +643,6 @@ a:visited {
   color: #b2b2b2;
 }
 
-@media (max-width: 1112px) {
-  .donation-block {
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 105px;
-  }
-  .donation-block .donation-image {
-    order: 2;
-  }
-  .donation-block .donation-text {
-    order: 1;
-    align-items: flex-start;
-  }
-}
-@media (max-width: 540px) {
-  .donation-text {
-    align-items: center !important;
-  }
-  .donation-text .donation-header {
-    font-size: 25px;
-    line-height: 130%;
-    text-align: center;
-    max-width: 220px;
-  }
-  .donation-text .donation-credit {
-    width: 281px;
-  }
-  .donation-text .donation-credit img {
-    height: 23px;
-  }
-  .donation-block {
-    margin-top: 40px;
-  }
-  .donation-block .credit-number {
-    font-size: 15px;
-    line-height: 110%;
-  }
-  .donation-block h5 {
-    font-size: 13px;
-    line-height: 160%;
-  }
-  .donation-block img {
-    height: 135.2px;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -861,12 +666,16 @@ a:visited {
 
 .footer-info {
   display: flex;
-  flex-basis: 709px;
+  gap: 150px;
   justify-content: space-between;
 }
 
 .footer-image {
-  margin-left: 230px;
+  margin-left: 160px;
+}
+.footer-image img {
+  height: 100%;
+  width: 100%;
 }
 
 .footer-contacts {
@@ -923,11 +732,6 @@ a:visited {
   color: #ffffff;
 }
 
-@media (max-width: 1015px) {
-  .footer-block {
-    flex-direction: column;
-  }
-}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -937,6 +741,253 @@ a:visited {
   font-family: "georgia";
   src: url("./assets/fonts/georgia.ttf");
   font-weight: normal;
+}
+@media (max-width: 1050px) and (min-width: 475px) {
+  .about-block {
+    flex-direction: column;
+  }
+  .about-block .about-text {
+    order: 1;
+  }
+  .about-block .about-image {
+    order: 2;
+    margin-left: 20px;
+  }
+}
+@media (max-width: 475px) {
+  .about {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .about .about-block {
+    margin-top: 15px;
+    flex-direction: column;
+  }
+  .about .about-block .about-text {
+    order: 1;
+    align-items: center;
+  }
+  .about .about-block .about-text h3 {
+    font-size: 25px;
+    line-height: 32.5px;
+    text-align: center;
+  }
+  .about .about-block .about-text p {
+    text-align: justify;
+    width: 84vw;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .about .about-block .about-image {
+    order: 2;
+    margin-left: 20px;
+    margin-top: 18px;
+    width: 260px;
+    height: 353.6px;
+  }
+}
+@media (max-width: 1112px) {
+  .donation-block {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-top: 75px;
+    margin-bottom: 104px;
+  }
+  .donation-block .donation-image {
+    order: 2;
+  }
+  .donation-block .donation-text {
+    order: 1;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 540px) {
+  .donation-text {
+    align-items: center !important;
+  }
+  .donation-text .donation-header {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 220px;
+  }
+  .donation-text .donation-credit {
+    width: 281px;
+  }
+  .donation-text .donation-credit img {
+    height: 23px;
+  }
+  .donation-block {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  .donation-block .credit-number {
+    font-size: 15px;
+    line-height: 110%;
+  }
+  .donation-block h5 {
+    font-size: 13px;
+    line-height: 160%;
+  }
+  .donation-block img {
+    height: 135.2px;
+  }
+}
+@media (max-width: 1245px) {
+  .footer {
+    min-height: 639px;
+  }
+  .footer-block {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 29px;
+  }
+  .footer-block .footer-info {
+    gap: 57px;
+  }
+  .footer-block .footer-image {
+    margin: 62px 0px 0px 0px;
+  }
+}
+@media (max-width: 687px) {
+  .footer h3 {
+    font-size: 25px;
+    line-height: 130%;
+    text-align: center;
+    max-width: 235px;
+  }
+  .footer-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px !important;
+  }
+  .footer-info h4 {
+    font-size: 20px;
+    line-height: 115%;
+  }
+  .footer-contacts {
+    height: 209px;
+    align-items: center;
+  }
+  .footer-location {
+    height: 223px;
+    align-items: center;
+  }
+  .footer-location div:nth-child(3) {
+    width: 270px;
+    align-self: flex-start;
+  }
+  .footer-image {
+    width: 260px;
+    height: 269px;
+    margin-top: 40px !important;
+  }
+}
+@media (max-width: 720px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header {
+    margin: 0px 20px;
+  }
+}
+@media (max-width: 875px) {
+  .help-list {
+    gap: 60px;
+  }
+  .help-list h4 {
+    font-size: 20px;
+    line-height: 115%;
+  }
+  .help-card {
+    width: 170px;
+    height: 113px;
+  }
+}
+@media (max-width: 530px) {
+  .help-block {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    gap: 45px;
+  }
+  .help-header {
+    font-size: 25px;
+    line-height: 130%;
+    margin-top: 5px;
+  }
+  .help-list {
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .help-list h4 {
+    font-size: 15px;
+    line-height: 110%;
+  }
+  .help-card {
+    width: 130px;
+    height: 87px;
+    gap: 0px;
+  }
+  .help-card img {
+    height: 50px;
+  }
+}
+@media (max-width: 1110px) and (min-width: 720px) {
+  .card-wrapper .card:nth-child(3) {
+    display: none;
+  }
+  .pets-block {
+    margin-top: 65px;
+  }
+}
+@media (max-width: 720px) {
+  .pets {
+    min-height: 791px !important;
+  }
+  .pets-block {
+    padding-top: 33px;
+    gap: 50px;
+  }
+  .pets-header {
+    font-size: 25px;
+    line-height: 130%;
+    width: 100%;
+  }
+  .wrapper-block {
+    flex-direction: column !important;
+  }
+  .wrapper-block .arrow {
+    display: none;
+  }
+  .wrapper-block .mobile-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 79px;
+    margin-top: 10px;
+  }
+  .wrapper-block .mobile-buttons .mobile-arrows {
+    display: inline-block;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card {
+    gap: 16px;
+  }
+  .card-wrapper .card .card-button {
+    margin-top: 20px;
+  }
+  .card-wrapper .card:nth-child(2),
+  .card-wrapper .card:nth-child(3) {
+    display: none;
+  }
 }
 * {
   margin: 0px;

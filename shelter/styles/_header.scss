@@ -97,18 +97,3 @@ a:visited {
     border: 2px solid #f1cdb3;
   }
 }
-
-@media (max-width: 720px) {
-  .nav-bar {
-    display: none;
-  }
-  .burger-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header {
-    margin: 0px 20px;
-  }
-}
