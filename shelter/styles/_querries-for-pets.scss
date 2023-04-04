@@ -12,7 +12,10 @@
   }
 
   .header {
-    margin: 0px 20px;
+    margin: 0px 19px;
+    .logo p {
+      transform: translate(12px, -5px);
+    }
   }
 }
 

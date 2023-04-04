@@ -154,6 +154,14 @@
 }
 
 //header
+@media (max-width: 770px) {
+  .header {
+    margin: 0px 30px;
+    .logo p {
+      margin-bottom: 4px;
+    }
+  }
+}
 
 @media (max-width: 767px) {
   .nav-bar {
