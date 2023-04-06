@@ -1,5 +1,6 @@
 export function burgerActive() {
   const burgerMenu = document.querySelector(".burger-menu");
-  this.classList.toggle("active");
+  const burger = document.querySelector(".burger");
+  burger.classList.toggle("active");
   burgerMenu.classList.toggle("active");
 }
