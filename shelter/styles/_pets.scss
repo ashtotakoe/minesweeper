@@ -192,6 +192,7 @@
   max-width: 900px;
   min-height: 500px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   .popup-block {
     margin: 50px 20px 89px 0px;
@@ -220,6 +221,7 @@
   }
   .popup-list {
     margin-top: 40px;
+    margin-left: -30px;
     list-style: none;
     li::before {
       content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
@@ -309,9 +311,6 @@
     min-height: 341px;
     .popup-block {
       flex-direction: column;
-    }
-    .popup-list {
-      margin-left: 14px;
     }
   }
 }
