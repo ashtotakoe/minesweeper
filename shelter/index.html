@@ -17,7 +17,7 @@
             <h1>Cozy House</h1>
             <p>Shelter for pets in Boston</p>
           </div>
-          <div class="burger-button">
+          <div class="burger">
             <span></span>
             <span></span>
             <span></span>
@@ -25,6 +25,16 @@
           <nav class="nav-bar">
             <ul class="navigation">
               <li id="selected-page"><a>About the shelter</a><span></span></li>
+              <li><a href="pets.html">Our pets</a><span></span></li>
+              <li><a href="#help">Help the shelter</a><span></span></li>
+              <li><a href="#donation">Contacts</a><span></span></li>
+            </ul>
+          </nav>
+          <nav class="burger-menu">
+            <ul class="navigation">
+              <li id="burger-selected-page">
+                <a>About the shelter</a><span></span>
+              </li>
               <li><a href="pets.html">Our pets</a><span></span></li>
               <li><a href="#help">Help the shelter</a><span></span></li>
               <li><a href="#donation">Contacts</a><span></span></li>
@@ -81,26 +91,31 @@
               <img src="./assets/images/button-arrow.svg" alt="arrow" />
             </button>
             <div class="card-wrapper">
-              <div class="card">
-                <div class="card-image">
-                  <img src="./assets/images/pets-katrine.jpg" alt="Katrine" />
+              <div class="card-stack">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="./assets/images/pets-katrine.jpg" alt="Katrine" />
+                  </div>
+                  <p class="card-text">Katrine</p>
+                  <button class="card-button">Learn more</button>
                 </div>
-                <p class="card-text">Katrine</p>
-                <button class="card-button">Learn more</button>
-              </div>
-              <div class="card">
-                <div class="card-image">
-                  <img src="./assets/images/pets-jennifer.jpg" alt="Jennifer" />
+                <div class="card">
+                  <div class="card-image">
+                    <img
+                      src="./assets/images/pets-jennifer.jpg"
+                      alt="Jennifer"
+                    />
+                  </div>
+                  <p class="card-text">Jennifer</p>
+                  <button class="card-button">Learn more</button>
                 </div>
-                <p class="card-text">Jennifer</p>
-                <button class="card-button">Learn more</button>
-              </div>
-              <div class="card">
-                <div class="card-image">
-                  <img src="./assets/images/pets-woody.jpg" alt="Woody" />
+                <div class="card">
+                  <div class="card-image">
+                    <img src="./assets/images/pets-woody.jpg" alt="Woody" />
+                  </div>
+                  <p class="card-text">Woody</p>
+                  <button class="card-button">Learn more</button>
                 </div>
-                <p class="card-text">Woody</p>
-                <button class="card-button">Learn more</button>
               </div>
             </div>
             <button class="arrow arrow-right">
@@ -232,6 +247,6 @@
         </div>
       </footer>
     </main>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
