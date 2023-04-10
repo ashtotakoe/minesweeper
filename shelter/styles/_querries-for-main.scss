@@ -264,8 +264,13 @@
       }
     }
   }
+
   .card-wrapper {
     justify-content: center;
+    .card-stack {
+      justify-content: center;
+    }
+
     .card {
       gap: 16px;
       .card-button {

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -428,6 +429,14 @@ a:visited {
   justify-content: space-between;
   align-items: center;
 }
+.card-wrapper .card-stack {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .card {
   background: #fafafa;
@@ -519,6 +528,144 @@ a:visited {
   border-radius: 100px;
 }
 
+.popup .popup-list li, .popup .popup-text, .popup .popup-subheader, .popup .popup-header {
+  font-family: "georgia", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  /* or 45px */
+  letter-spacing: 0.06em;
+  color: #000000;
+}
+
+.popup {
+  background: #fafafa;
+  position: relative;
+  z-index: 2;
+  width: 80vw;
+  max-width: 900px;
+  min-height: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+.popup .popup-block {
+  margin: 50px 20px 89px 0px;
+  max-width: 351px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.popup .popup-subheader {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 115%;
+}
+.popup .popup-text {
+  margin-top: 40px;
+  font-size: 13px;
+  line-height: 110%;
+}
+.popup img {
+  height: 100%;
+}
+.popup .popup-list {
+  margin-top: 40px;
+  list-style: none;
+}
+.popup .popup-list li::before {
+  content: "•"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: #f1cdb3; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+.popup .popup-list li {
+  margin-top: 11px;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 110%;
+}
+.popup .popup-list li span {
+  font-weight: 200;
+}
+
+.popup-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: rgba(41, 41, 41, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-close {
+  position: absolute;
+  top: -53px;
+  right: -30px;
+  background-color: transparent;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #f1cdb3;
+  border-radius: 100px;
+}
+.popup-close span {
+  width: 16px;
+  height: 3px;
+  position: absolute;
+  top: 23px;
+  left: 16px;
+  display: inline-block;
+  background-color: #292929;
+}
+.popup-close span:first-child {
+  transform: rotate(45deg);
+}
+.popup-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 1100px) {
+  .popup {
+    max-width: 630px;
+    min-height: 350px;
+  }
+  .popup img {
+    height: 350px;
+  }
+  .popup .popup-block {
+    margin: 10px 11px 38px 9px;
+  }
+  .popup .popup-block .popup-text {
+    margin-top: 20px;
+  }
+  .popup .popup-block .popup-list {
+    margin-top: 14px;
+  }
+  .popup .popup-list li {
+    margin-top: 6px;
+  }
+}
+@media (max-width: 655px) {
+  .popup {
+    max-width: 240px;
+    min-height: 341px;
+  }
+  .popup img {
+    display: none;
+  }
+  .popup .popup-block {
+    flex-direction: column;
+  }
+  .popup .popup-list {
+    margin-left: 14px;
+  }
+}
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
@@ -1032,6 +1179,9 @@ a:visited {
     display: inline-block;
   }
   .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper .card-stack {
     justify-content: center;
   }
   .card-wrapper .card {

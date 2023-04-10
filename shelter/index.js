@@ -1,5 +1,6 @@
 import { burgerActive } from "./js/burger.js";
 import { sliderMoveLeft, sliderMoveRight } from "./js/slider.js";
+import { createPopup } from "./js/popup.js";
 
 document.querySelector(".logo").addEventListener("click", () => {
   window.location.href = "index.html";
@@ -12,9 +13,7 @@ for (let link of burgerLinks) {
   link.addEventListener("click", burgerActive);
 }
 
-const sliderButtonsLeft = document.querySelectorAll(".arrow-left");
-const sliderButtonsRight = document.querySelectorAll(".arrow-right");
-sliderButtonsLeft.forEach((buttonLeft, index) => {
-  buttonLeft.addEventListener("click", sliderMoveLeft);
-  sliderButtonsRight[index].addEventListener("click", sliderMoveRight);
+const cards = document.querySelectorAll(".card");
+cards.forEach((card) => {
+  card.addEventListener("click", createPopup);
 });
