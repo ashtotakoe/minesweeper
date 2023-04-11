@@ -1,7 +1,7 @@
 import { burgerActive } from "./js/burger.js";
 import { sliderMoveLeft, sliderMoveRight } from "./js/slider.js";
 import { createPopup } from "./js/popup.js";
-
+document.querySelector(".burger-bg").addEventListener("click", burgerActive);
 document.querySelector(".logo").addEventListener("click", () => {
   window.location.href = "index.html";
 });

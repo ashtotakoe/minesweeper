@@ -149,6 +149,21 @@ a:visited {
   transform: translate(0px, 0px);
 }
 
+.burger-bg {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  background: rgba(41, 41, 41, 0.6);
+  display: none;
+}
+
+.burger-bg.active {
+  display: block;
+}
+
 @font-face {
   font-family: "arial";
   src: url("./assets/fonts/arial.ttf");
