@@ -37,6 +37,7 @@ export async function createPopup() {
   popup.append(popupClose);
   document.body.append(popupBg);
   popupClose.addEventListener("click", deletePopup);
+  popupBg.addEventListener("click", deletePopup);
   document.body.style.overflow = "hidden";
 }
 
