@@ -1,0 +1,33 @@
+@import './vars.scss';
+
+.header {
+  font-size: 2rem;
+  text-align: center;
+  margin: 5px;
+}
+
+.template {
+  max-width: $square-side * 11;
+  border: solid black 2px;
+  margin: 20px auto;
+  padding: 5px;
+  gap: 2px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.template__item {
+  box-sizing: border-box;
+  width: $square-side;
+  height: $square-side;
+  border: rgb(75, 75, 75) solid 3px;
+
+  border-radius: 5%;
+  background-color: rgb(173, 171, 171);
+  display: inline-block;
+}
+
+.template__item.bomb {
+  background-color: blue;
+}
