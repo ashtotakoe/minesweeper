@@ -1,10 +1,7 @@
 {
   "env": { "browser": true, "es2021": true, "node": true },
-  "extends": [
-    "eslint:recommended",
-    "airbnb-base",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "airbnb-base", "prettier"],
+
   "root": true,
   "rules": {
     "block-spacing": ["warn", "always"],

@@ -31,3 +31,7 @@
 .template__item.bomb {
   background-color: blue;
 }
+
+.template__item.opened {
+  visibility: hidden;
+}
