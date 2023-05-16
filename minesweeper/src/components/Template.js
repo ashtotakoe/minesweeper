@@ -49,22 +49,17 @@ export class Template extends Component {
         return 'game over';
       });
     }
-
+    const [index1, index2] = elem
+      .getAttribute('data-indexes')
+      .split('.')
+      .map((e) => Number(e));
     const checkedSquares = [];
     const counter = this.surroundingCheck(elem);
     if (counter === 0) {
-      this.recursiveOpen(elem, checkedSquares);
+      this.recursiveOpen(index1, index2, checkedSquares);
     }
     elem.textContent = counter;
     return null;
-
-    // bombIndexes.forEach((index) => {
-    //   squaresArr.flat()[index].node.classList.add('bomb');
-    // });
-
-    // console.log(bombIndexes, event.target.getAttribute('data-id'));
-
-    // console.log(bombIndexes.includes(Number(event.target.getAttribute('data-id'))));
   }
 
   surroundingCheck(elem) {
@@ -103,7 +98,12 @@ export class Template extends Component {
     return 0;
   }
 
-  recursiveOpen(elem, checkedSquares) {
+  recursiveOpen(i1, i2, checkedSquares) {
+    if (i1 < 0 || i2 < 0 || i1 > 9 || i2 > 9) {
+      return 0;
+    }
+    const elem = minesweeperState.squaresArr[i1][i2].node;
+
     const [index1, index2] = elem
       .getAttribute('data-indexes')
       .split('.')
@@ -116,17 +116,17 @@ export class Template extends Component {
       elem.classList.add('opened');
       checkedSquares.push(elem);
 
-      this.recursiveOpen(minesweeperState.squaresArr[index1 - 1][index2 - 1].node, checkedSquares);
-      this.recursiveOpen(minesweeperState.squaresArr[index1][index2 - 1].node, checkedSquares);
+      this.recursiveOpen(index1 - 1, index2 - 1, checkedSquares);
+      this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
-      this.recursiveOpen(minesweeperState.squaresArr[index1 + 1][index2 - 1].node, checkedSquares);
-      this.recursiveOpen(minesweeperState.squaresArr[index1 + 1][index2].node, checkedSquares);
+      this.recursiveOpen(index1 + 1, index2 - 1, checkedSquares);
+      this.recursiveOpen(index1 + 1, index2, checkedSquares);
 
-      this.recursiveOpen(minesweeperState.squaresArr[index1 + 1][index2 + 1].node, checkedSquares);
-      this.recursiveOpen(minesweeperState.squaresArr[index1][index2 + 1].node, checkedSquares);
+      this.recursiveOpen(index1 + 1, index2 + 1, checkedSquares);
+      this.recursiveOpen(index1, index2 + 1, checkedSquares);
 
-      this.recursiveOpen(minesweeperState.squaresArr[index1 - 1][index2 + 1].node, checkedSquares);
-      this.recursiveOpen(minesweeperState.squaresArr[index1 - 1][index2].node, checkedSquares);
+      this.recursiveOpen(index1 - 1, index2 + 1, checkedSquares);
+      this.recursiveOpen(index1 - 1, index2, checkedSquares);
       return null;
     }
     const node = elem;
