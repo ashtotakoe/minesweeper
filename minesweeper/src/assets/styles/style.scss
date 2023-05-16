@@ -29,7 +29,8 @@
 }
 
 .template__item.bomb {
-  background-color: blue;
+  background-image: url('../images/bomb.webp');
+  background-size: cover;
 }
 
 .template__item.opened {
