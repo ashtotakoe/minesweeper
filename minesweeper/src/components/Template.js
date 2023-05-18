@@ -1,33 +1,49 @@
 import { Component } from '../utils/Component';
 import minesweeperState from '../utils/minesweeper-state';
+import { setDifficulty, getSquares } from '../utils/setClass';
+import { addFlag } from '../utils/addFlag';
 
 export class Template extends Component {
-  createTemplate(squareCount) {
+  createTemplate() {
+    const { difficulty } = minesweeperState;
     let dataId = 0;
-    minesweeperState.squaresArr = Array.from({ length: squareCount / 10 }, (_, index1) =>
+    const squareCount = getSquares[difficulty];
+    minesweeperState.numderOfSquares = squareCount;
+    console.log(1);
+    minesweeperState.squaresArr = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
-        { length: squareCount / 10 },
+        { length: squareCount },
         (__, index2) =>
           new Component(
-            { parent: this.node, className: 'template__item' },
+            { parent: this.node, className: setDifficulty[minesweeperState.difficulty] },
             {
               attrs: {
                 'data-id': dataId++,
                 'data-indexes': `${index1}.${index2}`,
               },
-              event: {
-                name: 'click',
-                callback: (event) => this.clickHandler(event),
-              },
+              events: [
+                {
+                  name: 'click',
+                  callback: (event) => this.clickHandler(event),
+                },
+                {
+                  name: 'contextmenu',
+                  callback: addFlag,
+                },
+              ],
             },
           ),
       ),
     );
+
+    console.log(minesweeperState);
   }
 
   addBombs() {
-    while (minesweeperState.bombIndexes.length < 10) {
-      const num = Math.floor(Math.random() * 100);
+    const numberOfSquares = minesweeperState.numderOfSquares;
+
+    while (minesweeperState.bombIndexes.length < numberOfSquares ** 2 / 10) {
+      const num = Math.floor(Math.random() * numberOfSquares ** 2);
       if (!minesweeperState.bombIndexes.includes(num)) {
         minesweeperState.bombIndexes.push(num);
       }
@@ -35,6 +51,10 @@ export class Template extends Component {
   }
 
   clickHandler(event) {
+    if (event.target.classList.contains('flagged')) {
+      return null;
+    }
+
     const { bombIndexes, squaresArr } = minesweeperState;
     const elem = event.target;
     const [index1, index2] = elem
@@ -53,8 +73,8 @@ export class Template extends Component {
       document.querySelector('.header').textContent = 'You lost, try again!';
       return null;
     }
+    // func do not stop
 
-    console.log('test');
     const checkedSquares = [];
     const counter = this.surroundingCheck(index1, index2);
     if (counter === 0) {
@@ -83,7 +103,12 @@ export class Template extends Component {
   }
 
   squareCheck(index1, index2) {
-    if (index1 < 0 || index2 < 0 || index1 > 9 || index2 > 9) {
+    if (
+      index1 < 0 ||
+      index2 < 0 ||
+      index1 > minesweeperState.numderOfSquares - 1 ||
+      index2 > minesweeperState.numderOfSquares - 1
+    ) {
       return 0;
     }
     const { squaresArr, bombIndexes } = minesweeperState;
@@ -97,7 +122,12 @@ export class Template extends Component {
   }
 
   recursiveOpen(index1, index2, checkedSquares) {
-    if (index1 < 0 || index2 < 0 || index1 > 9 || index2 > 9) {
+    if (
+      index1 < 0 ||
+      index2 < 0 ||
+      index1 > minesweeperState.numderOfSquares - 1 ||
+      index2 > minesweeperState.numderOfSquares - 1
+    ) {
       return 0;
     }
     const elem = minesweeperState.squaresArr[index1][index2].node;
@@ -110,16 +140,12 @@ export class Template extends Component {
       checkedSquares.push(elem);
 
       setTimeout(() => {
-        this.recursiveOpen(index1 - 1, index2 - 1, checkedSquares);
         this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
-        this.recursiveOpen(index1 + 1, index2 - 1, checkedSquares);
         this.recursiveOpen(index1 + 1, index2, checkedSquares);
 
-        this.recursiveOpen(index1 + 1, index2 + 1, checkedSquares);
         this.recursiveOpen(index1, index2 + 1, checkedSquares);
 
-        this.recursiveOpen(index1 - 1, index2 + 1, checkedSquares);
         this.recursiveOpen(index1 - 1, index2, checkedSquares);
       }, 50);
 

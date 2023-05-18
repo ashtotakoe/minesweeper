@@ -7,7 +7,7 @@
 }
 
 .template {
-  max-width: $square-side * 11;
+  max-width: $square-side-easy * 11;
   border: solid black 2px;
   margin: 20px auto;
   padding: 5px;
@@ -17,10 +17,14 @@
   flex-wrap: wrap;
 }
 
+.template.medium {
+  max-width: 470px;
+}
+
 .template__item {
   box-sizing: border-box;
-  width: $square-side;
-  height: $square-side;
+  width: $square-side-easy;
+  height: $square-side-easy;
   border: rgb(75, 75, 75) solid 3px;
 
   border-radius: 5%;
@@ -28,11 +32,25 @@
   display: inline-block;
 }
 
-.template__item.bomb {
+.template__item.medium {
+  width: $square-side-medium;
+  height: $square-side-medium;
+}
+
+.template__item.hard {
+  width: $square-side-hard;
+  height: $square-side-hard;
+}
+
+.bomb {
   background-image: url('../images/bomb.webp');
   background-size: cover;
 }
 
-.template__item.opened {
+.opened {
   visibility: hidden;
+}
+.flaged {
+  background-image: url('../images/flag.webp');
+  background-size: cover;
 }

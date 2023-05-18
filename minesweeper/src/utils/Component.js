@@ -9,8 +9,10 @@ export class Component {
     }
 
     if (extraprops) {
-      if (extraprops.event) {
-        this.node.addEventListener(extraprops.event.name, extraprops.event.callback);
+      if (extraprops.events) {
+        extraprops.events.forEach((event) => {
+          this.node.addEventListener(event.name, event.callback);
+        });
       }
       if (extraprops.attrs) {
         Object.keys(extraprops.attrs).forEach((key) => {
