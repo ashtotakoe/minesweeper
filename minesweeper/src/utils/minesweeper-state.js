@@ -1,7 +1,7 @@
 export const minesweeperState = {
   clickCounter: 0,
   bombIndexes: [],
-  squaresArr: [],
-  numderOfSquares: 10, // 10 -> 18 -> 24
+  squaresMatrix: [],
+  squareCount: 10, // 10 -> 18 -> 24
   difficulty: 'easy', // medium -> hard
 };

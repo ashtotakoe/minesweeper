@@ -1,25 +1,30 @@
-import { Component } from '../utils/Component';
-import minesweeperState from '../utils/minesweeper-state';
+import { Component } from '../utils/component';
+import { minesweeperState } from '../utils/minesweeper-state';
 
 export class Header extends Component {
-  start() {
-    const counter = new Component({
-      textContent: 'Click count: 0',
-      parent: this.node,
-      className: 'header__item click-count',
-      tag: 'p',
-    });
+  init() {
     const heading = new Component({
       textContent: 'Minesweeper',
       parent: this.node,
-      className: 'header__item heading',
+      className: 'header__heading',
       tag: 'h3',
     });
-    const difficulty = new Component({
+
+    const headerData = new Component({
       parent: this.node,
-      className: 'header__item',
-      textContent: minesweeperState.difficulty,
-      tag: 'p',
+      className: 'header__data',
+    });
+    const counter = new Component({
+      textContent: 'Click count: 0',
+      parent: headerData.node,
+      className: 'header__data_item header__data_counter',
+      tag: 'span',
+    });
+    const difficulty = new Component({
+      parent: headerData.node,
+      className: 'header__data_item header__data_difficulty',
+      textContent: `Difficulty: ${minesweeperState.difficulty}`,
+      tag: 'span',
     });
   }
 }

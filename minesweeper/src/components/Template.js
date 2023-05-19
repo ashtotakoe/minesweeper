@@ -1,16 +1,17 @@
 import { Component } from '../utils/component';
 import { minesweeperState } from '../utils/minesweeper-state';
 import { setClass, getSquares } from '../utils/set-class';
-import { addFlag } from '../utils/add-flag';
+import { toggleFlagClass } from '../utils/toggle-flag-class';
 import { isIndexesBroken } from '../utils/is-indexes-broken';
+import { getRandomIndex } from '../utils/get-random-index';
 
 export class Template extends Component {
   createTemplate() {
     const { difficulty } = minesweeperState;
     let dataId = 0;
     const squareCount = getSquares[difficulty];
-    minesweeperState.numderOfSquares = squareCount;
-    minesweeperState.squaresArr = Array.from({ length: squareCount }, (_, index1) =>
+    minesweeperState.squareCount = squareCount;
+    minesweeperState.squaresMatrix = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
         { length: squareCount },
         (__, index2) =>
@@ -28,7 +29,7 @@ export class Template extends Component {
                 },
                 {
                   name: 'contextmenu',
-                  callback: addFlag,
+                  callback: toggleFlagClass,
                 },
               ],
             },
@@ -38,10 +39,10 @@ export class Template extends Component {
   }
 
   addBombs() {
-    const numberOfSquares = minesweeperState.numderOfSquares;
+    const { squareCount } = minesweeperState;
 
-    while (minesweeperState.bombIndexes.length < numberOfSquares ** 2 / 10) {
-      const num = Math.floor(Math.random() * numberOfSquares ** 2);
+    while (minesweeperState.bombIndexes.length < squareCount ** 2 / 10) {
+      const num = getRandomIndex(squareCount);
       if (!minesweeperState.bombIndexes.includes(num)) {
         minesweeperState.bombIndexes.push(num);
       }
@@ -49,13 +50,13 @@ export class Template extends Component {
   }
 
   clickHandler(event) {
+    // DO NOT WORK\
     if (event.target.classList.contains('flagged')) {
       return null;
     }
 
-    const { bombIndexes, squaresArr } = minesweeperState;
-    const elem = event.target;
-    const [index1, index2] = elem
+    const { bombIndexes, squaresMatrix } = minesweeperState;
+    const [index1, index2] = event.target
       .getAttribute('data-indexes')
       .split('.')
       .map((e) => Number(e));
@@ -66,7 +67,7 @@ export class Template extends Component {
 
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
       bombIndexes.forEach((index) => {
-        squaresArr.flat()[index].node.classList.add('bomb');
+        squaresMatrix.flat()[index].node.classList.add('bomb');
       });
       document.querySelector('.header').textContent = 'You lost, try again!';
       return null;
@@ -78,7 +79,9 @@ export class Template extends Component {
     if (counter === 0) {
       this.recursiveOpen(index1, index2, checkedSquares);
     }
-    elem.textContent = counter;
+
+    Object.assign(event.target, { textContent: counter });
+
     return null;
   }
 
@@ -104,8 +107,8 @@ export class Template extends Component {
     if (isIndexesBroken(index1, index2)) {
       return 0;
     }
-    const { squaresArr, bombIndexes } = minesweeperState;
-    const component = squaresArr[index1][index2];
+    const { squaresMatrix, bombIndexes } = minesweeperState;
+    const component = squaresMatrix[index1][index2];
 
     const dataId = Number(component.node.getAttribute('data-id'));
     if (bombIndexes.includes(dataId)) {
@@ -118,7 +121,7 @@ export class Template extends Component {
     if (isIndexesBroken(index1, index2)) {
       return 0;
     }
-    const elem = minesweeperState.squaresArr[index1][index2].node;
+    const elem = this.getElem(index1, index2);
 
     if (checkedSquares.includes(elem)) {
       return null;
@@ -139,8 +142,12 @@ export class Template extends Component {
 
       return null;
     }
-    const node = elem;
-    node.textContent = this.surroundingCheck(index1, index2);
+
+    Object.assign(elem, { textContent: this.surroundingCheck(index1, index2) });
     return null;
+  }
+
+  getElem(indexFirst, indexSecond) {
+    return minesweeperState.squaresMatrix[indexFirst][indexSecond].node;
   }
 }

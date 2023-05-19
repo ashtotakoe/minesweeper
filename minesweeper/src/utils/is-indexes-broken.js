@@ -4,8 +4,8 @@ export function isIndexesBroken(indexFirst, indexSecond) {
   if (
     indexFirst < 0 ||
     indexSecond < 0 ||
-    indexFirst > minesweeperState.numderOfSquares - 1 ||
-    indexSecond > minesweeperState.numderOfSquares - 1
+    indexFirst > minesweeperState.squareCount - 1 ||
+    indexSecond > minesweeperState.squareCount - 1
   ) {
     return true;
   }

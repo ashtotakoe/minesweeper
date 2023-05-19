@@ -1,11 +1,20 @@
 @import './vars.scss';
 
 .header {
-  font-size: 2rem;
   text-align: center;
-  margin: 5px;
 }
 
+.header__heading {
+  font-size: 2rem;
+  margin: 15px;
+}
+.header__data {
+  font-size: 1.1rem;
+}
+.header__data_item {
+  display: inline-block;
+  margin: 0 10px;
+}
 .template {
   max-width: $square-side-easy * 11;
   border: solid black 2px;
