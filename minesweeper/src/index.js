@@ -1,16 +1,16 @@
 import './assets/styles/style.scss';
-import minesweeperState from './utils/minesweeper-state';
+import { minesweeperState } from './utils/minesweeper-state';
 import { Template } from './components/Template';
-import { Component } from './utils/Component';
-import { setDifficultyTemplate } from './utils/setClass';
-import { rebuiltTemplate } from './utils/rebuiltTemplate';
+import { Component } from './utils/component';
+import { setClassTemplate } from './utils/set-class';
+import { rebuiltTemplate } from './utils/rebuilt-template';
 
 class App {
   constructor(root) {
     this.header = new Component({ className: 'header', textContent: 'Minesweeper', parent: root, tag: 'header' });
     this.main = new Component({ className: 'main', tag: 'main', parent: root });
     this.template = new Template({
-      className: setDifficultyTemplate[minesweeperState.difficulty],
+      className: setClassTemplate[minesweeperState.difficulty],
       parent: this.main.node,
     });
   }

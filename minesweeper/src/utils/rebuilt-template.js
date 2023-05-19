@@ -1,9 +1,9 @@
-import { setDifficultyTemplate } from './setClass';
+import { setClassTemplate } from './set-class';
 import { Template } from '../components/Template';
-import minesweeperState from './minesweeper-state';
+import { minesweeperState } from './minesweeper-state';
 
 export function rebuiltTemplate(template, main) {
-  const difficulty = setDifficultyTemplate[minesweeperState.difficulty];
+  const difficulty = setClassTemplate[minesweeperState.difficulty];
 
   const templateNew = new Template({
     className: difficulty,
@@ -11,7 +11,6 @@ export function rebuiltTemplate(template, main) {
   });
 
   templateNew.createTemplate();
-  console.log(templateNew.node);
   template.node.replaceWith(templateNew.node);
 
   return templateNew;

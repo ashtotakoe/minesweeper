@@ -1,7 +1,8 @@
-import { Component } from '../utils/Component';
-import minesweeperState from '../utils/minesweeper-state';
-import { setDifficulty, getSquares } from '../utils/setClass';
-import { addFlag } from '../utils/addFlag';
+import { Component } from '../utils/component';
+import { minesweeperState } from '../utils/minesweeper-state';
+import { setClass, getSquares } from '../utils/set-class';
+import { addFlag } from '../utils/add-flag';
+import { isIndexesBroken } from '../utils/is-indexes-broken';
 
 export class Template extends Component {
   createTemplate() {
@@ -9,13 +10,12 @@ export class Template extends Component {
     let dataId = 0;
     const squareCount = getSquares[difficulty];
     minesweeperState.numderOfSquares = squareCount;
-    console.log(1);
     minesweeperState.squaresArr = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
         { length: squareCount },
         (__, index2) =>
           new Component(
-            { parent: this.node, className: setDifficulty[minesweeperState.difficulty] },
+            { parent: this.node, className: setClass[minesweeperState.difficulty] },
             {
               attrs: {
                 'data-id': dataId++,
@@ -35,8 +35,6 @@ export class Template extends Component {
           ),
       ),
     );
-
-    console.log(minesweeperState);
   }
 
   addBombs() {
@@ -103,12 +101,7 @@ export class Template extends Component {
   }
 
   squareCheck(index1, index2) {
-    if (
-      index1 < 0 ||
-      index2 < 0 ||
-      index1 > minesweeperState.numderOfSquares - 1 ||
-      index2 > minesweeperState.numderOfSquares - 1
-    ) {
+    if (isIndexesBroken(index1, index2)) {
       return 0;
     }
     const { squaresArr, bombIndexes } = minesweeperState;
@@ -122,12 +115,7 @@ export class Template extends Component {
   }
 
   recursiveOpen(index1, index2, checkedSquares) {
-    if (
-      index1 < 0 ||
-      index2 < 0 ||
-      index1 > minesweeperState.numderOfSquares - 1 ||
-      index2 > minesweeperState.numderOfSquares - 1
-    ) {
+    if (isIndexesBroken(index1, index2)) {
       return 0;
     }
     const elem = minesweeperState.squaresArr[index1][index2].node;
