@@ -14,6 +14,7 @@ export class Template extends Component {
     const { difficulty } = minesweeperState;
     let dataId = 0;
     const squareCount = getSquares[difficulty];
+    minesweeperComponents.heading.node.textContent = 'Minesweeper';
     minesweeperState.squareCount = squareCount;
     minesweeperState.squaresMatrix = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
@@ -45,6 +46,7 @@ export class Template extends Component {
   addBombs(elem) {
     const { customSquareCount, squareCount, bombIndexes } = minesweeperState;
     const squareNum = customSquareCount || squareCount ** 2 / 10;
+    console.log(squareNum);
     while (bombIndexes.length < squareNum) {
       const num = getRandomIndex(squareCount);
       if (!bombIndexes.includes(num) && Number(elem.getAttribute('data-id')) !== num) {

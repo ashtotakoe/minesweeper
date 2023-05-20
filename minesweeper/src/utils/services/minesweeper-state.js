@@ -3,6 +3,6 @@ export const minesweeperState = {
   bombIndexes: [],
   squaresMatrix: [],
   customSquareCount: 0,
-  squareCount: 10, // 10 -> 18 -> 24
+  squareCount: 10, // 10 -> 15 -> 25
   difficulty: 'easy', // medium -> hard
 };

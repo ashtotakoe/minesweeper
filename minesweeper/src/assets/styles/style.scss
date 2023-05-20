@@ -9,14 +9,18 @@
   font-size: 2rem;
   margin: 15px;
 }
+
 .header__data {
   font-size: 1.1rem;
 }
+
 .header__data_item {
+  color: black;
   display: inline-block;
   margin: 0 10px;
   max-width: 110px;
 }
+
 .template {
   max-width: $square-side-easy * 11;
   border: solid black 2px;
@@ -31,9 +35,11 @@
 .template.medium {
   max-width: 395px;
 }
+
 .template.hard {
   max-width: 475px;
 }
+
 .template__item {
   box-sizing: border-box;
   width: $square-side-easy;
@@ -63,7 +69,23 @@
 .opened {
   visibility: hidden;
 }
+
 .flaged {
   background-image: url('../images/flag.webp');
   background-size: cover;
+}
+
+.body.dark {
+  background-color: rgb(47, 47, 47);
+  .header__heading {
+    color: white;
+  }
+  .header__data_counter,
+  .header__data_difficulty {
+    color: white;
+  }
+}
+.template__item.dark {
+  background-color: rgb(97, 93, 93);
+  color: white;
 }
