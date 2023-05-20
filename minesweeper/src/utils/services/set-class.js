@@ -7,11 +7,5 @@ export const setClass = {
 export const setClassTemplate = {
   easy: 'template',
   medium: 'template medium',
-  hard: 'template medium',
-};
-
-export const getSquares = {
-  easy: 10,
-  medium: 18,
-  hard: 24,
+  hard: 'template hard',
 };

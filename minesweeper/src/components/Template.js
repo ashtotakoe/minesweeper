@@ -1,9 +1,13 @@
 import { Component } from '../utils/component';
-import { minesweeperState } from '../utils/minesweeper-state';
-import { setClass, getSquares } from '../utils/set-class';
+import { minesweeperState } from '../utils/services/minesweeper-state';
+import { setClass } from '../utils/services/set-class';
 import { toggleFlagClass } from '../utils/toggle-flag-class';
 import { isIndexesBroken } from '../utils/is-indexes-broken';
 import { getRandomIndex } from '../utils/get-random-index';
+import { clickDisplay } from '../utils/click-display';
+import { minesweeperComponents } from '../utils/services/minesweeper-components';
+import { displayDefeat } from '../utils/display-defeat';
+import { getSquares } from '../utils/services/get-squares-count';
 
 export class Template extends Component {
   createTemplate() {
@@ -38,41 +42,35 @@ export class Template extends Component {
     );
   }
 
-  addBombs() {
-    const { squareCount } = minesweeperState;
-
-    while (minesweeperState.bombIndexes.length < squareCount ** 2 / 10) {
+  addBombs(elem) {
+    const { customSquareCount, squareCount, bombIndexes } = minesweeperState;
+    const squareNum = customSquareCount || squareCount ** 2 / 10;
+    while (bombIndexes.length < squareNum) {
       const num = getRandomIndex(squareCount);
-      if (!minesweeperState.bombIndexes.includes(num)) {
-        minesweeperState.bombIndexes.push(num);
+      if (!bombIndexes.includes(num) && Number(elem.getAttribute('data-id')) !== num) {
+        bombIndexes.push(num);
       }
     }
+    console.log('bombs have been planted');
   }
 
   clickHandler(event) {
-    // DO NOT WORK\
-    if (event.target.classList.contains('flagged')) {
+    if (event.target.classList.contains('flaged')) {
       return null;
     }
 
-    const { bombIndexes, squaresMatrix } = minesweeperState;
+    const { bombIndexes } = minesweeperState;
     const [index1, index2] = event.target
       .getAttribute('data-indexes')
       .split('.')
       .map((e) => Number(e));
     if (minesweeperState.clickCounter === 0) {
-      this.addBombs();
+      this.addBombs(event.target);
     }
-    minesweeperState.clickCounter++;
-
+    clickDisplay(event, minesweeperComponents.counter);
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
-      bombIndexes.forEach((index) => {
-        squaresMatrix.flat()[index].node.classList.add('bomb');
-      });
-      document.querySelector('.header').textContent = 'You lost, try again!';
-      return null;
+      displayDefeat(minesweeperComponents.heading);
     }
-    // func do not stop
 
     const checkedSquares = [];
     const counter = this.surroundingCheck(index1, index2);
@@ -107,11 +105,8 @@ export class Template extends Component {
     if (isIndexesBroken(index1, index2)) {
       return 0;
     }
-    const { squaresMatrix, bombIndexes } = minesweeperState;
-    const component = squaresMatrix[index1][index2];
-
-    const dataId = Number(component.node.getAttribute('data-id'));
-    if (bombIndexes.includes(dataId)) {
+    const dataId = Number(this.getElem(index1, index2).getAttribute('data-id'));
+    if (minesweeperState.bombIndexes.includes(dataId)) {
       return 1;
     }
     return 0;
