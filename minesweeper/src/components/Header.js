@@ -61,15 +61,6 @@ export class Header extends Component {
       textContent: `Difficulty: ${minesweeperState.difficulty}`,
       tag: 'span',
     });
-    this.popupButton = new Component(
-      {
-        parent: this.headerData.node,
-        className: 'header__data_item header__data_popup-button',
-        tag: 'button',
-        innerText: '\u2699',
-      },
-      { events: [{ name: 'click', callback: togglePopupClass }] },
-    );
   }
 
   setValues() {
@@ -78,7 +69,6 @@ export class Header extends Component {
       setMineCount: this.setMineCount,
       difficulty: this.difficulty,
       counter: this.counter,
-      popupButton: this.popupButton,
     });
   }
 }

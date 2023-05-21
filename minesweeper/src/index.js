@@ -7,10 +7,12 @@ import { setClassTemplate } from './utils/services/set-class';
 import { Header } from './components/Header';
 import { minesweeperComponents } from './utils/services/minesweeper-components';
 import { Popup } from './components/Popup';
+import { Controls } from './components/Controls';
 
 class App {
   constructor(root) {
     this.popUp = new Popup({ className: 'popup', parent: root });
+    this.controls = new Controls({ className: 'controls', parent: root });
     this.header = new Header({ className: 'header', parent: root, tag: 'header' });
     this.main = new Component({ className: 'main', tag: 'main', parent: root });
     this.template = new Template({
