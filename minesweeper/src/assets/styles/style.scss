@@ -7,6 +7,13 @@
   right: 4px;
   max-width: 300px;
 }
+.controls__item {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 1.2rem;
+  background: #ffffff;
+  border-radius: 5%;
+}
 .header {
   text-align: center;
 }

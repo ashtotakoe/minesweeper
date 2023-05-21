@@ -2,7 +2,7 @@ import { minesweeperState } from './services/minesweeper-state';
 
 export function displayDefeat(heading) {
   const { bombIndexes, squaresMatrix } = minesweeperState;
-
+  minesweeperState.isGameOver = true;
   bombIndexes.forEach((index) => {
     squaresMatrix.flat()[index].node.classList.add('bomb');
   });

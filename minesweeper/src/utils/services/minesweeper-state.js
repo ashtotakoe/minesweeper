@@ -5,4 +5,5 @@ export const minesweeperState = {
   customSquareCount: 0,
   squareCount: 10, // 10 -> 15 -> 25
   difficulty: 'easy', // medium -> hard
+  isGameOver: false,
 };

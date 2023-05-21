@@ -8,6 +8,7 @@ import { clickDisplay } from '../utils/click-display';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
 import { displayDefeat } from '../utils/display-defeat';
 import { getSquares } from '../utils/services/get-squares-count';
+import { manageTimer } from '../utils/manageTimer';
 
 export class Template extends Component {
   createTemplate() {
@@ -16,6 +17,7 @@ export class Template extends Component {
     const squareCount = getSquares[difficulty];
     minesweeperComponents.heading.node.textContent = 'Minesweeper';
     minesweeperState.squareCount = squareCount;
+    minesweeperComponents.timer.node.textContent = '0:00';
     minesweeperState.squaresMatrix = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
         { length: squareCount },
@@ -46,14 +48,12 @@ export class Template extends Component {
   addBombs(elem) {
     const { customSquareCount, squareCount, bombIndexes } = minesweeperState;
     const squareNum = customSquareCount || squareCount ** 2 / 10;
-    console.log(squareNum);
     while (bombIndexes.length < squareNum) {
       const num = getRandomIndex(squareCount);
       if (!bombIndexes.includes(num) && Number(elem.getAttribute('data-id')) !== num) {
         bombIndexes.push(num);
       }
     }
-    console.log('bombs have been planted');
   }
 
   clickHandler(event) {
@@ -68,6 +68,8 @@ export class Template extends Component {
       .map((e) => Number(e));
     if (minesweeperState.clickCounter === 0) {
       this.addBombs(event.target);
+      minesweeperState.isGameOver = false;
+      manageTimer(true);
     }
     clickDisplay(event, minesweeperComponents.counter);
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
