@@ -15,9 +15,9 @@ export class Template extends Component {
     const { difficulty } = minesweeperState;
     let dataId = 0;
     const squareCount = getSquares[difficulty];
-    minesweeperComponents.heading.node.textContent = 'Minesweeper';
-    minesweeperState.squareCount = squareCount;
-    minesweeperComponents.timer.node.textContent = '0:00';
+
+    this.setDefaultValues(squareCount);
+
     minesweeperState.squaresMatrix = Array.from({ length: squareCount }, (_, index1) =>
       Array.from(
         { length: squareCount },
@@ -45,6 +45,15 @@ export class Template extends Component {
     );
   }
 
+  setDefaultValues(squareCount) {
+    minesweeperState.clickCounter = 0;
+    minesweeperComponents.counter.node.textContent = 'Click count: 0';
+
+    minesweeperComponents.heading.node.textContent = 'Minesweeper';
+    minesweeperState.squareCount = squareCount;
+    minesweeperComponents.timer.node.textContent = '0:00';
+  }
+
   addBombs(elem) {
     const { customSquareCount, squareCount, bombIndexes } = minesweeperState;
     const squareNum = customSquareCount || squareCount ** 2 / 10;
@@ -66,12 +75,15 @@ export class Template extends Component {
       .getAttribute('data-indexes')
       .split('.')
       .map((e) => Number(e));
+
     if (minesweeperState.clickCounter === 0) {
       this.addBombs(event.target);
       minesweeperState.isGameOver = false;
       manageTimer(true);
     }
+
     clickDisplay(event, minesweeperComponents.counter);
+
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
       displayDefeat(minesweeperComponents.heading);
     }
@@ -81,10 +93,21 @@ export class Template extends Component {
     if (counter === 0) {
       this.recursiveOpen(index1, index2, checkedSquares);
     }
-
+    minesweeperState.openedSquareCount++;
     Object.assign(event.target, { textContent: counter });
 
+    console.log(
+      minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length,
+      minesweeperState.openedSquareCount,
+    );
+    this.checkIfWin();
     return null;
+  }
+
+  checkIfWin() {
+    if (minesweeperState.squareCount ** 2 === minesweeperState.openedSquareCount) {
+      console.log('you win');
+    }
   }
 
   surroundingCheck(index1, index2) {
@@ -128,7 +151,7 @@ export class Template extends Component {
     if (this.surroundingCheck(index1, index2) === 0) {
       elem.classList.add('opened');
       checkedSquares.push(elem);
-
+      minesweeperState.openedSquareCount++;
       setTimeout(() => {
         this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
@@ -143,6 +166,7 @@ export class Template extends Component {
     }
 
     Object.assign(elem, { textContent: this.surroundingCheck(index1, index2) });
+    minesweeperState.openedSquareCount++;
     return null;
   }
 

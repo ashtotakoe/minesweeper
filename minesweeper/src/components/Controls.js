@@ -24,12 +24,17 @@ export class Controls extends Component {
       },
       { events: [{ name: 'click', callback: togglePopupClass }] },
     );
-    this.soundButton = new Component({
-      parent: this.node,
-      className: 'controls__item',
-      tag: 'button',
-      textContent: 'S',
-    });
+    this.soundButton = new Component(
+      {
+        parent: this.node,
+        className: 'controls__item',
+        tag: 'button',
+        textContent: 'S',
+      },
+      {
+        events: [{ name: 'click', callback: () => playAudio('click') }],
+      },
+    );
 
     Object.assign(minesweeperComponents, { timer: this.timer });
   }

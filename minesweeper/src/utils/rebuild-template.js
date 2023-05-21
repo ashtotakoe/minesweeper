@@ -6,8 +6,7 @@ import { minesweeperComponents } from './services/minesweeper-components';
 export function rebuildTemplate() {
   const difficulty = setClassTemplate[minesweeperState.difficulty];
   minesweeperState.bombIndexes = [];
-  minesweeperState.clickCounter = 0;
-  minesweeperComponents.counter.node.textContent = 'Click count: 0';
+  minesweeperState.isGameOver = true;
 
   const templateNew = new Template({
     className: difficulty,

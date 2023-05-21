@@ -1,5 +1,7 @@
+import clickSound from '../assets/audio/button-click1.mp3';
+
 const songs = {
-  click: '../assets/audio/button-click1.mp3',
+  click: clickSound,
 };
 
 export function playAudio(type) {
