@@ -30,7 +30,7 @@ export class Controls extends Component {
         parent: this.node,
         className: 'controls__item',
         tag: 'button',
-        textContent: 'S',
+        textContent: 'M',
       },
       {
         events: [{ name: 'click', callback: this.toggleVolume }],
@@ -42,6 +42,6 @@ export class Controls extends Component {
 
   toggleVolume(event) {
     minesweeperState.isSoundOn = !minesweeperState.isSoundOn;
-    Object.assign(event.target, { textContent: event.target.textContent === 'S' ? 'M' : 'S' });
+    Object.assign(event.target, { textContent: event.target.textContent === 'U' ? 'M' : 'U' });
   }
 }
