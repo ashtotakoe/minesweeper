@@ -21,7 +21,7 @@ export class Header extends Component {
   }
 
   setCustomMineCount(event) {
-    if (Number(event.target.value) > 0 && Number(event.target.value) < 100) {
+    if (Number(event.target.value) > 9 && Number(event.target.value) < 100) {
       minesweeperState.customSquareCount = Number(event.target.value);
       return null;
     }

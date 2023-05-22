@@ -1,7 +1,6 @@
 import { Component } from '../utils/component';
 import { minesweeperState } from '../utils/minesweeper-state';
 import { setClass } from '../utils/set-class';
-import { isIndexesBroken } from '../utils/is-indexes-broken';
 import { getRandomIndex } from '../utils/get-random-index';
 import { clickDisplay } from '../utils/click-display';
 import { minesweeperComponents } from '../utils/minesweeper-components';
@@ -155,7 +154,7 @@ export class Template extends Component {
   }
 
   squareCheck(index1, index2) {
-    if (isIndexesBroken(index1, index2)) {
+    if (this.isIndexesBroken(index1, index2)) {
       return 0;
     }
     const dataId = Number(this.getElem(index1, index2).getAttribute('data-id'));
@@ -166,7 +165,7 @@ export class Template extends Component {
   }
 
   recursiveOpen(index1, index2, checkedSquares) {
-    if (isIndexesBroken(index1, index2)) {
+    if (this.isIndexesBroken(index1, index2)) {
       return 0;
     }
     const elem = this.getElem(index1, index2);
@@ -217,5 +216,17 @@ export class Template extends Component {
     Object.assign(heading.node, { textContent: 'You lost, try again!' });
 
     return null;
+  }
+
+  isIndexesBroken(indexFirst, indexSecond) {
+    if (
+      indexFirst < 0 ||
+      indexSecond < 0 ||
+      indexFirst > minesweeperState.squareCount - 1 ||
+      indexSecond > minesweeperState.squareCount - 1
+    ) {
+      return true;
+    }
+    return false;
   }
 }
