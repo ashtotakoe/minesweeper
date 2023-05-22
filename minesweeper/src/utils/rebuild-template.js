@@ -8,6 +8,7 @@ export function rebuildTemplate() {
   const difficulty = setClassTemplate[minesweeperState.difficulty];
   minesweeperState.bombIndexes = [];
   minesweeperState.isGameOver = true;
+  Object.assign(minesweeperComponents.difficulty.node, { textContent: `Difficulty: ${minesweeperState.difficulty}` });
 
   const templateNew = new Template({
     className: difficulty,
