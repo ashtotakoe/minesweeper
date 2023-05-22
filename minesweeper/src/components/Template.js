@@ -69,7 +69,6 @@ export class Template extends Component {
     if (event.target.classList.contains('flaged')) {
       return null;
     }
-
     const { bombIndexes } = minesweeperState;
     const [index1, index2] = event.target
       .getAttribute('data-indexes')
@@ -81,31 +80,52 @@ export class Template extends Component {
       minesweeperState.isGameOver = false;
       manageTimer(true);
     }
-
     clickDisplay(event, minesweeperComponents.counter);
 
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
       displayDefeat(minesweeperComponents.heading);
     }
-
+    if (event.target.textContent === '') {
+      minesweeperState.openedSquareCount++;
+      this.checkIfWin();
+    }
     const checkedSquares = [];
     const counter = this.surroundingCheck(index1, index2);
     if (counter === 0) {
       this.recursiveOpen(index1, index2, checkedSquares);
     }
-    minesweeperState.openedSquareCount++;
-    Object.assign(event.target, { textContent: counter });
 
-    console.log(
-      minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length,
-      minesweeperState.openedSquareCount,
-    );
+    Object.assign(event.target, { textContent: counter });
+    this.addColor(event.target);
     this.checkIfWin();
     return null;
   }
 
+  addColor(elem) {
+    const value = Number(elem.textContent);
+    console.log(value);
+    if (value < 2) {
+      elem.classList.add('green');
+      return null;
+    }
+    if (value < 4) {
+      elem.classList.add('yellow');
+      return null;
+    }
+    if (value > 6 && value < 9) {
+      elem.classList.add('red');
+      return null;
+    }
+    return null;
+  }
+
+  // console.log(
+  //   minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length,
+  //   minesweeperState.openedSquareCount,
+  // );
+
   checkIfWin() {
-    if (minesweeperState.squareCount ** 2 === minesweeperState.openedSquareCount) {
+    if (minesweeperState.squareCount ** 2 <= minesweeperState.openedSquareCount) {
       console.log('you win');
     }
   }
@@ -166,7 +186,9 @@ export class Template extends Component {
     }
 
     Object.assign(elem, { textContent: this.surroundingCheck(index1, index2) });
+    this.addColor(elem);
     minesweeperState.openedSquareCount++;
+    this.checkIfWin();
     return null;
   }
 

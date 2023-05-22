@@ -58,6 +58,7 @@
   width: $square-side-easy;
   height: $square-side-easy;
   border: rgb(75, 75, 75) solid 3px;
+  font-weight: 600;
 
   border-radius: 5%;
   background-color: rgb(173, 171, 171);
@@ -98,7 +99,22 @@
     color: white;
   }
 }
-.template__item.dark {
+
+.template.dark {
+  background-color: black;
+}
+
+.dark {
   background-color: rgb(97, 93, 93);
   color: white;
+}
+
+.green {
+  color: rgb(0, 171, 0);
+}
+.yellow {
+  color: yellow;
+}
+.red {
+  color: red;
 }

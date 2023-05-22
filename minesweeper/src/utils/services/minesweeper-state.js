@@ -7,4 +7,5 @@ export const minesweeperState = {
   difficulty: 'easy', // medium -> hard
   isGameOver: false,
   openedSquareCount: 0,
+  isDarkTheme: false,
 };
