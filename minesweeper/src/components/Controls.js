@@ -1,8 +1,6 @@
 import { Component } from '../utils/component';
-import { manageTimer } from '../utils/manageTimer';
-import { playAudio } from '../utils/playAudio';
-import { minesweeperComponents } from '../utils/services/minesweeper-components';
-import { minesweeperState } from '../utils/services/minesweeper-state';
+import { minesweeperComponents } from '../utils/minesweeper-components';
+import { minesweeperState } from '../utils/minesweeper-state';
 import { toggleClass } from '../utils/toggle-class';
 
 export class Controls extends Component {

@@ -1,7 +1,7 @@
 import { Component } from '../utils/component';
 import { rebuildTemplate } from '../utils/rebuild-template';
-import { minesweeperState } from '../utils/services/minesweeper-state';
-import { minesweeperComponents } from '../utils/services/minesweeper-components';
+import { minesweeperState } from '../utils/minesweeper-state';
+import { minesweeperComponents } from '../utils/minesweeper-components';
 import { changeTheme } from '../utils/change-theme';
 import { toggleClass } from '../utils/toggle-class';
 

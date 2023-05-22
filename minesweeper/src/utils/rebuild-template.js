@@ -1,7 +1,7 @@
-import { setClassTemplate } from './services/set-class';
+import { setClassTemplate } from './set-class';
 import { Template } from '../components/Template';
-import { minesweeperState } from './services/minesweeper-state';
-import { minesweeperComponents } from './services/minesweeper-components';
+import { minesweeperState } from './minesweeper-state';
+import { minesweeperComponents } from './minesweeper-components';
 import { changeTheme } from './change-theme';
 
 export function rebuildTemplate() {

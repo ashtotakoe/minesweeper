@@ -1,11 +1,11 @@
 import './assets/styles/normalize.scss';
 import './assets/styles/style.scss';
-import { minesweeperState } from './utils/services/minesweeper-state';
+import { minesweeperState } from './utils/minesweeper-state';
 import { Template } from './components/Template';
 import { Component } from './utils/component';
-import { setClassTemplate } from './utils/services/set-class';
+import { setClassTemplate } from './utils/set-class';
 import { Header } from './components/Header';
-import { minesweeperComponents } from './utils/services/minesweeper-components';
+import { minesweeperComponents } from './utils/minesweeper-components';
 import { Popup } from './components/Popup';
 import { Controls } from './components/Controls';
 

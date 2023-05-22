@@ -1,20 +1,17 @@
-import { minesweeperState } from './services/minesweeper-state';
-import { minesweeperComponents } from './services/minesweeper-components';
-
 const time = {
   seconds: 0,
   tenseconds: 0,
   minutes: 0,
 };
 
-export function manageTimer(start) {
+export function manageTimer(start, minesweeperComponents, minesweeperState) {
   if (start) {
     Object.assign(time, { seconds: 0, tenseconds: 0, minutes: 0 });
   }
+
   if (minesweeperState.isGameOver) {
     return null;
   }
-
   time.seconds++;
   if (time.seconds === 10) {
     time.seconds = 0;
@@ -25,9 +22,10 @@ export function manageTimer(start) {
     time.tenseconds = 0;
   }
 
-  minesweeperComponents.timer.node.textContent = `${time.minutes}:${time.tenseconds}${time.seconds}`;
+  Object.assign(minesweeperComponents.timer.node, { textContent: `${time.minutes}:${time.tenseconds}${time.seconds}` });
+
   setTimeout(() => {
-    manageTimer();
+    manageTimer(false, minesweeperComponents, minesweeperState);
   }, 1000);
   return null;
 }

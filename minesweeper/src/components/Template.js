@@ -1,12 +1,11 @@
 import { Component } from '../utils/component';
-import { minesweeperState } from '../utils/services/minesweeper-state';
-import { setClass } from '../utils/services/set-class';
+import { minesweeperState } from '../utils/minesweeper-state';
+import { setClass } from '../utils/set-class';
 import { isIndexesBroken } from '../utils/is-indexes-broken';
 import { getRandomIndex } from '../utils/get-random-index';
 import { clickDisplay } from '../utils/click-display';
-import { minesweeperComponents } from '../utils/services/minesweeper-components';
-import { displayDefeat } from '../utils/display-defeat';
-import { getSquares } from '../utils/services/get-squares-count';
+import { minesweeperComponents } from '../utils/minesweeper-components';
+import { getSquares } from '../utils/get-squares-count';
 import { manageTimer } from '../utils/manageTimer';
 import { playAudio } from '../utils/playAudio';
 import { toggleClass } from '../utils/toggle-class';
@@ -39,7 +38,7 @@ export class Template extends Component {
                   name: 'contextmenu',
                   callback: (event) => {
                     event.preventDefault();
-                    playAudio('flag');
+                    playAudio('flag', minesweeperState);
                     toggleClass(event.target, 'flaged');
                   },
                 },
@@ -51,7 +50,7 @@ export class Template extends Component {
   }
 
   setDefaultValues(squareCount) {
-    playAudio('start');
+    playAudio('start', minesweeperState);
 
     minesweeperState.clickCounter = 0;
     minesweeperComponents.counter.node.textContent = 'Click count: 0';
@@ -86,12 +85,12 @@ export class Template extends Component {
     if (minesweeperState.clickCounter === 0) {
       this.addBombs(event.target);
       minesweeperState.isGameOver = false;
-      manageTimer(true);
+      manageTimer(true, minesweeperComponents, minesweeperState);
     }
     clickDisplay(event, minesweeperComponents.counter, minesweeperState);
 
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
-      displayDefeat(minesweeperComponents.heading);
+      this.displayDefeat(minesweeperComponents.heading);
       return null;
     }
 
@@ -104,7 +103,7 @@ export class Template extends Component {
       this.recursiveOpen(index1, index2, checkedSquares);
       minesweeperState.openedSquareCount += checkedSquares.length - 1;
     }
-    playAudio('click');
+    playAudio('click', minesweeperState);
     Object.assign(event.target, { textContent: counter });
     this.addColor(event.target);
     this.checkIfWin();
@@ -203,8 +202,20 @@ export class Template extends Component {
   }
 
   displayVictory() {
-    playAudio('start');
+    playAudio('start', minesweeperState);
     Object.assign(minesweeperComponents.heading.node, { textContent: 'You win!' });
     minesweeperState.isGameOver = true;
+  }
+
+  displayDefeat(heading) {
+    const { bombIndexes, squaresMatrix } = minesweeperState;
+    playAudio('defeat', minesweeperState);
+    minesweeperState.isGameOver = true;
+    bombIndexes.forEach((index) => {
+      squaresMatrix.flat()[index].node.classList.add('bomb');
+    });
+    Object.assign(heading.node, { textContent: 'You lost, try again!' });
+
+    return null;
   }
 }

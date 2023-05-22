@@ -1,4 +1,4 @@
-import { minesweeperState } from './services/minesweeper-state';
+import { minesweeperState } from './minesweeper-state';
 
 export function isIndexesBroken(indexFirst, indexSecond) {
   if (

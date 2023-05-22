@@ -1,8 +1,6 @@
 import { Component } from '../utils/component';
-import { minesweeperState } from '../utils/services/minesweeper-state';
-import { minesweeperComponents } from '../utils/services/minesweeper-components';
-
-import { getSquares } from '../utils/services/get-squares-count';
+import { minesweeperState } from '../utils/minesweeper-state';
+import { minesweeperComponents } from '../utils/minesweeper-components';
 
 export class Header extends Component {
   constructor(props, extraprops) {
