@@ -2,7 +2,7 @@ import { setClassTemplate } from './services/set-class';
 import { Template } from '../components/Template';
 import { minesweeperState } from './services/minesweeper-state';
 import { minesweeperComponents } from './services/minesweeper-components';
-import { changeTheme } from './changeTheme';
+import { changeTheme } from './change-theme';
 
 export function rebuildTemplate() {
   const difficulty = setClassTemplate[minesweeperState.difficulty];
@@ -20,7 +20,7 @@ export function rebuildTemplate() {
   minesweeperComponents.template = templateNew;
   if (minesweeperState.isDarkTheme) {
     document.body.classList.remove('dark');
-    changeTheme(minesweeperComponents.themeBtn, minesweeperComponents);
+    changeTheme(minesweeperComponents.themeBtn, minesweeperComponents, minesweeperState);
   }
 
   return templateNew;

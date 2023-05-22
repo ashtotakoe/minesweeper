@@ -2,7 +2,7 @@ import { Component } from '../utils/component';
 import { rebuildTemplate } from '../utils/rebuild-template';
 import { minesweeperState } from '../utils/services/minesweeper-state';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
-import { changeTheme } from '../utils/changeTheme';
+import { changeTheme } from '../utils/change-theme';
 import { toggleClass } from '../utils/toggle-class';
 
 export class Popup extends Component {
@@ -60,7 +60,7 @@ export class Popup extends Component {
           {
             name: 'click',
             callback: () => {
-              changeTheme(this.themeBtn, minesweeperComponents);
+              changeTheme(this.themeBtn, minesweeperComponents, minesweeperState);
               minesweeperState.isDarkTheme = !minesweeperState.isDarkTheme;
             },
           },

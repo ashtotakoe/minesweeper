@@ -1,6 +1,4 @@
-import { minesweeperState } from './services/minesweeper-state';
-
-export function changeTheme(elem, minesweeperComponents) {
+export function changeTheme(elem, minesweeperComponents, minesweeperState) {
   let { squaresMatrix } = minesweeperState;
   const { template } = minesweeperComponents;
   squaresMatrix = squaresMatrix.map((components) =>

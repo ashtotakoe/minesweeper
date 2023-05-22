@@ -88,7 +88,7 @@ export class Template extends Component {
       minesweeperState.isGameOver = false;
       manageTimer(true);
     }
-    clickDisplay(event, minesweeperComponents.counter);
+    clickDisplay(event, minesweeperComponents.counter, minesweeperState);
 
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
       displayDefeat(minesweeperComponents.heading);
