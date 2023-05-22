@@ -46,7 +46,7 @@ export class Header extends Component {
             callback: this.setCustomMineCount,
           },
         ],
-        attrs: { type: 'number', min: 1, max: 99, value: 50 },
+        attrs: { type: 'number', min: 10, max: 99, value: 50 },
       },
     );
     this.counter = new Component({

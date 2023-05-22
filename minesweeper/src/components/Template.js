@@ -49,6 +49,7 @@ export class Template extends Component {
     minesweeperState.clickCounter = 0;
     minesweeperComponents.counter.node.textContent = 'Click count: 0';
 
+    minesweeperState.openedSquareCount = 0;
     minesweeperComponents.heading.node.textContent = 'Minesweeper';
     minesweeperState.squareCount = squareCount;
     minesweeperComponents.timer.node.textContent = '0:00';
@@ -84,15 +85,17 @@ export class Template extends Component {
 
     if (bombIndexes.includes(Number(event.target.getAttribute('data-id')))) {
       displayDefeat(minesweeperComponents.heading);
+      return null;
     }
+
     if (event.target.textContent === '') {
       minesweeperState.openedSquareCount++;
-      this.checkIfWin();
     }
     const checkedSquares = [];
     const counter = this.surroundingCheck(index1, index2);
     if (counter === 0) {
       this.recursiveOpen(index1, index2, checkedSquares);
+      minesweeperState.openedSquareCount += checkedSquares.length - 1;
     }
 
     Object.assign(event.target, { textContent: counter });
@@ -103,7 +106,6 @@ export class Template extends Component {
 
   addColor(elem) {
     const value = Number(elem.textContent);
-    console.log(value);
     if (value < 2) {
       elem.classList.add('green');
       return null;
@@ -119,14 +121,13 @@ export class Template extends Component {
     return null;
   }
 
-  // console.log(
-  //   minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length,
-  //   minesweeperState.openedSquareCount,
-  // );
-
   checkIfWin() {
-    if (minesweeperState.squareCount ** 2 <= minesweeperState.openedSquareCount) {
+    if (
+      minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length ===
+      minesweeperState.openedSquareCount
+    ) {
       console.log('you win');
+      this.displayVictory();
     }
   }
 
@@ -171,28 +172,32 @@ export class Template extends Component {
     if (this.surroundingCheck(index1, index2) === 0) {
       elem.classList.add('opened');
       checkedSquares.push(elem);
-      minesweeperState.openedSquareCount++;
-      setTimeout(() => {
-        this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
-        this.recursiveOpen(index1 + 1, index2, checkedSquares);
+      this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
-        this.recursiveOpen(index1, index2 + 1, checkedSquares);
+      this.recursiveOpen(index1 + 1, index2, checkedSquares);
 
-        this.recursiveOpen(index1 - 1, index2, checkedSquares);
-      }, 50);
+      this.recursiveOpen(index1, index2 + 1, checkedSquares);
 
+      this.recursiveOpen(index1 - 1, index2, checkedSquares);
+
+      // set time out make it cooler
       return null;
     }
 
+    checkedSquares.push(elem); // test ubrat
     Object.assign(elem, { textContent: this.surroundingCheck(index1, index2) });
     this.addColor(elem);
-    minesweeperState.openedSquareCount++;
-    this.checkIfWin();
+
     return null;
   }
 
   getElem(indexFirst, indexSecond) {
     return minesweeperState.squaresMatrix[indexFirst][indexSecond].node;
+  }
+
+  displayVictory() {
+    Object.assign(minesweeperComponents.heading.node, { textContent: 'You win!' });
+    minesweeperState.isGameOver = true;
   }
 }
