@@ -1,7 +1,6 @@
 import { Component } from '../utils/component';
 import { minesweeperState } from '../utils/services/minesweeper-state';
 import { setClass } from '../utils/services/set-class';
-import { toggleFlagClass } from '../utils/toggle-flag-class';
 import { isIndexesBroken } from '../utils/is-indexes-broken';
 import { getRandomIndex } from '../utils/get-random-index';
 import { clickDisplay } from '../utils/click-display';
@@ -10,6 +9,7 @@ import { displayDefeat } from '../utils/display-defeat';
 import { getSquares } from '../utils/services/get-squares-count';
 import { manageTimer } from '../utils/manageTimer';
 import { playAudio } from '../utils/playAudio';
+import { toggleClass } from '../utils/toggle-class';
 
 export class Template extends Component {
   createTemplate() {
@@ -37,7 +37,11 @@ export class Template extends Component {
                 },
                 {
                   name: 'contextmenu',
-                  callback: toggleFlagClass,
+                  callback: (event) => {
+                    event.preventDefault();
+                    playAudio('flag');
+                    toggleClass(event.target, 'flaged');
+                  },
                 },
               ],
             },

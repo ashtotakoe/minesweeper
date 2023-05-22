@@ -3,7 +3,7 @@ import { manageTimer } from '../utils/manageTimer';
 import { playAudio } from '../utils/playAudio';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
 import { minesweeperState } from '../utils/services/minesweeper-state';
-import { togglePopupClass } from '../utils/toggle-popup-class';
+import { toggleClass } from '../utils/toggle-class';
 
 export class Controls extends Component {
   constructor(props, extraprops) {
@@ -23,7 +23,7 @@ export class Controls extends Component {
         tag: 'button',
         innerText: '\u2699',
       },
-      { events: [{ name: 'click', callback: togglePopupClass }] },
+      { events: [{ name: 'click', callback: (event) => toggleClass(minesweeperComponents.popup.node, 'opened') }] },
     );
     this.volumeButton = new Component(
       {

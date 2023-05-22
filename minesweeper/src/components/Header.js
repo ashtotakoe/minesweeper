@@ -1,7 +1,7 @@
 import { Component } from '../utils/component';
 import { minesweeperState } from '../utils/services/minesweeper-state';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
-import { togglePopupClass } from '../utils/toggle-popup-class';
+
 import { getSquares } from '../utils/services/get-squares-count';
 
 export class Header extends Component {

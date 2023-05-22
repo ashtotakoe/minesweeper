@@ -1,9 +1,9 @@
 import { Component } from '../utils/component';
-import { togglePopupClass } from '../utils/toggle-popup-class';
 import { rebuildTemplate } from '../utils/rebuild-template';
 import { minesweeperState } from '../utils/services/minesweeper-state';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
 import { changeTheme } from '../utils/changeTheme';
+import { toggleClass } from '../utils/toggle-class';
 
 export class Popup extends Component {
   constructor(props, extraprops) {
@@ -21,7 +21,7 @@ export class Popup extends Component {
         events: [
           {
             name: 'click',
-            callback: togglePopupClass,
+            callback: (event) => toggleClass(minesweeperComponents.popup.node, 'opened'),
           },
         ],
       },
@@ -80,7 +80,7 @@ export class Popup extends Component {
   changeDifficulty(event) {
     minesweeperState.difficulty = event.target.textContent;
     rebuildTemplate();
-    togglePopupClass();
+    toggleClass(minesweeperComponents.popup.node, 'opened');
   }
 
   createdifficulty() {
@@ -121,6 +121,6 @@ export class Popup extends Component {
 
   replayGame() {
     rebuildTemplate();
-    togglePopupClass();
+    toggleClass(minesweeperComponents.popup.node, 'opened');
   }
 }
