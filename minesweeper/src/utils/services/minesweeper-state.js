@@ -8,5 +8,5 @@ export const minesweeperState = {
   isGameOver: false,
   openedSquareCount: 0,
   isDarkTheme: false,
-  isSoundOn: false,
+  isSoundOn: true,
 };

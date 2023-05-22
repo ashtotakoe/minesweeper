@@ -9,6 +9,7 @@ import { minesweeperComponents } from '../utils/services/minesweeper-components'
 import { displayDefeat } from '../utils/display-defeat';
 import { getSquares } from '../utils/services/get-squares-count';
 import { manageTimer } from '../utils/manageTimer';
+import { playAudio } from '../utils/playAudio';
 
 export class Template extends Component {
   createTemplate() {
@@ -46,6 +47,8 @@ export class Template extends Component {
   }
 
   setDefaultValues(squareCount) {
+    playAudio('start');
+
     minesweeperState.clickCounter = 0;
     minesweeperComponents.counter.node.textContent = 'Click count: 0';
 
@@ -97,7 +100,7 @@ export class Template extends Component {
       this.recursiveOpen(index1, index2, checkedSquares);
       minesweeperState.openedSquareCount += checkedSquares.length - 1;
     }
-
+    playAudio('click');
     Object.assign(event.target, { textContent: counter });
     this.addColor(event.target);
     this.checkIfWin();
@@ -126,7 +129,6 @@ export class Template extends Component {
       minesweeperState.squareCount ** 2 - minesweeperState.bombIndexes.length ===
       minesweeperState.openedSquareCount
     ) {
-      console.log('you win');
       this.displayVictory();
     }
   }
@@ -197,6 +199,7 @@ export class Template extends Component {
   }
 
   displayVictory() {
+    playAudio('start');
     Object.assign(minesweeperComponents.heading.node, { textContent: 'You win!' });
     minesweeperState.isGameOver = true;
   }

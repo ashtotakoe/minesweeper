@@ -2,6 +2,7 @@ import { Component } from '../utils/component';
 import { manageTimer } from '../utils/manageTimer';
 import { playAudio } from '../utils/playAudio';
 import { minesweeperComponents } from '../utils/services/minesweeper-components';
+import { minesweeperState } from '../utils/services/minesweeper-state';
 import { togglePopupClass } from '../utils/toggle-popup-class';
 
 export class Controls extends Component {
@@ -24,7 +25,7 @@ export class Controls extends Component {
       },
       { events: [{ name: 'click', callback: togglePopupClass }] },
     );
-    this.soundButton = new Component(
+    this.volumeButton = new Component(
       {
         parent: this.node,
         className: 'controls__item',
@@ -32,10 +33,15 @@ export class Controls extends Component {
         textContent: 'S',
       },
       {
-        events: [{ name: 'click', callback: () => playAudio('click') }],
+        events: [{ name: 'click', callback: this.toggleVolume }],
       },
     );
 
     Object.assign(minesweeperComponents, { timer: this.timer });
+  }
+
+  toggleVolume(event) {
+    minesweeperState.isSoundOn = !minesweeperState.isSoundOn;
+    Object.assign(event.target, { textContent: event.target.textContent === 'S' ? 'M' : 'S' });
   }
 }

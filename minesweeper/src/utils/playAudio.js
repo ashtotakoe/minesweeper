@@ -1,4 +1,4 @@
-import clickSound from '../assets/audio/button-click2.mp3';
+import clickSound from '../assets/audio/button-click1.mp3';
 import gameStart from '../assets/audio/game-start.mp3';
 import explosion from '../assets/audio/mine-explosion.mp3';
 import { minesweeperState } from './services/minesweeper-state';
