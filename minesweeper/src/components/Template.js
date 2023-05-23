@@ -177,15 +177,18 @@ export class Template extends Component {
       elem.classList.add('opened');
       checkedSquares.push(elem);
 
+      this.recursiveOpen(index1 - 1, index2 - 1, checkedSquares);
       this.recursiveOpen(index1, index2 - 1, checkedSquares);
 
+      this.recursiveOpen(index1 + 1, index2 - 1, checkedSquares);
       this.recursiveOpen(index1 + 1, index2, checkedSquares);
 
+      this.recursiveOpen(index1 + 1, index2 + 1, checkedSquares);
       this.recursiveOpen(index1, index2 + 1, checkedSquares);
 
+      this.recursiveOpen(index1 - 1, index2 + 1, checkedSquares);
       this.recursiveOpen(index1 - 1, index2, checkedSquares);
 
-      // set time out make it cooler
       return null;
     }
 
@@ -195,6 +198,16 @@ export class Template extends Component {
 
     return null;
   }
+  /**
+      this.recursiveOpen(index1, index2 - 1, checkedSquares);
+
+      this.recursiveOpen(index1 + 1, index2, checkedSquares);
+
+      this.recursiveOpen(index1, index2 + 1, checkedSquares);
+
+      this.recursiveOpen(index1 - 1, index2, checkedSquares);
+
+   */
 
   getElem(indexFirst, indexSecond) {
     return minesweeperState.squaresMatrix[indexFirst][indexSecond].node;

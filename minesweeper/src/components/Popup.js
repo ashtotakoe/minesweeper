@@ -28,7 +28,7 @@ export class Popup extends Component {
     );
 
     this.createPopupItems();
-    this.createdifficulty();
+    this.createDifficulty();
     this.saveValues();
   }
 
@@ -83,7 +83,7 @@ export class Popup extends Component {
     toggleClass(minesweeperComponents.popup.node, 'opened');
   }
 
-  createdifficulty() {
+  createDifficulty() {
     this.easy = new Component(
       {
         className: 'difficulty__item',
