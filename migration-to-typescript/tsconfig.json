@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true,
-    "moduleResolution": "node"
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2016",
+    "resolveJsonModule": true
   }
 }
