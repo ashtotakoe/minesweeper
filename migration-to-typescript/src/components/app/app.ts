@@ -1,6 +1,6 @@
 import AppController from '../controller/controller'
 import { AppView } from '../view/appView'
-import { ResponseNews } from '../../types'
+import { Response } from '../../types/types'
 
 class App {
   private controller = new AppController()
@@ -9,8 +9,8 @@ class App {
   public start(): void {
     document
       .querySelector('.sources')
-      ?.addEventListener('click', (e) => this.controller.getNews(e, (data: ResponseNews) => this.view.drawNews(data)))
-    this.controller.getSources((data) => this.view.drawSources(data))
+      ?.addEventListener('click', (e) => this.controller.getNews(e, (data: Response) => this.view.drawNews(data)))
+    this.controller.getSources((data: Response) => this.view.drawSources(data))
   }
 }
 

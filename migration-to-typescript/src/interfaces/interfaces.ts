@@ -33,3 +33,16 @@ export interface Source {
   name: string
   url: string
 }
+
+export interface LoaderOptions {
+  apiKey: string
+}
+
+export interface GetRespParam {
+  endpoint: string
+  options?: GetRespOptions
+}
+
+export interface GetRespOptions {
+  sources?: string
+}
