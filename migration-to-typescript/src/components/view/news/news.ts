@@ -30,16 +30,16 @@ class News {
       }
     }
   }
-  private getElements(newsClone: DocumentFragment): HTMLElement[] {
-    return [
-      this.getElement<HTMLElement>(newsClone, '.news__meta-photo'),
-      this.getElement<HTMLElement>(newsClone, '.news__meta-author'),
-      this.getElement<HTMLElement>(newsClone, '.news__meta-date'),
-      this.getElement<HTMLElement>(newsClone, '.news__description-title'),
-      this.getElement<HTMLElement>(newsClone, '.news__description-source'),
-      this.getElement<HTMLElement>(newsClone, '.news__description-content'),
-      this.getElement<HTMLElement>(newsClone, '.news__read-more a'),
-    ]
+  private getElements(newsClone: DocumentFragment): Record<string, HTMLElement> {
+    return {
+      metaPhoto: this.getElement<HTMLElement>(newsClone, '.news__meta-photo'),
+      metaAuthor: this.getElement<HTMLElement>(newsClone, '.news__meta-author'),
+      metaDate: this.getElement<HTMLElement>(newsClone, '.news__meta-date'),
+      descriptionTitle: this.getElement<HTMLElement>(newsClone, '.news__description-title'),
+      descriptionSource: this.getElement<HTMLElement>(newsClone, '.news__description-source'),
+      descriptionContent: this.getElement<HTMLElement>(newsClone, '.news__description-content'),
+      readMore: this.getElement<HTMLElement>(newsClone, '.news__read-more a'),
+    }
   }
 
   private getElement<T extends HTMLElement>(root: DocumentFragment, selector: string): T {
@@ -49,23 +49,26 @@ class News {
     }
     throw new Error('egor! ne smotry!')
   }
-  private setProps(elements: HTMLElement[], item: Article): void {
-    const [
-      metaPhoto,
-      metaAuthor,
-      metaDate,
-      descriptionTitle,
-      descriptionSource,
-      descriptionContent,
-      readMore,
-    ] = elements
-    metaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`
-    metaAuthor.textContent = item.author || item.source.name
-    metaDate.textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-')
-    descriptionTitle.textContent = item.title
-    descriptionSource.textContent = item.source.name
-    descriptionContent.textContent = item.description
-    readMore.setAttribute('href', item.url)
+  private setProps(elements: Record<string, HTMLElement>, item: Article): void {
+    const changingTextElements: Record<string, string> = {
+      metaAuthor: item.author || item.source.name,
+      metaDate: item.publishedAt.slice(0, 10).split('-').reverse().join('-'),
+      descriptionTitle: item.title,
+      descriptionSource: item.source.name,
+      descriptionContent: item.description,
+    }
+    Object.keys(elements).forEach((key) => {
+      if (Object.keys(changingTextElements).includes(key)) {
+        Object.assign(elements[key], {
+          textContent: changingTextElements[key],
+        })
+      }
+    })
+
+    Object.assign(elements.metaPhoto.style, {
+      backgroundImage: `url(${item.urlToImage || 'img/news_placeholder.jpg'})`,
+    })
+    elements.readMore.setAttribute('href', item.url)
   }
 }
 
