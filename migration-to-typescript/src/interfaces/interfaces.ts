@@ -3,7 +3,7 @@ export interface ResponseNews {
   status: string
   totalResults: number
 }
-interface Article {
+export interface Article {
   author: string
   content: string
   description: string
