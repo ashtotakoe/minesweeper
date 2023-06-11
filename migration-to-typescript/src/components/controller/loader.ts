@@ -1,9 +1,10 @@
 import { GetRespOptions, GetRespParam, LoaderOptions } from '../../interfaces/interfaces'
 import { Response } from '../../types/types'
+import { HTTPRequests } from '../../model/enums'
 
 class Loader {
-  public baseLink: string
-  public options: LoaderOptions
+  private readonly baseLink: string
+  private options: LoaderOptions
 
   constructor(baseLink: string, options: LoaderOptions) {
     this.baseLink = baseLink
@@ -11,7 +12,7 @@ class Loader {
   }
 
   public getResp({ endpoint, options = {} }: GetRespParam, callback: (data: Response) => void): void {
-    this.load('GET', endpoint, callback, options)
+    this.load(HTTPRequests.GET, endpoint, callback, options)
   }
 
   private makeUrl(options: GetRespOptions, endpoint: string): string {
