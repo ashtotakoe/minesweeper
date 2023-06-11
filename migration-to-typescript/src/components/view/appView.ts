@@ -6,8 +6,6 @@ export class AppView {
   private news = new News()
   private sources = new Sources()
 
-  // TODO вынести повторяющийся код в утилитарку
-
   public drawNews(data: Response): void {
     const values = 'articles' in data ? data.articles : []
     this.news.draw(values)

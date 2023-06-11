@@ -4,7 +4,7 @@ import { Source } from '../../../interfaces/interfaces'
 class Sources {
   public draw(data: Source[]): void {
     const fragment = document.createDocumentFragment()
-    const sourceItemTemp = document.querySelector('#sourceItemTemp')
+    const sourceItemTemp = document.querySelector('.source-container')
 
     if (sourceItemTemp instanceof HTMLTemplateElement) {
       data.forEach((item) => {

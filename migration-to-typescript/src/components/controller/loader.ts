@@ -1,6 +1,6 @@
 import { GetRespOptions, GetRespParam, LoaderOptions } from '../../interfaces/interfaces'
 import { Response } from '../../types/types'
-import { HTTPRequests } from '../../model/enums'
+import { HTTPRequests } from '../../enums/http-requests'
 
 class Loader {
   private readonly baseLink: string
@@ -36,7 +36,7 @@ class Loader {
         return res.json()
       })
       .then((data) => callback(data))
-      .catch((err) => console.error('aboba', err))
+      .catch((err) => console.error(err))
   }
 }
 
