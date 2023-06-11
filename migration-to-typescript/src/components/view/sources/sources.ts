@@ -1,8 +1,8 @@
 import './sources.css'
-import { Source, Article } from '../../../interfaces/interfaces'
+import { Source } from '../../../interfaces/interfaces'
 
 class Sources {
-  public draw<T extends Source[] | Article[]>(data: T): void {
+  public draw(data: Source[]): void {
     const fragment = document.createDocumentFragment()
     const sourceItemTemp = document.querySelector('#sourceItemTemp')
 
