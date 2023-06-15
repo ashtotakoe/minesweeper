@@ -1,0 +1,16 @@
+.editor-wrapper {
+  height: 500px;
+  max-width: 750px;
+  margin: auto;
+  display: flex;
+  background: $editor-color;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.editor-wrapper__editor {
+  background-color: $palette-color;
+  height: 92%;
+  width: 45%;
+}

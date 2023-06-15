@@ -1,12 +1,14 @@
-import { BaseComponentProperties } from '../types/interface'
+import { BaseComponentProps } from '../types/interface'
 
 export class BaseComponent {
   public element
-  constructor({ tag = 'div', attribute, parent }: BaseComponentProperties) {
+  constructor({ tag = 'div', parent, attribute }: BaseComponentProps) {
     this.element = document.createElement(tag)
-    Object.assign(this.element, attribute)
     if (parent) {
       parent.append(this.element)
+    }
+    if (attribute) {
+      Object.assign(this.element, attribute)
     }
   }
 }
