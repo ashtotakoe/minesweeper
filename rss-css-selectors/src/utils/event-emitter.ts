@@ -39,7 +39,7 @@ class EventEmitter {
     return true
   }
 
-  public emit<T>(eventName: string, args: T): boolean {
+  public emit<T>(eventName: string, args?: T): boolean {
     const callbacks = this.events.get(eventName)
 
     if (!callbacks) {
