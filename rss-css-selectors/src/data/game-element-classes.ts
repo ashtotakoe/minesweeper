@@ -11,4 +11,8 @@ export const gameElementClasses = {
     playground: 'playground__apple',
     editor: 'editor__apple',
   },
+  bento: {
+    playground: 'playground__bento',
+    editor: 'editor__bento',
+  },
 }

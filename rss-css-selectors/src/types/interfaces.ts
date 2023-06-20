@@ -5,7 +5,7 @@ export interface BaseComponentProps {
 }
 
 export interface LevelElem {
-  name: 'base' | 'plate' | 'apple'
+  name: 'base' | 'plate' | 'apple' | 'bento'
   children: LevelElem[]
 }
 

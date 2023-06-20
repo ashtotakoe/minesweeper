@@ -1,0 +1,37 @@
+.playground {
+  margin-top: 50px;
+  height: 200px;
+}
+.playground__base {
+  width: fit-content;
+  margin: 10px;
+  height: 160px;
+  border: 3px solid $main-text-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  * {
+    margin: 15px;
+  }
+}
+
+.playground__bento {
+  width: 120px;
+  height: 120px;
+  border: 3px solid $main-text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playground__plate {
+  @extend .playground__bento;
+  border-radius: 50%
+}
+
+.playground__apple {
+  height: 50px;
+  width: 50px;
+  background-color: $extra-color;
+  border-radius: 50%;
+}
