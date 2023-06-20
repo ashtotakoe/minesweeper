@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../../utils/base-component'
 
-export class GameBoard extends BaseComponent {
+export class Playground extends BaseComponent {
   constructor(parent: HTMLElement) {
     super({ attribute: { className: 'game-board' }, parent })
   }

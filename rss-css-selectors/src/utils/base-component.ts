@@ -1,4 +1,4 @@
-import { BaseComponentProps } from '../types/interface'
+import { BaseComponentProps } from '../types/interfaces'
 
 export class BaseComponent {
   public element
