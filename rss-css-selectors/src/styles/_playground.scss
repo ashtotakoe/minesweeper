@@ -3,7 +3,7 @@
   height: 200px;
 }
 .playground__base {
-  width: fit-content;
+  max-width: 450px;
   margin: 10px;
   height: 160px;
   border: 3px solid $main-text-color;
@@ -12,6 +12,10 @@
   align-items: center;
   * {
     margin: 15px;
+  }
+  *.linted {
+  border: 5px solid $extra-color;
+
   }
 }
 

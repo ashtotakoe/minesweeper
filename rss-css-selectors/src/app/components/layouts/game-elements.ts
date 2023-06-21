@@ -86,30 +86,46 @@ export class GameElements {
       className: gameElementClasses[elem.name].editor,
     })
 
-    playgroundElem.element.addEventListener('mouseover', (e) => this.mouseEnterHandler(e))
-    playgroundElem.element.addEventListener('mouseout', (e) => this.mouseLeaveHandler(e))
+    playgroundElem.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
+    playgroundElem.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
+
+    editorElem.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
+    editorElem.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
 
     return [playgroundElem, editorElem]
   }
 
-  private mouseEnterHandler(e: Event): boolean {
+  private mouseEventHandler(e: Event): boolean {
+    this.playgroundElems.forEach((editorElem) => editorElem.element.classList.remove('linted'))
     this.editorElems.forEach((editorElem) => editorElem.element.classList.remove('linted'))
 
-    const targetElem = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
+    const playgroundTarget = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
+    const editorTarget = this.editorElems.find((gameElem) => gameElem.element === e.target)
 
-    if (targetElem !== undefined) {
-      this.editorElems.find((editorElem) => editorElem.id === targetElem.id)?.element.classList.add('linted')
+    if (playgroundTarget !== undefined) {
+      playgroundTarget.element.classList.add('linted')
+
+      const lintingTarget = this.editorElems.find((editorElem) => editorElem.id === playgroundTarget.id)
+      if (e.type === 'mouseover') {
+        lintingTarget?.element.classList.add('linted')
+        return true
+      }
+      lintingTarget?.element.classList.remove('linted')
       return true
     }
-    return false
-  }
-  private mouseLeaveHandler(e: Event): boolean {
-    const targetElem = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
 
-    if (targetElem !== undefined) {
-      this.editorElems.find((editorElem) => editorElem.id === targetElem.id)?.element.classList.remove('linted')
+    if (editorTarget !== undefined) {
+      editorTarget.element.classList.add('linted')
+
+      const lintingTarget = this.playgroundElems.find((playgroundElem) => playgroundElem.id === editorTarget.id)
+      if (e.type === 'mouseover') {
+        lintingTarget?.element.classList.add('linted')
+        return true
+      }
+      lintingTarget?.element.classList.remove('linted')
       return true
     }
+
     return false
   }
 }

@@ -9,4 +9,8 @@ export const levels: Record<string, LevelElem> = {
       { name: 'bento', children: [] },
     ],
   },
+  level2: {
+    name: 'base',
+    children: [{ name: 'plate', children: [{ name: 'apple', children: [] }] }],
+  },
 }
