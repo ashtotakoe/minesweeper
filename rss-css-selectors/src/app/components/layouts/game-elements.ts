@@ -2,7 +2,7 @@ import { levels } from '../../../data/levels'
 import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../../types/interfaces'
 import { GameElement } from '../../../utils/game-element'
 import { gameElementClasses } from '../../../data/game-element-classes'
-import { gameELementTextContent } from '../../../data/game-element-inner-text'
+import { gameELementTextNodes } from '../../../data/game-element-text-nodes'
 
 export class GameElements {
   private playground: HTMLElement
@@ -19,7 +19,7 @@ export class GameElements {
   }
 
   private createElements(level: LevelElem): GameElement[][] {
-    const [baseElemBeforeText, baseElemAfterText] = gameELementTextContent[level.name]
+    const [baseElemBeforeText, baseElemAfterText] = gameELementTextNodes[level.name]
     const baseElements = this.createElementTuple({
       elem: level,
       parentPlayground: this.playground,
@@ -30,11 +30,11 @@ export class GameElements {
     const playgroundElems: GameElement[] = [baseElements[0]]
     const editorElems: GameElement[] = [baseElements[1]]
 
-    baseElements[1].element.textContent = baseElemBeforeText
+    baseElements[1].element.append(baseElemBeforeText)
 
     this.childrenIteration(level, baseElements, playgroundElems, editorElems)
 
-    baseElements[1].element.textContent += `\n${baseElemAfterText}`
+    baseElements[1].element.append(baseElemAfterText)
 
     return [playgroundElems, editorElems]
   }
@@ -52,11 +52,12 @@ export class GameElements {
         parentPlayground: baseElements[0].element,
         parentEditor: baseElements[1].element,
       })
-      const [editorElemBeforeText, editorElemAfterText] = gameELementTextContent[elem.name]
+      const [editorElemBeforeText, editorElemAfterText] = gameELementTextNodes[elem.name]
 
       playgroundElems.push(playgroundElem)
       editorElems.push(editorElem)
-      editorElem.element.textContent = editorElemBeforeText
+
+      editorElem.element.append(editorElemBeforeText)
 
       if (elem.children.length !== 0) {
         elem.children.forEach((child) => {
@@ -67,12 +68,15 @@ export class GameElements {
             id: this.id++,
           })
 
+          const [editorChildTextContent] = gameELementTextNodes[child.name]
+          editorChild.element.textContent = editorChildTextContent
+
           playgroundElems.push(playgroundChild)
           editorElems.push(editorChild)
         })
       }
 
-      editorElem.element.textContent += editorElemAfterText
+      editorElem.element.append(editorElemAfterText)
     })
   }
 

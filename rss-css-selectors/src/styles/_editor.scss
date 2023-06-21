@@ -5,3 +5,11 @@
   border: 3px $main-text-color solid;
   margin-left: 6vw;
 }
+
+.editor__base {
+  margin: 4px;
+  font-size: 1.2em;
+  * {
+    margin: 2px 20px;
+  }
+}
