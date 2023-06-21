@@ -9,6 +9,9 @@ export class GameElements {
   private editor: HTMLElement
   private id = 0
 
+  private playgroundElems: GameElement[] = []
+  private editorElems: GameElement[] = []
+
   public elements: GameElement[][]
 
   constructor({ playground, editor }: GameElementsConstructor) {
@@ -27,24 +30,19 @@ export class GameElements {
       id: this.id++,
     })
 
-    const playgroundElems: GameElement[] = [baseElements[0]]
-    const editorElems: GameElement[] = [baseElements[1]]
+    this.playgroundElems.push(baseElements[0])
+    this.editorElems.push(baseElements[1])
 
     baseElements[1].element.append(baseElemBeforeText)
 
-    this.childrenIteration(level, baseElements, playgroundElems, editorElems)
+    this.childrenIteration(level, baseElements)
 
     baseElements[1].element.append(baseElemAfterText)
 
-    return [playgroundElems, editorElems]
+    return [this.playgroundElems, this.editorElems]
   }
 
-  private childrenIteration(
-    level: LevelElem,
-    baseElements: GameElement[],
-    playgroundElems: GameElement[],
-    editorElems: GameElement[],
-  ): void {
+  private childrenIteration(level: LevelElem, baseElements: GameElement[]): void {
     level.children.forEach((elem) => {
       const [playgroundElem, editorElem] = this.createElementTuple({
         elem,
@@ -54,8 +52,8 @@ export class GameElements {
       })
       const [editorElemBeforeText, editorElemAfterText] = gameELementTextNodes[elem.name]
 
-      playgroundElems.push(playgroundElem)
-      editorElems.push(editorElem)
+      this.playgroundElems.push(playgroundElem)
+      this.editorElems.push(editorElem)
 
       editorElem.element.append(editorElemBeforeText)
 
@@ -71,8 +69,8 @@ export class GameElements {
           const [editorChildTextContent] = gameELementTextNodes[child.name]
           editorChild.element.textContent = editorChildTextContent
 
-          playgroundElems.push(playgroundChild)
-          editorElems.push(editorChild)
+          this.playgroundElems.push(playgroundChild)
+          this.editorElems.push(editorChild)
         })
       }
 
@@ -81,13 +79,37 @@ export class GameElements {
   }
 
   private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
-    return [
-      new GameElement(parentPlayground, id, {
-        className: gameElementClasses[elem.name].playground,
-      }),
-      new GameElement(parentEditor, id, {
-        className: gameElementClasses[elem.name].editor,
-      }),
-    ]
+    const playgroundElem = new GameElement(parentPlayground, id, {
+      className: gameElementClasses[elem.name].playground,
+    })
+    const editorElem = new GameElement(parentEditor, id, {
+      className: gameElementClasses[elem.name].editor,
+    })
+
+    playgroundElem.element.addEventListener('mouseover', (e) => this.mouseEnterHandler(e))
+    playgroundElem.element.addEventListener('mouseout', (e) => this.mouseLeaveHandler(e))
+
+    return [playgroundElem, editorElem]
+  }
+
+  private mouseEnterHandler(e: Event): boolean {
+    this.editorElems.forEach((editorElem) => editorElem.element.classList.remove('linted'))
+
+    const targetElem = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
+
+    if (targetElem !== undefined) {
+      this.editorElems.find((editorElem) => editorElem.id === targetElem.id)?.element.classList.add('linted')
+      return true
+    }
+    return false
+  }
+  private mouseLeaveHandler(e: Event): boolean {
+    const targetElem = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
+
+    if (targetElem !== undefined) {
+      this.editorElems.find((editorElem) => editorElem.id === targetElem.id)?.element.classList.remove('linted')
+      return true
+    }
+    return false
   }
 }
