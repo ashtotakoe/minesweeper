@@ -85,14 +85,14 @@ export class GameElements {
     const editorElem = new GameElement(parentEditor, id, {
       className: gameElementClasses[elem.name].editor,
     })
+    const gameElementTuple = [playgroundElem, editorElem]
 
-    playgroundElem.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
-    playgroundElem.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
+    gameElementTuple.forEach((gameElement) => {
+      gameElement.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
+      gameElement.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
+    })
 
-    editorElem.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
-    editorElem.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
-
-    return [playgroundElem, editorElem]
+    return gameElementTuple
   }
 
   private mouseEventHandler(e: Event): boolean {
@@ -101,6 +101,10 @@ export class GameElements {
 
     const playgroundTarget = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
     const editorTarget = this.editorElems.find((gameElem) => gameElem.element === e.target)
+
+    if (editorTarget?.id === 0 || playgroundTarget?.id === 0) {
+      return false
+    }
 
     if (playgroundTarget !== undefined) {
       playgroundTarget.element.classList.add('linted')
