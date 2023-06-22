@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../../utils/base-component'
+import { BaseComponent } from '../../../shared/base-component'
 
 export class SideBar extends BaseComponent {
   private sidebarHeading = new BaseComponent({

@@ -1,4 +1,4 @@
-import { Layout } from './components/layout/layout'
+import { Layout } from './features/layout/layout'
 
 class App {
   public init(): void {

@@ -1,4 +1,4 @@
-import { Callback } from '../types/type'
+import { Callback } from '../core/types/type'
 
 class EventEmitter {
   private events = new Map<string, Callback[]>()

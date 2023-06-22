@@ -1,9 +1,9 @@
 @import 'normalize.css';
 @import 'vars';
-@import '/src/app/components/header/header';
-@import '/src/app/components/playground/playground';
-@import '/src/app/components/editor/editor';
-@import '/src/app/components/side-bar/sidebar';
+@import '/src/app/core/components/header/header';
+@import '/src/app/features/playground/playground';
+@import '/src/app/features/editor/editor';
+@import '/src/app/core/components/side-bar/sidebar';
 
 * {
   margin: 0;

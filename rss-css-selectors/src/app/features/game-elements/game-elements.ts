@@ -1,8 +1,7 @@
-import { levels } from '../../../data/levels'
-import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../../types/interfaces'
-import { GameElement } from '../../../utils/game-element'
-import { gameElementClasses } from '../../../data/game-element-classes'
-import { gameELementTextNodes } from '../../../data/game-element-text-nodes'
+import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../core/types/interfaces'
+import { GameElement } from '../../shared/game-element'
+import { gameElementClasses } from '../../core/constants/game-element-classes'
+import { gameELementTextNodes } from '../../core/constants/game-element-text-nodes'
 
 export class GameElements {
   private playground: HTMLElement
@@ -12,17 +11,16 @@ export class GameElements {
   private playgroundElems: GameElement[] = []
   private editorElems: GameElement[] = []
 
-  public elements: GameElement[][]
-
   constructor({ playground, editor }: GameElementsConstructor) {
     this.playground = playground
     this.editor = editor
-
-    this.elements = this.createElements(levels.level1)
   }
 
-  private createElements(level: LevelElem): GameElement[][] {
-    const [baseElemBeforeText, baseElemAfterText] = gameELementTextNodes[level.name]
+  public createElements(level: LevelElem): GameElement[][] {
+    this.playground.replaceChildren()
+    this.editor.replaceChildren()
+
+    const [textBeforeBaseElem, textAfterBaseElem] = gameELementTextNodes[level.name]
     const baseElements = this.createElementTuple({
       elem: level,
       parentPlayground: this.playground,
@@ -33,11 +31,11 @@ export class GameElements {
     this.playgroundElems.push(baseElements[0])
     this.editorElems.push(baseElements[1])
 
-    baseElements[1].element.append(baseElemBeforeText)
+    baseElements[1].element.append(textBeforeBaseElem)
 
     this.childrenIteration(level, baseElements)
 
-    baseElements[1].element.append(baseElemAfterText)
+    baseElements[1].element.append(textAfterBaseElem)
 
     return [this.playgroundElems, this.editorElems]
   }
@@ -50,12 +48,12 @@ export class GameElements {
         parentPlayground: baseElements[0].element,
         parentEditor: baseElements[1].element,
       })
-      const [editorElemBeforeText, editorElemAfterText] = gameELementTextNodes[elem.name]
+      const [textBeforeEditorElem, textAfterEditorElem] = gameELementTextNodes[elem.name]
 
       this.playgroundElems.push(playgroundElem)
       this.editorElems.push(editorElem)
 
-      editorElem.element.append(editorElemBeforeText)
+      editorElem.element.append(textBeforeEditorElem)
 
       if (elem.children.length !== 0) {
         elem.children.forEach((child) => {
@@ -74,7 +72,7 @@ export class GameElements {
         })
       }
 
-      editorElem.element.append(editorElemAfterText)
+      editorElem.element.append(textAfterEditorElem)
     })
   }
 
