@@ -1,9 +1,9 @@
 import { BaseComponent } from '../../../utils/base-component'
-import { Editor } from './editor'
-import { Playground } from './playground'
-import { GameElements } from './game-elements'
-import { Header } from './header'
-import { SideBar } from './side-bar'
+import { Editor } from '../editor/editor'
+import { Playground } from '../playground/playground'
+import { GameElements } from '../game-elements/game-elements'
+import { Header } from '../header/header'
+import { SideBar } from '../side-bar/side-bar'
 import { GameElement } from '../../../utils/game-element'
 
 export class Layout {
