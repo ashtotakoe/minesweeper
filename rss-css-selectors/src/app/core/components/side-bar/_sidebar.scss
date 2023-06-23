@@ -12,3 +12,19 @@
   margin: 15px;
   font-size: 2rem;
 }
+
+.side-bar__level-wrapper {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.level-wrapper__button {
+  width: 100%;
+  background-color: $main-bg-color;
+  border: none;
+  color: $main-text-color;
+  height: 40px;
+}

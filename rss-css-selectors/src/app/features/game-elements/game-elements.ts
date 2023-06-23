@@ -2,6 +2,7 @@ import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../
 import { GameElement } from '../../shared/game-element'
 import { gameElementClasses } from '../../core/constants/game-element-classes'
 import { gameELementTextNodes } from '../../core/constants/game-element-text-nodes'
+import { emitter } from '../../shared/event-emitter'
 
 export class GameElements {
   private playground: HTMLElement
@@ -14,9 +15,13 @@ export class GameElements {
   constructor({ playground, editor }: GameElementsConstructor) {
     this.playground = playground
     this.editor = editor
+    emitter.subscribe('change level', (args: LevelElem) => this.createElements(args))
   }
 
-  public createElements(level: LevelElem): GameElement[][] {
+  public createElements(level: LevelElem): void {
+    this.playgroundElems = []
+    this.editorElems = []
+    this.id = 0
     this.playground.replaceChildren()
     this.editor.replaceChildren()
 
@@ -36,8 +41,6 @@ export class GameElements {
     this.childrenIteration(level, baseElements)
 
     baseElements[1].element.append(textAfterBaseElem)
-
-    return [this.playgroundElems, this.editorElems]
   }
 
   private childrenIteration(level: LevelElem, baseElements: GameElement[]): void {
@@ -77,11 +80,19 @@ export class GameElements {
   }
 
   private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
-    const playgroundElem = new GameElement(parentPlayground, id, {
-      className: gameElementClasses[elem.name].playground,
+    const playgroundElem = new GameElement({
+      parent: parentPlayground,
+      id,
+      attribute: {
+        className: gameElementClasses[elem.name].playground,
+      },
     })
-    const editorElem = new GameElement(parentEditor, id, {
-      className: gameElementClasses[elem.name].editor,
+    const editorElem = new GameElement({
+      parent: parentEditor,
+      id,
+      attribute: {
+        className: gameElementClasses[elem.name].editor,
+      },
     })
     const gameElementTuple = [playgroundElem, editorElem]
 

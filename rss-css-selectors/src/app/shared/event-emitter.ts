@@ -1,16 +1,16 @@
 import { Callback } from '../core/types/type'
 
-class EventEmitter {
-  private events = new Map<string, Callback[]>()
+class EventEmitter<Str, Func> {
+  private events = new Map()
 
-  public subscribe(eventName: string, ...eventCallbacks: Callback[]): void {
+  public subscribe(eventName: Str, eventCallback: Func): void {
     let callbacks = this.events.get(eventName)
 
     if (!callbacks) {
       this.events.set(eventName, (callbacks = []))
     }
 
-    callbacks.push(...eventCallbacks)
+    callbacks.push(eventCallback)
   }
 
   public unsubscribe(eventName: string, eventCallback?: Callback): boolean {
@@ -46,7 +46,7 @@ class EventEmitter {
       return false
     }
 
-    callbacks.forEach((handler) => {
+    callbacks.forEach((handler: Callback) => {
       try {
         handler(args)
       } catch (err) {

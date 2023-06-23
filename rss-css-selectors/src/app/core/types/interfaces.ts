@@ -20,3 +20,10 @@ export interface CreateElementTupleParam {
   parentEditor: HTMLElement
   id: number
 }
+
+export interface GameElementConstructor {
+  parent: HTMLElement
+  id: number
+  attribute?: Record<string, string>
+  tag?: keyof HTMLElementTagNameMap
+}
