@@ -68,7 +68,7 @@ export class GameElements {
           })
 
           const [editorChildTextContent] = gameELementTextNodes[child.name]
-          editorChild.element.textContent = editorChildTextContent
+          Object.assign(editorChild.element, { textContent: editorChildTextContent })
 
           this.playgroundElems.push(playgroundChild)
           this.editorElems.push(editorChild)

@@ -27,3 +27,10 @@ export interface GameElementConstructor {
   attribute?: Record<string, string>
   tag?: keyof HTMLElementTagNameMap
 }
+
+export interface LevelConstructor {
+  serialNumber: number
+  structure: LevelElem
+  answer?: string[]
+  task?: string
+}

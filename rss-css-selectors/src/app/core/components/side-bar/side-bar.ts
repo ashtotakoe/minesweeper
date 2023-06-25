@@ -1,5 +1,6 @@
 import { BaseComponent } from '../../../shared/base-component'
 import { emitter } from '../../../shared/event-emitter'
+import { gameState } from '../../constants/game-state'
 import { levels } from '../../constants/levels'
 
 export class SideBar extends BaseComponent {
@@ -9,15 +10,23 @@ export class SideBar extends BaseComponent {
     attribute: { className: 'side-bar__heading', textContent: 'Menu' },
   })
 
-  private levelButtons: BaseComponent[] = []
+  private taskHolder = new BaseComponent({
+    tag: 'p',
+    parent: this.element,
+    attribute: { className: 'side-bar__task' },
+  })
 
   private levelButtonsWrapper = new BaseComponent({
     parent: this.element,
     attribute: { className: 'side-bar__level-wrapper' },
   })
+
+  private levelButtons: BaseComponent[] = []
+
   constructor(parent: HTMLElement) {
     super({ parent, attribute: { className: 'side-bar' } })
     this.createLevelButtons()
+    this.setTask(gameState.currentLevel)
   }
 
   private createLevelButtons(): void {
@@ -35,8 +44,14 @@ export class SideBar extends BaseComponent {
   private switchLevel(e: Event): void {
     this.levelButtons.forEach((levelButton, buttonIndex) => {
       if (levelButton.element === e.target) {
+        gameState.currentLevel = buttonIndex
         emitter.emit('change level', levels[buttonIndex].structure)
+        this.setTask(buttonIndex)
       }
     })
+  }
+
+  private setTask(currentLevel: number): void {
+    Object.assign(this.taskHolder.element, { textContent: levels[currentLevel].task })
   }
 }
