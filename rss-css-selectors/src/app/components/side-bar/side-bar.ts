@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../../shared/base-component'
-import { emitter } from '../../../shared/event-emitter'
+import { BaseComponent } from '../../utils/base-component'
+import { emitter } from '../../utils/event-emitter'
 import { gameState } from '../../constants/game-state'
 import { levels } from '../../constants/levels'
 
@@ -36,7 +36,7 @@ export class SideBar extends BaseComponent {
         parent: this.levelButtonsWrapper.element,
         attribute: { textContent: `level ${level.serialNumber.toString()}`, className: 'level-wrapper__button' },
       })
-      levelButton.element.addEventListener('click', (e) => this.switchLevel(e))
+      levelButton.element.addEventListener('click', (e: Event) => this.switchLevel(e))
       return levelButton
     })
   }

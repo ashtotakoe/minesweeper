@@ -1,4 +1,4 @@
-import { LevelElem, LevelConstructor } from '../core/types/interfaces'
+import { LevelElem, LevelConstructor } from '../models/interfaces'
 
 export class Level {
   public serialNumber: number

@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../shared/base-component'
+import { BaseComponent } from '../../utils/base-component'
 
 export class EditorCSS extends BaseComponent {
   private answerForm = new BaseComponent({
@@ -28,7 +28,7 @@ export class EditorCSS extends BaseComponent {
   }
 
   private init(): void {
-    this.answerForm.element.addEventListener('click', (e) => {
+    this.answerForm.element.addEventListener('click', (e: Event) => {
       if (e.target instanceof HTMLInputElement) {
         e.target.value = ''
       }

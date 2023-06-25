@@ -1,5 +1,5 @@
 import { BaseComponent } from './base-component'
-import { GameElementConstructor } from '../core/types/interfaces'
+import { GameElementConstructor } from '../models/interfaces'
 
 export class GameElement extends BaseComponent {
   public id: number

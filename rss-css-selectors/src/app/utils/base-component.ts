@@ -1,4 +1,4 @@
-import { BaseComponentProps } from '../core/types/interfaces'
+import { BaseComponentProps } from '../models/interfaces'
 
 export class BaseComponent {
   public element

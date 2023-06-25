@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../shared/base-component'
+import { BaseComponent } from '../../utils/base-component'
 
 export class Editor extends BaseComponent {
   constructor(parent: HTMLElement) {

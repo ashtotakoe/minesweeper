@@ -1,8 +1,8 @@
-import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../core/types/interfaces'
-import { GameElement } from '../../shared/game-element'
-import { gameElementClasses } from '../../core/constants/game-element-classes'
-import { gameELementTextNodes } from '../../core/constants/game-element-text-nodes'
-import { emitter } from '../../shared/event-emitter'
+import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../models/interfaces'
+import { GameElement } from '../../utils/game-element'
+import { gameElementClasses } from '../../constants/game-element-classes'
+import { gameELementTextNodes } from '../../constants/game-element-text-nodes'
+import { emitter } from '../../utils/event-emitter'
 
 export class GameElements {
   private playground: HTMLElement
@@ -97,8 +97,8 @@ export class GameElements {
     const gameElementTuple = [playgroundElem, editorElem]
 
     gameElementTuple.forEach((gameElement) => {
-      gameElement.element.addEventListener('mouseover', (e) => this.mouseEventHandler(e))
-      gameElement.element.addEventListener('mouseout', (e) => this.mouseEventHandler(e))
+      gameElement.element.addEventListener('mouseover', (e: Event) => this.mouseEventHandler(e))
+      gameElement.element.addEventListener('mouseout', (e: Event) => this.mouseEventHandler(e))
     })
 
     return gameElementTuple

@@ -1,4 +1,4 @@
-import { Level } from '../../shared/level'
+import { Level } from '../utils/level'
 
 export const levels: Level[] = [
   new Level({
