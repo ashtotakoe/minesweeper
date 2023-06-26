@@ -6,4 +6,5 @@ export const changeLevel = (levelIndex: number): void => {
   emitter.emit('change level', gameState.currentLevel.structure)
   emitter.emit('set input text default')
   emitter.emit('set task', gameState.currentLevel)
+  emitter.emit('lint level', gameState.currentLevelIndex)
 }

@@ -30,21 +30,22 @@ export class EditorCSS extends BaseComponent {
   private init(): void {
     this.setInputTextDefault()
 
-    this.answerForm.element.addEventListener('click', this.inputEventHandler)
+    this.answerForm.element.addEventListener('click', () => this.inputEventHandler())
     this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
     document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
+    document.body.addEventListener('keypress', () => this.inputEventHandler())
 
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
     })
   }
 
-  private inputEventHandler(e: Event): boolean {
+  private inputEventHandler(): boolean {
     if (!gameState.isInputFitstTimeClicked) {
       return false
     }
-    if (e.target instanceof HTMLInputElement) {
-      e.target.value = ''
+    if (this.answerForm.element instanceof HTMLInputElement) {
+      Object.assign(this.answerForm.element, { value: '' })
       gameState.isInputFitstTimeClicked = false
     }
     return true

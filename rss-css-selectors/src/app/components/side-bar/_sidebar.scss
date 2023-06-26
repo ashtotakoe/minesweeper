@@ -29,6 +29,10 @@
   height: 40px;
 }
 
+.level-wrapper__button.linted {
+  border: $main-text-color solid 3px;
+}
+
 .side-bar__task {
   height: 100px;
   color: $main-bg-color

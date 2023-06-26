@@ -31,6 +31,7 @@ export class SideBar extends BaseComponent {
     this.setTask(gameState.currentLevel)
 
     emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))
+    emitter.subscribe('lint level', (currentLevelIndex: number) => this.lintCurrentLevel(currentLevelIndex))
   }
 
   private createLevelButtons(): void {
@@ -55,5 +56,14 @@ export class SideBar extends BaseComponent {
 
   private setTask(currentLevel: Level): void {
     Object.assign(this.taskHolder.element, { textContent: currentLevel.task })
+  }
+
+  private lintCurrentLevel(currentLevelIndex: number): void {
+    this.levelButtons.forEach((levelButton, buttonIndex) => {
+      levelButton.element.classList.remove('linted')
+      if (buttonIndex === currentLevelIndex) {
+        levelButton.element.classList.add('linted')
+      }
+    })
   }
 }
