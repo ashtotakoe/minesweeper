@@ -3,6 +3,7 @@ import { emitter } from '../../utils/event-emitter'
 import { gameState } from '../../constants/game-state'
 import { levels } from '../../constants/levels'
 import { Level } from '../../utils/level'
+import { changeLevel } from '../../utils/change-level'
 
 export class SideBar extends BaseComponent {
   private sidebarHeading = new BaseComponent({
@@ -28,6 +29,8 @@ export class SideBar extends BaseComponent {
     super({ parent, attribute: { className: 'side-bar' } })
     this.createLevelButtons()
     this.setTask(gameState.currentLevel)
+
+    emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))
   }
 
   private createLevelButtons(): void {
@@ -45,10 +48,7 @@ export class SideBar extends BaseComponent {
   private switchLevel(e: Event): void {
     this.levelButtons.forEach((levelButton, buttonIndex) => {
       if (levelButton.element === e.target) {
-        gameState.currentLevelIndex = buttonIndex
-        emitter.emit('change level', levels[buttonIndex].structure)
-        emitter.emit('set input text default')
-        this.setTask(gameState.currentLevel)
+        changeLevel(buttonIndex)
       }
     })
   }

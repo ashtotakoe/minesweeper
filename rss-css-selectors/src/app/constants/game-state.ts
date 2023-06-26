@@ -13,6 +13,10 @@ class GameState {
     return levels[this._currentLevelIndex]
   }
 
+  public get currentLevelIndex(): number {
+    return this._currentLevelIndex
+  }
+
   public set currentLevelIndex(level: number) {
     this.isInputFitstTimeClicked = true
     this._currentLevelIndex = level

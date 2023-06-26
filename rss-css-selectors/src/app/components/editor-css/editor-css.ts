@@ -1,5 +1,6 @@
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
+import { changeLevel } from '../../utils/change-level'
 import { emitter } from '../../utils/event-emitter'
 
 export class EditorCSS extends BaseComponent {
@@ -30,8 +31,8 @@ export class EditorCSS extends BaseComponent {
     this.setInputTextDefault()
 
     this.answerForm.element.addEventListener('click', this.inputEventHandler)
-    // this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
-    // document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
+    this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
+    document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
 
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
@@ -59,10 +60,11 @@ export class EditorCSS extends BaseComponent {
     if (e instanceof KeyboardEvent && e.code !== 'Enter') {
       return false
     }
+
     if (this.answerForm.element instanceof HTMLInputElement) {
       if (gameState.currentLevel.answer.includes(this.answerForm.element.value)) {
-        gameState.currentLevelIndex++
-        emitter.emit('change level', gameState.currentLevel.structure)
+        gameState.currentLevelIndex += 1
+        changeLevel(gameState.currentLevelIndex)
         return true
       }
     }
