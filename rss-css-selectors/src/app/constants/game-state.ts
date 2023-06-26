@@ -1,7 +1,17 @@
 class GameState {
-  public currentLevel: number
+  private _currentLevel: number
+  public isInputFitstTimeClicked: boolean = true
   constructor({ currentLevel }: GameStateConstructor) {
-    this.currentLevel = currentLevel
+    this._currentLevel = currentLevel
+  }
+
+  public get currentLevel(): number {
+    return this._currentLevel
+  }
+
+  public set currentLevel(level: number) {
+    this.isInputFitstTimeClicked = true
+    this._currentLevel = level
   }
 }
 

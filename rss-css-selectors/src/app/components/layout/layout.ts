@@ -7,6 +7,7 @@ import { SideBar } from '../side-bar/side-bar'
 import { levels } from '../../constants/levels'
 import { EditorWrapper } from '../editor-wrapper/editor-wrapper'
 import { EditorCSS } from '../editor-css/editor-css'
+import { gameState } from '../../constants/game-state'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | GameElements> {
@@ -17,7 +18,7 @@ export class Layout {
     const editorHTML = new Editor(editorWrapper.element)
     const editorCSS = new EditorCSS(editorWrapper.element)
     const gameElements = new GameElements({ playground: gameBoard.element, editor: editorHTML.element })
-    gameElements.createElements(levels[0].structure)
+    gameElements.createElements(levels[gameState.currentLevel].structure)
     const sideBar = new SideBar(main.element)
     return { header, main, editorWrapper, gameBoard, editorHTML, editorCSS, sideBar, gameElements }
   }

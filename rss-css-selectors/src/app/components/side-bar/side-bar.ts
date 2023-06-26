@@ -46,6 +46,7 @@ export class SideBar extends BaseComponent {
       if (levelButton.element === e.target) {
         gameState.currentLevel = buttonIndex
         emitter.emit('change level', levels[buttonIndex].structure)
+        emitter.emit('set input text default')
         this.setTask(buttonIndex)
       }
     })
