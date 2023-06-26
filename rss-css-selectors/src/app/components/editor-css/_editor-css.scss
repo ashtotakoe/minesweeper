@@ -7,8 +7,13 @@
   border: none;
   background-color: inherit;
   color: grey;
+  margin: 10px;
 }
 
 .editor-css__submit-button {
   background-color: inherit;
+}
+
+.editor-css__answer:focus {
+  color: $main-text-color;
 }

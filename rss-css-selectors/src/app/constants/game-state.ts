@@ -1,17 +1,21 @@
+import { Level } from '../utils/level'
+import { levels } from './levels'
+
 class GameState {
-  private _currentLevel: number
+  private _currentLevelIndex: number
   public isInputFitstTimeClicked: boolean = true
+
   constructor({ currentLevel }: GameStateConstructor) {
-    this._currentLevel = currentLevel
+    this._currentLevelIndex = currentLevel
   }
 
-  public get currentLevel(): number {
-    return this._currentLevel
+  public get currentLevel(): Level {
+    return levels[this._currentLevelIndex]
   }
 
-  public set currentLevel(level: number) {
+  public set currentLevelIndex(level: number) {
     this.isInputFitstTimeClicked = true
-    this._currentLevel = level
+    this._currentLevelIndex = level
   }
 }
 

@@ -6,7 +6,7 @@ export class Level {
   public answer: string[]
   public task: string
 
-  constructor({ serialNumber, structure, task = 'sorry, no task yet!', answer = [] }: LevelConstructor) {
+  constructor({ serialNumber, structure, task = 'sorry, no task yet!', answer = ['selector'] }: LevelConstructor) {
     this.serialNumber = serialNumber
     this.structure = structure
     this.answer = answer

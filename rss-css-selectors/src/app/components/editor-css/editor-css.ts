@@ -28,14 +28,17 @@ export class EditorCSS extends BaseComponent {
 
   private init(): void {
     this.setInputTextDefault()
-    this.answerForm.element.addEventListener('click', this.inputClickHandler)
+
+    this.answerForm.element.addEventListener('click', this.inputEventHandler)
+    // this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
+    // document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
 
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
     })
   }
 
-  private inputClickHandler(e: Event): boolean {
+  private inputEventHandler(e: Event): boolean {
     if (!gameState.isInputFitstTimeClicked) {
       return false
     }
@@ -50,5 +53,20 @@ export class EditorCSS extends BaseComponent {
     if (this.answerForm.element instanceof HTMLInputElement) {
       this.answerForm.element.value = 'type your selector here'
     }
+  }
+
+  private submitEventHandler(e: Event): boolean {
+    if (e instanceof KeyboardEvent && e.code !== 'Enter') {
+      return false
+    }
+    if (this.answerForm.element instanceof HTMLInputElement) {
+      if (gameState.currentLevel.answer.includes(this.answerForm.element.value)) {
+        gameState.currentLevelIndex++
+        emitter.emit('change level', gameState.currentLevel.structure)
+        return true
+      }
+    }
+
+    return true
   }
 }
