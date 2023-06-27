@@ -1,7 +1,7 @@
-import { LevelElemName } from '../types/type'
+// import { LevelElemName } from '../types/type'
 
-export const gameElementAbstractions: Record<LevelElemName, keyof HTMLElementTagNameMap> = {
-  plate: 'div',
+export const gameElementAbstractions: Record<string, string> = {
+  plate: 'span',
   bento: 'p',
   apple: 'img',
   base: 'div',

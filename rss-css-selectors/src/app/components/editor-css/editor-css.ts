@@ -1,7 +1,9 @@
+import { gameElementAbstractions } from '../../constants/game-element-abstractions'
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
 import { changeLevel } from '../../utils/change-level'
 import { emitter } from '../../utils/event-emitter'
+import { GameElements } from '../game-elements/game-elements'
 
 export class EditorCSS extends BaseComponent {
   private answerForm = new BaseComponent({
@@ -21,9 +23,11 @@ export class EditorCSS extends BaseComponent {
       textContent: 'submit',
     },
   })
+  public gameElements: GameElements
 
-  constructor(parent: HTMLElement) {
+  constructor(parent: HTMLElement, gameElements: GameElements) {
     super({ parent, attribute: { className: 'editor-css' } })
+    this.gameElements = gameElements
     this.init()
   }
 
@@ -63,7 +67,12 @@ export class EditorCSS extends BaseComponent {
     }
 
     if (this.answerForm.element instanceof HTMLInputElement) {
-      if (gameState.currentLevel.answer.includes(this.answerForm.element.value)) {
+      // if (gameState.currentLevel.answer.includes(this.answerForm.element.value)) {
+      //   gameState.currentLevelIndex += 1
+      //   changeLevel(gameState.currentLevelIndex)
+      //   return true
+      // }
+      if (this.validateAnswer(this.answerForm.element.value)) {
         gameState.currentLevelIndex += 1
         changeLevel(gameState.currentLevelIndex)
         return true
@@ -71,5 +80,30 @@ export class EditorCSS extends BaseComponent {
     }
 
     return true
+  }
+
+  private validateAnswer(selector: string): boolean {
+    const properSelector = this.turnIntoProperSelector(selector)
+    const target = this.gameElements.abstractDOMModel.querySelector(properSelector)
+
+    console.log(this.gameElements.abstractDOMModel)
+    console.log(target)
+
+    if (target === null || target?.getAttribute('data-target') === null) {
+      return false
+    }
+    console.log('you guessed it right!')
+
+    return true
+  }
+
+  private turnIntoProperSelector(selector: string): string {
+    let properSelector = selector
+
+    Object.keys(gameElementAbstractions).forEach((abstraction) => {
+      properSelector = properSelector.replaceAll(abstraction, gameElementAbstractions[abstraction])
+    })
+
+    return properSelector
   }
 }

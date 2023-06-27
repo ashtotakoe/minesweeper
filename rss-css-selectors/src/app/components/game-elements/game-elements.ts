@@ -15,10 +15,7 @@ export class GameElements {
   private editorElems: GameElement[] = []
 
   public abstractDOMModel: HTMLElement = new BaseComponent({
-    tag: 'div',
-    attribute: {
-      className: 'table',
-    },
+    tag: 'section',
   }).element
 
   constructor({ playground, editor }: GameElementsConstructor) {
@@ -29,6 +26,7 @@ export class GameElements {
 
   public createElements(level: LevelElem): void {
     this.resetAll()
+    const abstractBase = this.createAbstractDOM(level, this.abstractDOMModel)
 
     const [textBeforeBaseElem, textAfterBaseElem] = gameELementTextNodes[level.name]
     const baseElements = this.createElementTuple({
@@ -43,14 +41,14 @@ export class GameElements {
 
     baseElements[1].element.append(textBeforeBaseElem)
 
-    this.childrenIteration(level, baseElements)
+    this.childrenIteration(level, baseElements, abstractBase)
 
     baseElements[1].element.append(textAfterBaseElem)
   }
 
-  private childrenIteration(level: LevelElem, baseElements: GameElement[]): void {
+  private childrenIteration(level: LevelElem, baseElements: GameElement[], abstractBase: HTMLElement): void {
     level.children.forEach((elem) => {
-      const elemAbstraction = this.createAbstractDOM(elem, this.abstractDOMModel)
+      const elemAbstraction = this.createAbstractDOM(elem, abstractBase)
 
       const [playgroundElem, editorElem] = this.createElementTuple({
         elem,
@@ -171,10 +169,7 @@ export class GameElements {
     this.playground.replaceChildren()
     this.editor.replaceChildren()
     this.abstractDOMModel = new BaseComponent({
-      tag: 'div',
-      attribute: {
-        className: 'table',
-      },
+      tag: 'section',
     }).element
   }
 }

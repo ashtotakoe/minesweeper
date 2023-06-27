@@ -15,9 +15,9 @@ export class Layout {
     const gameBoard = new Playground(main.element)
     const editorWrapper = new EditorWrapper(main.element)
     const editorHTML = new Editor(editorWrapper.element)
-    const editorCSS = new EditorCSS(editorWrapper.element)
     const gameElements = new GameElements({ playground: gameBoard.element, editor: editorHTML.element })
     gameElements.createElements(gameState.currentLevel.structure)
+    const editorCSS = new EditorCSS(editorWrapper.element, gameElements)
     const sideBar = new SideBar(main.element)
     return { header, main, editorWrapper, gameBoard, editorHTML, editorCSS, sideBar, gameElements }
   }

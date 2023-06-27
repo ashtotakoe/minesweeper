@@ -7,22 +7,23 @@ export const levels: Level[] = [
       name: 'base',
       children: [{ name: 'plate', isTarget: true, children: [{ name: 'apple', children: [] }] }],
     },
-    answer: ['aboba', 'buba'],
-    task: 'just type aboba or buba',
+    task: 'select a plate',
   }),
   new Level({
     serialNumber: 2,
     structure: {
       name: 'base',
+      isTarget: true,
       children: [{ name: 'bento', children: [{ name: 'apple', children: [] }] }],
     },
+    task: 'select table',
   }),
   new Level({
     serialNumber: 3,
     structure: {
       name: 'base',
       children: [
-        { name: 'plate', children: [{ name: 'apple', children: [] }] },
+        { name: 'plate', children: [{ name: 'apple', isTarget: true, children: [] }] },
         { name: 'plate', children: [] },
         { name: 'bento', children: [] },
       ],

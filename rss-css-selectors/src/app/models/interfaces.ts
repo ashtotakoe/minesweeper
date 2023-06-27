@@ -1,7 +1,7 @@
 import { LevelElemName } from '../types/type'
 
 export interface BaseComponentProps {
-  tag?: keyof HTMLElementTagNameMap
+  tag?: string
   attribute?: Record<string, string>
   parent?: HTMLElement
 }
@@ -10,6 +10,7 @@ export interface LevelElem {
   name: LevelElemName
   children: LevelElem[]
   isTarget?: boolean
+  className?: 'string'
 }
 
 export interface GameElementsConstructor {
