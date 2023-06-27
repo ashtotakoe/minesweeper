@@ -86,12 +86,10 @@ export class EditorCSS extends BaseComponent {
     const properSelector = this.turnIntoProperSelector(selector)
     const target = this.gameElements.abstractDOMModel.querySelector(properSelector)
 
-    console.log(this.gameElements.abstractDOMModel)
-    console.log(target)
-
     if (target === null || target?.getAttribute('data-target') === null) {
       return false
     }
+
     console.log('you guessed it right!')
 
     return true

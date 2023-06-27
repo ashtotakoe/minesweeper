@@ -13,6 +13,7 @@ export const levels: Level[] = [
     serialNumber: 2,
     structure: {
       name: 'base',
+      className: 'table',
       isTarget: true,
       children: [{ name: 'bento', children: [{ name: 'apple', children: [] }] }],
     },

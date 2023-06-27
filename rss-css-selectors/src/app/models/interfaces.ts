@@ -10,7 +10,7 @@ export interface LevelElem {
   name: LevelElemName
   children: LevelElem[]
   isTarget?: boolean
-  className?: 'string'
+  className?: string
 }
 
 export interface GameElementsConstructor {

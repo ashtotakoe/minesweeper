@@ -115,8 +115,13 @@ export class GameElements {
     const abstraction = new BaseComponent({
       tag: gameElementAbstractions[elem.name],
     }).element
+
     if (elem.isTarget) {
       abstraction.setAttribute('data-target', 'true')
+    }
+
+    if (elem.className) {
+      Object.assign(abstraction, { className: elem.className })
     }
 
     parent.append(abstraction)
