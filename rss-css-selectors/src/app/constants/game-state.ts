@@ -1,5 +1,6 @@
 import { Level } from '../utils/level'
 import { levels } from './levels'
+import { GameStateConstructor } from '../models/interfaces'
 
 class GameState {
   private _currentLevelIndex: number
@@ -21,10 +22,6 @@ class GameState {
     this.isInputFitstTimeClicked = true
     this._currentLevelIndex = level
   }
-}
-
-interface GameStateConstructor {
-  currentLevel: number
 }
 
 export const gameState = new GameState({ currentLevel: 0 })

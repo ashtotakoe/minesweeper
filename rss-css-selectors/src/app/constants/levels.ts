@@ -5,7 +5,7 @@ export const levels: Level[] = [
     serialNumber: 1,
     structure: {
       name: 'base',
-      children: [{ name: 'plate', children: [{ name: 'apple', children: [] }] }],
+      children: [{ name: 'plate', isTarget: true, children: [{ name: 'apple', children: [] }] }],
     },
     answer: ['aboba', 'buba'],
     task: 'just type aboba or buba',
