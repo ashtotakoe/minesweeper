@@ -56,7 +56,8 @@ export class GameElements {
         parentPlayground: baseElements[0].element,
         parentEditor: baseElements[1].element,
       })
-      const [textBeforeEditorElem, textAfterEditorElem] = gameELementTextNodes[elem.name]
+
+      const [textBeforeEditorElem, textAfterEditorElem] = this.getTextNodes(elem)
 
       this.playgroundElems.push(playgroundElem)
       this.editorElems.push(editorElem)
@@ -74,7 +75,7 @@ export class GameElements {
             id: this.id++,
           })
 
-          const [editorChildTextContent] = gameELementTextNodes[child.name]
+          const [editorChildTextContent] = this.getTextNodes(child)
           Object.assign(editorChild.element, { textContent: editorChildTextContent })
 
           this.playgroundElems.push(playgroundChild)
@@ -84,6 +85,22 @@ export class GameElements {
 
       editorElem.element.append(textAfterEditorElem)
     })
+  }
+
+  private getTextNodes(elem: LevelElem): string[] {
+    let tag = gameELementTextNodes[elem.name][0]
+
+    if (elem.className) {
+      tag += ' class="'
+      elem.className.split(' ').forEach((className) => {
+        tag += className
+      })
+      tag += '"'
+    }
+
+    tag += '>'
+
+    return [tag, gameELementTextNodes[elem.name][1]]
   }
 
   private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {

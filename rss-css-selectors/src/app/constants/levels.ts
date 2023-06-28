@@ -6,7 +6,14 @@ export const levels: Level[] = [
     structure: {
       name: 'base',
       className: 'table',
-      children: [{ name: 'plate', className: 'plate', isTarget: true, children: [{ name: 'apple', children: [] }] }],
+      children: [
+        {
+          name: 'plate',
+          className: 'plate',
+          isTarget: true,
+          children: [{ name: 'apple', children: [] }],
+        },
+      ],
     },
     task: 'select a plate',
   }),
@@ -26,7 +33,7 @@ export const levels: Level[] = [
       name: 'base',
       className: 'table',
       children: [
-        { name: 'plate', children: [{ name: 'apple', isTarget: true, children: [] }] },
+        { name: 'plate', children: [{ name: 'apple', className: 'apple', isTarget: true, children: [] }] },
         { name: 'plate', children: [] },
         { name: 'bento', children: [] },
       ],

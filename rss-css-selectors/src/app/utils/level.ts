@@ -10,6 +10,6 @@ export class Level {
     this.serialNumber = serialNumber
     this.structure = structure
     this.answer = answer
-    this.task = task
+    this.task = `Your task: ${task}`
   }
 }
