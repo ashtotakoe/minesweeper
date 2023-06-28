@@ -33,7 +33,21 @@ export const levels: Level[] = [
       name: 'base',
       className: 'table',
       children: [
-        { name: 'plate', children: [{ name: 'apple', className: 'apple', isTarget: true, children: [] }] },
+        {
+          name: 'plate',
+          attributes: { buba: '' },
+          children: [
+            {
+              name: 'apple',
+              attributes: {
+                apple: 'yes',
+              },
+              className: 'apple',
+              isTarget: true,
+              children: [],
+            },
+          ],
+        },
         { name: 'plate', children: [] },
         { name: 'bento', children: [] },
       ],

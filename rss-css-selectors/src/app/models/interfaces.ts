@@ -11,6 +11,7 @@ export interface LevelElem {
   children: LevelElem[]
   isTarget?: boolean
   className?: string
+  attributes?: Record<string, string>
 }
 
 export interface GameElementsConstructor {

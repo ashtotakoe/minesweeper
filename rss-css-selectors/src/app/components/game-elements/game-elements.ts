@@ -93,9 +93,29 @@ export class GameElements {
     if (elem.className) {
       tag += ' class="'
       elem.className.split(' ').forEach((className) => {
-        tag += className
+        tag += `${className} `
       })
+
+      tag = tag
+        .split('')
+        .slice(0, tag.length - 1)
+        .join('')
+
       tag += '"'
+    }
+
+    if (elem.attributes) {
+      tag += ' '
+
+      Object.keys(elem.attributes).forEach((attribute) => {
+        if (elem.attributes !== undefined) {
+          tag += attribute
+          const value = elem.attributes[attribute]
+          if (value !== '') {
+            tag += `="${value}"`
+          }
+        }
+      })
     }
 
     tag += '>'
@@ -143,6 +163,14 @@ export class GameElements {
 
     if (elem.className) {
       Object.assign(abstraction, { className: elem.className })
+    }
+
+    if (elem.attributes) {
+      Object.keys(elem.attributes).forEach((attribute) => {
+        if (elem.attributes !== undefined) {
+          abstraction.setAttribute(attribute, elem.attributes[attribute])
+        }
+      })
     }
 
     parent.append(abstraction)

@@ -28,7 +28,12 @@ export class SideBar extends BaseComponent {
     parent: this.element,
     attribute: {
       className: 'side-bar__task',
-      textContent: 'Note! Please separate all of your selectors with space. For Example: .table :nth-child(1) > apple',
+      innerHTML: `
+      'Note! Please separate every selector with a <b>space</b>.
+      For Example: <b>.table :nth-child(1) > apple</b>
+       or 
+       <b>plate [cool]</b>'
+      `,
     },
   })
 
