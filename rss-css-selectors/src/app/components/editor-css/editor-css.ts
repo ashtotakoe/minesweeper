@@ -1,7 +1,7 @@
 import { gameElementAbstractions } from '../../constants/game-element-abstractions'
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
-import { changeLevel } from '../../utils/change-level'
+import { displayVictory } from '../../utils/display-victory'
 import { emitter } from '../../utils/event-emitter'
 import { GameElements } from '../game-elements/game-elements'
 
@@ -69,7 +69,8 @@ export class EditorCSS extends BaseComponent {
     if (this.answerForm.element instanceof HTMLInputElement) {
       if (this.validateAnswer(this.answerForm.element.value)) {
         gameState.currentLevelIndex += 1
-        changeLevel(gameState.currentLevelIndex)
+        // changeLevel(gameState.currentLevelIndex)
+        displayVictory(gameState.currentLevelIndex)
         return true
       }
     }

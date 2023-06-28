@@ -4,13 +4,14 @@ import { emitter } from '../../utils/event-emitter'
 export class EditorWrapper extends BaseComponent {
   constructor(parent: HTMLElement) {
     super({ parent, attribute: { className: 'editor-wrapper' } })
-    emitter.subscribe('display error', () => this.wrongAnswerDisplay())
+    emitter.subscribe('display error', () => this.answerDisplay('wrong'))
+    emitter.subscribe('display victory', () => this.answerDisplay('correct'))
   }
 
-  public wrongAnswerDisplay(): void {
-    this.element.classList.add('wrong')
+  private answerDisplay(type: 'wrong' | 'correct'): void {
+    this.element.classList.add(type)
     setTimeout(() => {
-      this.element.classList.remove('wrong')
+      this.element.classList.remove(type)
     }, 400)
   }
 }
