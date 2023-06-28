@@ -23,6 +23,15 @@ export class SideBar extends BaseComponent {
     attribute: { className: 'side-bar__level-wrapper' },
   })
 
+  private note = new BaseComponent({
+    tag: 'p',
+    parent: this.element,
+    attribute: {
+      className: 'side-bar__task',
+      textContent: 'Note! Please separate all of your selectors with space. For Example: .table :nth-child(1) > apple',
+    },
+  })
+
   private levelButtons: BaseComponent[] = []
 
   constructor(parent: HTMLElement) {

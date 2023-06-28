@@ -108,6 +108,10 @@ export class GameElements {
       gameElement.element.addEventListener('mouseout', (e: Event) => this.mouseEventHandler(e))
     })
 
+    if (elem.isTarget) {
+      playgroundElem.element.classList.add('jumping')
+    }
+
     return gameElementTuple
   }
 

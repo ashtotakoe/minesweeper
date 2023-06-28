@@ -31,6 +31,7 @@ export const levels: Level[] = [
         { name: 'bento', children: [] },
       ],
     },
+    task: 'select an apple',
   }),
   new Level({
     serialNumber: 1,
