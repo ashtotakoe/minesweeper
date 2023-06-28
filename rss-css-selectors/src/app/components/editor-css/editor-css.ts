@@ -67,11 +67,6 @@ export class EditorCSS extends BaseComponent {
     }
 
     if (this.answerForm.element instanceof HTMLInputElement) {
-      // if (gameState.currentLevel.answer.includes(this.answerForm.element.value)) {
-      //   gameState.currentLevelIndex += 1
-      //   changeLevel(gameState.currentLevelIndex)
-      //   return true
-      // }
       if (this.validateAnswer(this.answerForm.element.value)) {
         gameState.currentLevelIndex += 1
         changeLevel(gameState.currentLevelIndex)
@@ -96,12 +91,18 @@ export class EditorCSS extends BaseComponent {
   }
 
   private turnIntoProperSelector(selector: string): string {
-    let properSelector = selector
-
-    Object.keys(gameElementAbstractions).forEach((abstraction) => {
-      properSelector = properSelector.replaceAll(abstraction, gameElementAbstractions[abstraction])
-    })
+    const properSelector = selector.replaceAll('data-target', '').split(' ')
 
     return properSelector
+      .map((keyword) => {
+        let properKeyWord = keyword
+        Object.keys(gameElementAbstractions).forEach((abstraction) => {
+          if (keyword === abstraction) {
+            properKeyWord = gameElementAbstractions[abstraction]
+          }
+        })
+        return properKeyWord
+      })
+      .join(' ')
   }
 }

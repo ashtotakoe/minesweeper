@@ -5,7 +5,8 @@ export const levels: Level[] = [
     serialNumber: 1,
     structure: {
       name: 'base',
-      children: [{ name: 'plate', isTarget: true, children: [{ name: 'apple', children: [] }] }],
+      className: 'table',
+      children: [{ name: 'plate', className: 'plate', isTarget: true, children: [{ name: 'apple', children: [] }] }],
     },
     task: 'select a plate',
   }),
@@ -23,6 +24,7 @@ export const levels: Level[] = [
     serialNumber: 3,
     structure: {
       name: 'base',
+      className: 'table',
       children: [
         { name: 'plate', children: [{ name: 'apple', isTarget: true, children: [] }] },
         { name: 'plate', children: [] },
