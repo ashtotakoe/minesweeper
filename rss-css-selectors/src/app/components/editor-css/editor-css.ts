@@ -73,13 +73,19 @@ export class EditorCSS extends BaseComponent {
         return true
       }
     }
-
+    emitter.emit('display error')
     return true
   }
 
   private validateAnswer(selector: string): boolean {
     const properSelector = this.turnIntoProperSelector(selector)
-    const target = this.gameElements.abstractDOMModel.querySelector(properSelector)
+    let target: HTMLElement | null = this.gameElements.abstractDOMModel
+
+    try {
+      target = this.gameElements.abstractDOMModel.querySelector(properSelector)
+    } catch {
+      return false
+    }
 
     if (target === null || target?.getAttribute('data-target') === null) {
       return false
