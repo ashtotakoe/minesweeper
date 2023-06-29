@@ -43,14 +43,13 @@ export const levels: Level[] = [
         {
           name: 'plate',
           attributes: {
-            id: 'apple-holder',
+            id: 'appleHolder',
           },
           isTarget: true,
           children: [{ name: 'apple', children: [] }],
         },
         {
           name: 'plate',
-          isTarget: true,
           children: [],
         },
       ],
@@ -73,7 +72,6 @@ export const levels: Level[] = [
         },
         {
           name: 'plate',
-          isTarget: true,
           children: [],
         },
         {
@@ -85,6 +83,91 @@ export const levels: Level[] = [
       ],
     },
     task: 'select all of the plates with an apple in it',
+  }),
+
+  new Level({
+    serialNumber: 5,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'plate',
+          children: [{ name: 'apple', children: [] }],
+        },
+        {
+          name: 'plate',
+          children: [],
+        },
+        {
+          name: 'bento',
+          children: [{ name: 'apple', isTarget: true, children: [] }],
+        },
+      ],
+    },
+    task: 'select an apple in bento',
+  }),
+
+  new Level({
+    serialNumber: 6,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'plate',
+          className: 'fancy',
+          children: [],
+        },
+        {
+          name: 'plate',
+          className: 'fancy',
+          children: [],
+        },
+        {
+          name: 'plate',
+          isTarget: true,
+          attributes: {
+            fancy: '',
+          },
+          children: [],
+        },
+      ],
+    },
+    task: 'select the plate with the fancy attribute',
+  }),
+
+  new Level({
+    serialNumber: 7,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          isTarget: true,
+          attributes: {
+            fancy: 'yes',
+          },
+          children: [],
+        },
+      ],
+    },
+    task: 'select the bento with the fancy attribute',
   }),
 ]
 

@@ -1,4 +1,3 @@
-import { gameElementAbstractions } from '../../constants/game-element-abstractions'
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
 import { displayVictory } from '../../utils/display-victory'
@@ -78,43 +77,34 @@ export class EditorCSS extends BaseComponent {
   }
 
   private validateAnswer(selector: string): boolean {
-    const properSelector = this.turnIntoProperSelector(selector)
     let targetList: NodeListOf<Element>
     let isEveryElementTarget = true
 
     try {
-      targetList = this.gameElements.abstractDOMModel.querySelectorAll(properSelector)
+      targetList = this.gameElements.abstractDOMModel.querySelectorAll(selector)
     } catch {
       return false
     }
 
+    if (!targetList.length) {
+      return false
+    }
+
+    const [firstElement] = targetList
+    if (gameState.currentLevel.targetsCount === 1 && firstElement.getAttribute('data-target')) {
+      return true
+    }
+
     targetList.forEach((target) => {
-      if (target.getAttribute('data-target') === null) {
+      if (!target.getAttribute('data-target')) {
         isEveryElementTarget = false
       }
     })
 
     if (targetList.length !== gameState.currentLevel.targetsCount || !isEveryElementTarget) {
-      console.log(targetList.length, gameState.currentLevel.targetsCount)
       return false
     }
 
     return true
-  }
-
-  private turnIntoProperSelector(selector: string): string {
-    const properSelector = selector.replaceAll('data-target', '').split(' ')
-
-    return properSelector
-      .map((keyword) => {
-        let properKeyWord = keyword
-        Object.keys(gameElementAbstractions).forEach((abstraction) => {
-          if (keyword === abstraction) {
-            properKeyWord = gameElementAbstractions[abstraction]
-          }
-        })
-        return properKeyWord
-      })
-      .join(' ')
   }
 }

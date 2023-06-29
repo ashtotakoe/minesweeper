@@ -4,7 +4,6 @@ import { gameElementClasses } from '../../constants/game-element-classes'
 import { gameELementTextNodes } from '../../constants/game-element-text-nodes'
 import { emitter } from '../../utils/event-emitter'
 import { BaseComponent } from '../../utils/base-component'
-import { gameElementAbstractions } from '../../constants/game-element-abstractions'
 
 export class GameElements {
   private playground: HTMLElement
@@ -155,7 +154,7 @@ export class GameElements {
 
   private createAbstractDOM(elem: LevelElem, parent: HTMLElement): HTMLElement {
     const abstraction = new BaseComponent({
-      tag: gameElementAbstractions[elem.name],
+      tag: elem.name === 'base' ? 'div' : elem.name,
     }).element
 
     if (elem.isTarget) {
