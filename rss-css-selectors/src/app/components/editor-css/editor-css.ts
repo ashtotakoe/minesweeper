@@ -36,8 +36,8 @@ export class EditorCSS extends BaseComponent {
 
     this.answerForm.element.addEventListener('click', () => this.inputEventHandler())
     this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
-    document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
-    document.body.addEventListener('keypress', () => this.inputEventHandler())
+    document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e)) // rewrite
+    document.body.addEventListener('keypress', () => this.inputEventHandler()) // rewrite
 
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
@@ -69,7 +69,6 @@ export class EditorCSS extends BaseComponent {
     if (this.answerForm.element instanceof HTMLInputElement) {
       if (this.validateAnswer(this.answerForm.element.value)) {
         gameState.currentLevelIndex += 1
-        // changeLevel(gameState.currentLevelIndex)
         displayVictory(gameState.currentLevelIndex)
         return true
       }
@@ -80,19 +79,25 @@ export class EditorCSS extends BaseComponent {
 
   private validateAnswer(selector: string): boolean {
     const properSelector = this.turnIntoProperSelector(selector)
-    let target: HTMLElement | null = this.gameElements.abstractDOMModel
+    let targetList: NodeListOf<Element>
+    let isEveryElementTarget = true
 
     try {
-      target = this.gameElements.abstractDOMModel.querySelector(properSelector)
+      targetList = this.gameElements.abstractDOMModel.querySelectorAll(properSelector)
     } catch {
       return false
     }
 
-    if (target === null || target?.getAttribute('data-target') === null) {
+    targetList.forEach((target) => {
+      if (target.getAttribute('data-target') === null) {
+        isEveryElementTarget = false
+      }
+    })
+
+    if (targetList.length !== gameState.currentLevel.targetsCount || !isEveryElementTarget) {
+      console.log(targetList.length, gameState.currentLevel.targetsCount)
       return false
     }
-
-    console.log('you guessed it right!')
 
     return true
   }

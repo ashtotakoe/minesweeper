@@ -35,6 +35,7 @@ export interface GameElementConstructor {
 
 export interface LevelConstructor {
   serialNumber: number
+  targetsCount?: number
   structure: LevelElem
   answer?: string[]
   task?: string
