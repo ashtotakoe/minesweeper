@@ -26,7 +26,7 @@ export class GameElements {
 
   public createElements(level: LevelElem): void {
     this.resetAll()
-    const abstractBase = this.createAbstractDOM(level, this.abstractDOMModel)
+    const abstractBase = this.createAbstractDOM(level, this.abstractDOMModel) // не нравится
 
     const [textBeforeBaseElem, textAfterBaseElem] = gameELementTextNodes[level.name]
     const baseElements = this.createElementTuple({
@@ -124,6 +124,7 @@ export class GameElements {
   }
 
   private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
+    // rename
     const playgroundElem = new GameElement({
       parent: parentPlayground,
       id,
@@ -190,30 +191,28 @@ export class GameElements {
     }
 
     if (playgroundTarget !== undefined) {
-      playgroundTarget.element.classList.add('linted')
-
-      const lintingTarget = this.editorElems.find((editorElem) => editorElem.id === playgroundTarget.id)
-      if (e.type === 'mouseover') {
-        lintingTarget?.element.classList.add('linted')
-        return true
-      }
-      lintingTarget?.element.classList.remove('linted')
-      return true
+      this.lintElement(playgroundTarget, this.editorElems, e)
     }
 
     if (editorTarget !== undefined) {
-      editorTarget.element.classList.add('linted')
-
-      const lintingTarget = this.playgroundElems.find((playgroundElem) => playgroundElem.id === editorTarget.id)
-      if (e.type === 'mouseover') {
-        lintingTarget?.element.classList.add('linted')
-        return true
-      }
-      lintingTarget?.element.classList.remove('linted')
-      return true
+      this.lintElement(editorTarget, this.playgroundElems, e)
     }
 
     return false
+  }
+
+  private lintElement(target: GameElement, lintingTargetArray: GameElement[], event: Event): boolean {
+    target.element.classList.add('linted')
+
+    const lintingTarget = lintingTargetArray.find((element) => element.id === target.id)
+
+    if (event.type === 'mouseover') {
+      lintingTarget?.element.classList.add('linted')
+      return true
+    }
+
+    lintingTarget?.element.classList.remove('linted')
+    return true
   }
 
   private resetAll(): void {
