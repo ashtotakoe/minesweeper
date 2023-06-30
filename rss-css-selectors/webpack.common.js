@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 
 const PROJECT = {
-  title: 'TStemplate',
+  title: 'CSS-Selectors',
   lang: 'en',
 }
 

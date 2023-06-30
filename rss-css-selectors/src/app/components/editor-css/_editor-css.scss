@@ -4,7 +4,7 @@
 }
 
 .editor-css__answer {
-  border: none;
+  border: 1px grey solid;
   background-color: inherit;
   color: grey;
   margin: 10px;
@@ -16,4 +16,9 @@
 
 .editor-css__answer:focus {
   color: $main-text-color;
+}
+
+.editor-css__decoration {
+  color: grey;
+  margin-left: 10px;
 }

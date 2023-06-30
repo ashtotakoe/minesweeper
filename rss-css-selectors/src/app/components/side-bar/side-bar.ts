@@ -23,20 +23,6 @@ export class SideBar extends BaseComponent {
     attribute: { className: 'side-bar__level-wrapper' },
   })
 
-  private note = new BaseComponent({
-    tag: 'p',
-    parent: this.element,
-    attribute: {
-      className: 'side-bar__task',
-      innerHTML: `
-      'Note! Please separate every selector with a <b>space</b>.
-      For Example: <b>.table :nth-child(1) > apple</b>
-       or 
-       <b>plate [cool]</b>'
-      `,
-    },
-  })
-
   private levelButtons: BaseComponent[] = []
 
   constructor(parent: HTMLElement) {

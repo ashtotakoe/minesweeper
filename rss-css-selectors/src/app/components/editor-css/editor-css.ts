@@ -22,6 +22,20 @@ export class EditorCSS extends BaseComponent {
       textContent: 'submit',
     },
   })
+
+  private editorDecoration = new BaseComponent({
+    tag: 'div',
+    parent: this.element,
+    attribute: {
+      className: 'editor-css__decoration',
+      innerHTML: `
+      {<br>
+       /* Styles would go here. */<br>
+      }
+      `,
+    },
+  })
+
   public gameElements: GameElements
 
   constructor(parent: HTMLElement, gameElements: GameElements) {
@@ -35,8 +49,7 @@ export class EditorCSS extends BaseComponent {
 
     this.answerForm.element.addEventListener('click', () => this.inputEventHandler())
     this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
-    document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e)) // rewrite
-    document.body.addEventListener('keypress', () => this.inputEventHandler()) // rewrite
+    document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))
 
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
