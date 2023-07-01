@@ -1,6 +1,8 @@
 import { defaultLevelsStatus } from '../constants/default-levels-status'
 import { gameState } from '../constants/game-state'
 import { levels } from '../constants/levels'
+import { changeLevel } from './change-level'
+import { emitter } from './event-emitter'
 
 export class ManageLocalStorage {
   public setLevelsStatus(): boolean {
@@ -34,6 +36,15 @@ export class ManageLocalStorage {
     )
 
     localStorage.setItem('current level', String(gameState.currentLevelIndex))
+  }
+
+  public reset(): void {
+    localStorage.clear()
+    levels.forEach((level) => {
+      Object.assign(level, { isDone: 'notDone' })
+    })
+    emitter.emit('rewrite statuses')
+    changeLevel(0)
   }
 }
 

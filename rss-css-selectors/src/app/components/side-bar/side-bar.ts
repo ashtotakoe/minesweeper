@@ -4,12 +4,22 @@ import { gameState } from '../../constants/game-state'
 import { levels } from '../../constants/levels'
 import { Level } from '../../utils/level'
 import { changeLevel } from '../../utils/change-level'
+import { manageLocalStroage } from '../../utils/manageLocalStrorage'
 
 export class SideBar extends BaseComponent {
   private sidebarHeading = new BaseComponent({
     tag: 'h3',
     parent: this.element,
     attribute: { className: 'side-bar__heading', textContent: 'Menu' },
+  })
+
+  private resetProgress = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'side-bar__reset-progress',
+      textContent: 'reset progress',
+    },
   })
 
   private taskHolder = new BaseComponent({
@@ -31,7 +41,8 @@ export class SideBar extends BaseComponent {
     this.createLevelButtons()
     this.createLevelStatuses()
     this.setTask(gameState.currentLevel)
-    this.lintCurrentLevel(0)
+    this.lintCurrentLevel(gameState.currentLevelIndex)
+    this.resetProgress.element.addEventListener('click', () => manageLocalStroage.reset())
 
     emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))
     emitter.subscribe('lint level', (currentLevelIndex: number) => this.lintCurrentLevel(currentLevelIndex))
@@ -56,6 +67,7 @@ export class SideBar extends BaseComponent {
         new BaseComponent({
           parent: levelButton.element,
           attribute: {
+            className: 'level-wrapper__button-status',
             textContent: levels[buttonIndex].isDone,
           },
         }),
