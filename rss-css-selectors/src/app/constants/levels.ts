@@ -1,6 +1,6 @@
 import { Level } from '../utils/level'
 
-export const levels: Level[] = [
+const levels: Level[] = [
   new Level({
     serialNumber: 1,
     structure: {
@@ -169,36 +169,102 @@ export const levels: Level[] = [
     },
     task: 'select the bento with the fancy attribute',
   }),
-]
 
-/* 
   new Level({
-    serialNumber: 3,
+    serialNumber: 8,
     structure: {
       name: 'base',
       className: 'table',
       children: [
         {
-          name: 'plate',
-          attributes: { buba: '' },
-          children: [
-            {
-              name: 'apple',
-              attributes: {
-                apple: 'yes',
-              },
-              className: 'apple',
-              isTarget: true,
-              children: [],
-            },
-          ],
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
         },
-        { name: 'plate', children: [] },
-        { name: 'bento', children: [] },
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          isTarget: true,
+          attributes: {
+            fancy: 'yes',
+          },
+          children: [],
+        },
       ],
     },
-    task: 'select an apple',
+    task: 'select the bento with the fancy attribute',
   }),
-
-
-*/
+  new Level({
+    serialNumber: 9,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          isTarget: true,
+          attributes: {
+            fancy: 'yes',
+          },
+          children: [],
+        },
+      ],
+    },
+    task: 'select the bento with the fancy attribute',
+  }),
+  new Level({
+    serialNumber: 10,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          attributes: {
+            fancy: 'no',
+          },
+          children: [],
+        },
+        {
+          name: 'bento',
+          isTarget: true,
+          attributes: {
+            fancy: 'yes',
+          },
+          children: [],
+        },
+      ],
+    },
+    task: 'select the bento with the fancy attribute',
+  }),
+]
+export { levels }

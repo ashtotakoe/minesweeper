@@ -3,21 +3,15 @@ import { LevelElem, LevelConstructor } from '../models/interfaces'
 export class Level {
   public serialNumber: number
   public structure: LevelElem
-  public answer: string[]
   public task: string
   public targetsCount: number
+  public isDone: string
 
-  constructor({
-    serialNumber,
-    structure,
-    targetsCount = 1,
-    task = 'sorry, no task yet!',
-    answer = ['selector'],
-  }: LevelConstructor) {
+  constructor({ serialNumber, structure, targetsCount = 1, task = 'sorry, no task yet!' }: LevelConstructor) {
     this.serialNumber = serialNumber
     this.structure = structure
-    this.answer = answer
     this.task = `Your task: ${task}`
     this.targetsCount = targetsCount
+    this.isDone = 'notDone'
   }
 }

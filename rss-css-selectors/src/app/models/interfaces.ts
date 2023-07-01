@@ -39,6 +39,7 @@ export interface LevelConstructor {
   structure: LevelElem
   answer?: string[]
   task?: string
+  isDone?: string
 }
 
 export interface GameStateConstructor {
