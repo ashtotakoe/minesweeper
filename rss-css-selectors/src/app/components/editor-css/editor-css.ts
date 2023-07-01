@@ -74,6 +74,7 @@ export class EditorCSS extends BaseComponent {
   }
 
   private submitEventHandler(e: Event): boolean {
+    this.inputEventHandler()
     if (e instanceof KeyboardEvent && e.code !== 'Enter') {
       return false
     }
