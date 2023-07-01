@@ -24,14 +24,18 @@ export class SideBar extends BaseComponent {
   })
 
   private levelButtons: BaseComponent[] = []
+  private levelStatuses: BaseComponent[] = []
 
   constructor(parent: HTMLElement) {
     super({ parent, attribute: { className: 'side-bar' } })
     this.createLevelButtons()
+    this.createLevelStatuses()
     this.setTask(gameState.currentLevel)
+    this.lintCurrentLevel(0)
 
     emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))
     emitter.subscribe('lint level', (currentLevelIndex: number) => this.lintCurrentLevel(currentLevelIndex))
+    emitter.subscribe('rewrite statuses', () => this.rewriteLevelStatuses())
   }
 
   private createLevelButtons(): void {
@@ -43,6 +47,24 @@ export class SideBar extends BaseComponent {
       })
       levelButton.element.addEventListener('click', (e: Event) => this.switchLevel(e))
       return levelButton
+    })
+  }
+
+  private createLevelStatuses(): void {
+    this.levelStatuses = this.levelButtons.map(
+      (levelButton, buttonIndex) =>
+        new BaseComponent({
+          parent: levelButton.element,
+          attribute: {
+            textContent: levels[buttonIndex].isDone,
+          },
+        }),
+    )
+  }
+
+  private rewriteLevelStatuses(): void {
+    this.levelStatuses.forEach((levelStatus, levelIndex) => {
+      Object.assign(levelStatus.element, { textContent: levels[levelIndex].isDone })
     })
   }
 
