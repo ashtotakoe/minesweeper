@@ -44,6 +44,27 @@ const levels: Level[] = [
       children: [
         {
           name: 'plate',
+          children: [],
+        },
+        {
+          name: 'bento',
+          isTarget: true,
+          children: [],
+        },
+      ],
+    },
+    hint: 'bento',
+    task: 'select the bento',
+  }),
+
+  new Level({
+    serialNumber: 4,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'plate',
           attributes: {
             id: 'appleHolder',
           },
@@ -57,11 +78,11 @@ const levels: Level[] = [
       ],
     },
     hint: '#appleHolder',
-    task: 'select the plate with an apple in it',
+    task: 'select the plate with an apple on it',
   }),
 
   new Level({
-    serialNumber: 4,
+    serialNumber: 5,
     targetsCount: 2,
     structure: {
       name: 'base',
@@ -86,11 +107,11 @@ const levels: Level[] = [
       ],
     },
     hint: '.apple-holder',
-    task: 'select all of the plates with an apple in it',
+    task: 'select all of the plates with an apple on it',
   }),
 
   new Level({
-    serialNumber: 5,
+    serialNumber: 6,
     structure: {
       name: 'base',
       className: 'table',
@@ -110,11 +131,11 @@ const levels: Level[] = [
       ],
     },
     hint: 'bento apple',
-    task: 'select an apple in bento',
+    task: 'select an apple on bento',
   }),
 
   new Level({
-    serialNumber: 6,
+    serialNumber: 7,
     structure: {
       name: 'base',
       className: 'table',
@@ -144,7 +165,7 @@ const levels: Level[] = [
   }),
 
   new Level({
-    serialNumber: 7,
+    serialNumber: 8,
     structure: {
       name: 'base',
       className: 'table',
@@ -165,33 +186,59 @@ const levels: Level[] = [
         },
         {
           name: 'bento',
-          isTarget: true,
           attributes: {
             fancy: 'yes',
           },
+          children: [
+            {
+              name: 'apple',
+              children: [],
+              isTarget: true,
+            },
+          ],
+        },
+      ],
+    },
+    hint: 'bento[fancy=yes] apple',
+    task: 'select an apple on bento with the truly fancy attribute',
+  }),
+
+  new Level({
+    serialNumber: 9,
+    structure: {
+      name: 'base',
+      className: 'table',
+      children: [
+        {
+          name: 'plate',
+          children: [],
+        },
+        {
+          name: 'plate',
+          isTarget: true,
+          children: [],
+        },
+        {
+          name: 'plate',
           children: [],
         },
       ],
     },
-    hint: 'bento[fancy=yes]',
-    task: 'select the bento with the fancy attribute',
+    hint: '.table :nth-child(2)',
+    task: 'select the second plate',
   }),
 
   new Level({
-    serialNumber: 7,
+    serialNumber: 10,
+    targetsCount: 6,
     structure: {
       name: 'base',
       className: 'table',
+      isTarget: true,
       children: [
         {
           name: 'bento',
-          attributes: {
-            fancy: 'no',
-          },
-          children: [],
-        },
-        {
-          name: 'bento',
+          isTarget: true,
           attributes: {
             fancy: 'no',
           },
@@ -203,75 +250,27 @@ const levels: Level[] = [
           attributes: {
             fancy: 'yes',
           },
-          children: [],
-        },
-      ],
-    },
-    hint: 'bento[fancy=yes]',
-    task: 'select the bento with the fancy attribute',
-  }),
-
-  new Level({
-    serialNumber: 7,
-    structure: {
-      name: 'base',
-      className: 'table',
-      children: [
-        {
-          name: 'bento',
-          attributes: {
-            fancy: 'no',
-          },
-          children: [],
-        },
-        {
-          name: 'bento',
-          attributes: {
-            fancy: 'no',
-          },
-          children: [],
+          children: [
+            {
+              name: 'apple',
+              isTarget: true,
+              children: [],
+            },
+          ],
         },
         {
           name: 'bento',
           isTarget: true,
           attributes: {
-            fancy: 'yes',
+            fancy: 'not-sure',
           },
-          children: [],
-        },
-      ],
-    },
-    hint: 'bento[fancy=yes]',
-    task: 'select the bento with the fancy attribute',
-  }),
-
-  new Level({
-    serialNumber: 7,
-    structure: {
-      name: 'base',
-      className: 'table',
-      children: [
-        {
-          name: 'bento',
-          attributes: {
-            fancy: 'no',
-          },
-          children: [],
-        },
-        {
-          name: 'bento',
-          attributes: {
-            fancy: 'no',
-          },
-          children: [],
-        },
-        {
-          name: 'bento',
-          isTarget: true,
-          attributes: {
-            fancy: 'yes',
-          },
-          children: [],
+          children: [
+            {
+              name: 'apple',
+              isTarget: true,
+              children: [],
+            },
+          ],
         },
       ],
     },
