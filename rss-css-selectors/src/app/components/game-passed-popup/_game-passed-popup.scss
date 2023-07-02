@@ -1,7 +1,17 @@
-// .game-passed-popup {
-//   height: 100vh;
-//   width: vw;
-//   position: absolute;
-//   top: 0;
-//   background-color: rgba(0, 0, 0, 0.546);
-// }
+.game-passed-popup-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 98vw;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.31);
+}
+
+.game-passed-popup-wrapper__popup {
+  height: 400px;
+  width: 500px;
+  background: $main-bg-color;
+}
