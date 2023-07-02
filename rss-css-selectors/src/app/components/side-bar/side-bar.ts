@@ -18,7 +18,7 @@ export class SideBar extends BaseComponent {
     parent: this.element,
     attribute: {
       className: 'side-bar__settings',
-      textContent: 'reset progress',
+      textContent: 'Reset progress',
     },
   })
 
@@ -27,7 +27,7 @@ export class SideBar extends BaseComponent {
     parent: this.element,
     attribute: {
       className: 'side-bar__settings',
-      textContent: 'show hint',
+      textContent: 'Help',
     },
   })
 
