@@ -230,11 +230,10 @@ const levels: Level[] = [
 
   new Level({
     serialNumber: 10,
-    targetsCount: 6,
+    targetsCount: 5,
     structure: {
       name: 'base',
       className: 'table',
-      isTarget: true,
       children: [
         {
           name: 'bento',
@@ -274,8 +273,8 @@ const levels: Level[] = [
         },
       ],
     },
-    hint: 'bento[fancy=yes]',
-    task: 'select the bento with the fancy attribute',
+    hint: '.table *',
+    task: 'select everything on the table',
   }),
 ]
 export { levels }

@@ -4,14 +4,13 @@
 }
 
 .playground__base {
-  max-width: 450px;
-  margin: 10px;
+  width: 450px;
   height: 160px;
   border: 3px solid $main-text-color;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
+
   * {
     margin: 15px;
   }
@@ -26,11 +25,21 @@
 }
 
 @keyframes jumpingAnimation {
-  from{transform: translateY(0px);}
-  25% {transform: translateY(-2px);}
-  50% {transform: translateY(0px)}
-  75% {transform: translateY(2px);}
-  to {transform: translateY(0px);}
+  from {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(0px);
+  }
 }
 
 %playground__elem {
@@ -40,7 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; 
+  position: relative;
 }
 
 %popup {
@@ -54,7 +63,7 @@
 }
 
 .playground__bento {
- @extend %playground__elem; 
+  @extend %playground__elem;
 }
 
 .playground__plate {
