@@ -1,6 +1,5 @@
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
-import { changeElementValue } from '../../utils/change-element-value'
 import { displayVictory } from '../../utils/display-victory'
 import { emitter } from '../../utils/event-emitter'
 import { GameElements } from '../game-elements/game-elements'
@@ -12,6 +11,7 @@ export class EditorCSS extends BaseComponent {
     attribute: {
       className: 'editor-css__answer',
       type: 'text',
+      placeholder: 'type your selector here',
     },
   })
 
@@ -46,7 +46,7 @@ export class EditorCSS extends BaseComponent {
   }
 
   private init(): void {
-    this.setInputTextDefault()
+    // this.setInputTextDefault()
 
     this.answerForm.element.addEventListener('click', () => this.inputEventHandler())
     this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
@@ -70,9 +70,7 @@ export class EditorCSS extends BaseComponent {
   }
 
   private setInputTextDefault(): void {
-    if (this.answerForm.element instanceof HTMLInputElement) {
-      this.answerForm.element.value = 'type your selector here'
-    }
+    this.answerForm.inputValue = ''
   }
 
   private submitEventHandler(e: Event): boolean {
@@ -126,7 +124,15 @@ export class EditorCSS extends BaseComponent {
   private showHint(): void {
     gameState.currentLevel.isDone = 'with hint'
     emitter.emit('rewrite statuses')
-    changeElementValue(this.answerForm.element, gameState.currentLevel.hint)
-    // typewriterLikeHintPrint(this.answerForm.element, gameState.currentLevel.hint)
+    this.typewriterLikeHintPrint(gameState.currentLevel.hint)
+  }
+
+  private typewriterLikeHintPrint(hint: string): void {
+    this.answerForm.inputValue = ''
+    hint.split('').forEach((char, index) => {
+      setTimeout(() => {
+        this.answerForm.inputValue += char
+      }, index * 100)
+    })
   }
 }

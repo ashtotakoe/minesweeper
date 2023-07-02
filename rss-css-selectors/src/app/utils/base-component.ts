@@ -11,4 +11,17 @@ export class BaseComponent {
       Object.assign(this.element, attribute)
     }
   }
+
+  public get inputValue(): string {
+    if (this.element instanceof HTMLInputElement) {
+      return this.element.value
+    }
+    return ''
+  }
+
+  public set inputValue(value: string) {
+    if (this.element instanceof HTMLInputElement) {
+      this.element.value = value
+    }
+  }
 }
