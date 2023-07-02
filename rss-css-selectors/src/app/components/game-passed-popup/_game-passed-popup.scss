@@ -1,17 +1,36 @@
-.game-passed-popup-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.popup {
+  width: 100vw;
   height: 100vh;
-  width: 98vw;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.31);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: rgba(41, 41, 41, 0.6);
 }
 
-.game-passed-popup-wrapper__popup {
-  height: 400px;
+.popup__content {
+  margin: 0 auto;
+  margin-top: 100px;
+  height: 225px;
   width: 500px;
   background: $main-bg-color;
+}
+
+.popup__content-heading {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.popup__content-message {
+  margin: 30px 15px 0px;
+}
+
+.popup__content-button {
+  display: block;
+  margin: 15px auto 0px;
+  width: 100px;
+  height: 30px;
+}
+
+.hidden {
+  display: none;
 }
