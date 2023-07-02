@@ -13,7 +13,7 @@ export class Level {
     this.structure = structure
     this.task = `Your task: ${task}`
     this.targetsCount = targetsCount
-    this.isDone = 'notDone'
+    this.isDone = 'not done'
     this.hint = hint
   }
 }
