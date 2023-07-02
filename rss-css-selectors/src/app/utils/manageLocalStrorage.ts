@@ -41,7 +41,7 @@ export class ManageLocalStorage {
   public reset(): void {
     localStorage.clear()
     levels.forEach((level) => {
-      Object.assign(level, { isDone: 'notDone' })
+      Object.assign(level, { isDone: 'not done' })
     })
     emitter.emit('rewrite statuses')
     changeLevel(0)

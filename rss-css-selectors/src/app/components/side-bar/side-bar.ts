@@ -17,8 +17,17 @@ export class SideBar extends BaseComponent {
     tag: 'button',
     parent: this.element,
     attribute: {
-      className: 'side-bar__reset-progress',
+      className: 'side-bar__settings',
       textContent: 'reset progress',
+    },
+  })
+
+  private hintButton = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'side-bar__settings',
+      textContent: 'show hint',
     },
   })
 
@@ -43,6 +52,7 @@ export class SideBar extends BaseComponent {
     this.setTask(gameState.currentLevel)
     this.lintCurrentLevel(gameState.currentLevelIndex)
     this.resetProgress.element.addEventListener('click', () => manageLocalStroage.reset())
+    this.hintButton.element.addEventListener('click', () => emitter.emit('show hint'))
 
     emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))
     emitter.subscribe('lint level', (currentLevelIndex: number) => this.lintCurrentLevel(currentLevelIndex))

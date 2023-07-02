@@ -6,12 +6,14 @@ export class Level {
   public task: string
   public targetsCount: number
   public isDone: string
+  public hint: string
 
-  constructor({ serialNumber, structure, targetsCount = 1, task = 'sorry, no task yet!' }: LevelConstructor) {
+  constructor({ serialNumber, structure, hint, targetsCount = 1, task = 'sorry, no task yet!' }: LevelConstructor) {
     this.serialNumber = serialNumber
     this.structure = structure
     this.task = `Your task: ${task}`
     this.targetsCount = targetsCount
     this.isDone = 'notDone'
+    this.hint = hint
   }
 }

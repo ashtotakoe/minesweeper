@@ -3,6 +3,10 @@ import { Callback } from '../types/type'
 class EventEmitter<Str, Func> {
   private events = new Map()
 
+  public showEvents(): void {
+    console.log(this.events)
+  }
+
   public subscribe(eventName: Str, eventCallback: Func): void {
     let callbacks = this.events.get(eventName)
 

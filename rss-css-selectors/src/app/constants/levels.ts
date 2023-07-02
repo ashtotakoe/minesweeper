@@ -9,6 +9,7 @@ const levels: Level[] = [
       isTarget: true,
       children: [],
     },
+    hint: '.table',
     task: 'select the table',
   }),
 
@@ -31,6 +32,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'plate',
     task: 'select the plates',
   }),
 
@@ -54,6 +56,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: '#appleHolder',
     task: 'select the plate with an apple in it',
   }),
 
@@ -82,6 +85,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: '.apple-holder',
     task: 'select all of the plates with an apple in it',
   }),
 
@@ -105,6 +109,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'bento apple',
     task: 'select an apple in bento',
   }),
 
@@ -134,6 +139,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'plate[fancy]',
     task: 'select the plate with the fancy attribute',
   }),
 
@@ -167,11 +173,12 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'bento[fancy=yes]',
     task: 'select the bento with the fancy attribute',
   }),
 
   new Level({
-    serialNumber: 8,
+    serialNumber: 7,
     structure: {
       name: 'base',
       className: 'table',
@@ -200,10 +207,12 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'bento[fancy=yes]',
     task: 'select the bento with the fancy attribute',
   }),
+
   new Level({
-    serialNumber: 9,
+    serialNumber: 7,
     structure: {
       name: 'base',
       className: 'table',
@@ -232,10 +241,12 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'bento[fancy=yes]',
     task: 'select the bento with the fancy attribute',
   }),
+
   new Level({
-    serialNumber: 10,
+    serialNumber: 7,
     structure: {
       name: 'base',
       className: 'table',
@@ -264,6 +275,7 @@ const levels: Level[] = [
         },
       ],
     },
+    hint: 'bento[fancy=yes]',
     task: 'select the bento with the fancy attribute',
   }),
 ]

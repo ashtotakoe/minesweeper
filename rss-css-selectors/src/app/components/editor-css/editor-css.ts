@@ -1,5 +1,6 @@
 import { gameState } from '../../constants/game-state'
 import { BaseComponent } from '../../utils/base-component'
+import { changeElementValue } from '../../utils/change-element-value'
 import { displayVictory } from '../../utils/display-victory'
 import { emitter } from '../../utils/event-emitter'
 import { GameElements } from '../game-elements/game-elements'
@@ -18,7 +19,7 @@ export class EditorCSS extends BaseComponent {
     tag: 'button',
     parent: this.element,
     attribute: {
-      className: 'editor-css__submit-button',
+      className: 'editor-css__button',
       textContent: 'submit',
     },
   })
@@ -54,6 +55,7 @@ export class EditorCSS extends BaseComponent {
     emitter.subscribe('set input text default', () => {
       this.setInputTextDefault()
     })
+    emitter.subscribe('show hint', () => this.showHint())
   }
 
   private inputEventHandler(): boolean {
@@ -74,7 +76,6 @@ export class EditorCSS extends BaseComponent {
   }
 
   private submitEventHandler(e: Event): boolean {
-    this.inputEventHandler()
     if (e instanceof KeyboardEvent && e.code !== 'Enter') {
       return false
     }
@@ -120,5 +121,12 @@ export class EditorCSS extends BaseComponent {
     }
 
     return true
+  }
+
+  private showHint(): void {
+    gameState.currentLevel.isDone = 'with hint'
+    emitter.emit('rewrite statuses')
+    changeElementValue(this.answerForm.element, gameState.currentLevel.hint)
+    // typewriterLikeHintPrint(this.answerForm.element, gameState.currentLevel.hint)
   }
 }

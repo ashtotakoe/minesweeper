@@ -37,9 +37,9 @@ export interface LevelConstructor {
   serialNumber: number
   targetsCount?: number
   structure: LevelElem
-  answer?: string[]
   task?: string
   isDone?: string
+  hint: string
 }
 
 export interface GameStateConstructor {
