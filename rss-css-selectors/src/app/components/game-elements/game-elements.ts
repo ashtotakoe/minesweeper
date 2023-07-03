@@ -28,45 +28,45 @@ export class GameElements {
     const abstractBase = this.createAbstractDOM(level, this.abstractDOMModel) // не нравится
 
     const [textBeforeBaseElem, textAfterBaseElem] = gameELementTextNodes[level.name]
-    const baseElements = this.createElementTuple({
+    const [playgroundElement, editorElement] = this.createElementTuple({
       elem: level,
       parentPlayground: this.playground,
       parentEditor: this.editor,
       id: this.id++,
     })
 
-    this.playgroundElems.push(baseElements[0])
-    this.editorElems.push(baseElements[1])
+    this.playgroundElems.push(playgroundElement)
+    this.editorElems.push(editorElement)
 
-    baseElements[1].element.append(textBeforeBaseElem)
+    editorElement.element.append(textBeforeBaseElem)
 
-    this.childrenIteration(level, baseElements, abstractBase)
+    this.childrenIteration(level, [playgroundElement, editorElement], abstractBase)
 
-    baseElements[1].element.append(textAfterBaseElem)
+    editorElement.element.append(textAfterBaseElem)
   }
 
-  private childrenIteration(level: LevelElem, baseElements: GameElement[], abstractBase: HTMLElement): void {
+  private childrenIteration(
+    level: LevelElem,
+    [playgroundElement, editorElement]: GameElement[],
+    abstractBase: HTMLElement,
+  ): void {
     level.children.forEach((elem) => {
       const elemAbstraction = this.createAbstractDOM(elem, abstractBase)
-
       const [playgroundElem, editorElem] = this.createElementTuple({
         elem,
         id: this.id++,
-        parentPlayground: baseElements[0].element,
-        parentEditor: baseElements[1].element,
+        parentPlayground: playgroundElement.element,
+        parentEditor: editorElement.element,
       })
 
       const [textBeforeEditorElem, textAfterEditorElem] = this.getTextNodes(elem)
-
       this.playgroundElems.push(playgroundElem)
       this.editorElems.push(editorElem)
-
       editorElem.element.append(textBeforeEditorElem)
 
       if (elem.children.length !== 0) {
         elem.children.forEach((child) => {
           this.createAbstractDOM(child, elemAbstraction)
-
           const [playgroundChild, editorChild] = this.createElementTuple({
             elem: child,
             parentPlayground: playgroundElem.element,
@@ -76,7 +76,6 @@ export class GameElements {
 
           const [editorChildTextContent] = this.getTextNodes(child)
           Object.assign(editorChild.element, { textContent: editorChildTextContent })
-
           this.playgroundElems.push(playgroundChild)
           this.editorElems.push(editorChild)
         })
@@ -87,39 +86,40 @@ export class GameElements {
   }
 
   private getTextNodes(elem: LevelElem): string[] {
-    let tag = gameELementTextNodes[elem.name][0]
+    let [openingTag] = gameELementTextNodes[elem.name]
+    const closingTag = gameELementTextNodes[elem.name][1]
 
     if (elem.className) {
-      tag += ' class="'
+      openingTag += ' class="'
       elem.className.split(' ').forEach((className) => {
-        tag += `${className} `
+        openingTag += `${className} `
       })
 
-      tag = tag
+      openingTag = openingTag
         .split('')
-        .slice(0, tag.length - 1)
+        .slice(0, openingTag.length - 1)
         .join('')
 
-      tag += '"'
+      openingTag += '"'
     }
 
     if (elem.attributes) {
-      tag += ' '
+      openingTag += ' '
 
       Object.keys(elem.attributes).forEach((attribute) => {
         if (elem.attributes !== undefined) {
-          tag += attribute
+          openingTag += attribute
           const value = elem.attributes[attribute]
           if (value !== '') {
-            tag += `="${value}"`
+            openingTag += `="${value}"`
           }
         }
       })
     }
 
-    tag += '>'
+    openingTag += '>'
 
-    return [tag, gameELementTextNodes[elem.name][1]]
+    return [openingTag, closingTag]
   }
 
   private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
