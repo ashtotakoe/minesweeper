@@ -46,8 +46,6 @@ export class EditorCSS extends BaseComponent {
   }
 
   private init(): void {
-    // this.setInputTextDefault()
-
     this.answerForm.element.addEventListener('click', () => this.inputEventHandler())
     this.submitButton.element.addEventListener('click', (e: Event) => this.submitEventHandler(e))
     document.body.addEventListener('keypress', (e: Event) => this.submitEventHandler(e))

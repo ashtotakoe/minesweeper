@@ -123,7 +123,6 @@ export class GameElements {
   }
 
   private createElementTuple({ element, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
-    // rename
     const playgroundElement = new GameElement({
       parent: parentPlayground,
       id,
