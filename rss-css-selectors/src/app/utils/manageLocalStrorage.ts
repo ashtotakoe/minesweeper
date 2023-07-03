@@ -48,4 +48,4 @@ export class ManageLocalStorage {
   }
 }
 
-export const manageLocalStroage = new ManageLocalStorage()
+export const manageLocalStorage = new ManageLocalStorage()

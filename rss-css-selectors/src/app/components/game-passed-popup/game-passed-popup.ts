@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../utils/base-component'
 import { emitter } from '../../utils/event-emitter'
-import { manageLocalStroage } from '../../utils/manageLocalStrorage'
+import { manageLocalStorage } from '../../utils/manageLocalStrorage'
 
 export class GamePassedPopup extends BaseComponent {
   private popup = new BaseComponent({
@@ -56,7 +56,7 @@ export class GamePassedPopup extends BaseComponent {
 
     this.restartButton.element.addEventListener('click', () => {
       this.element.classList.add('hidden')
-      manageLocalStroage.reset()
+      manageLocalStorage.reset()
     })
 
     this.resumeButton.element.addEventListener('click', () => {

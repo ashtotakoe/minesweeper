@@ -4,7 +4,7 @@ import { gameState } from '../../constants/game-state'
 import { levels } from '../../constants/levels'
 import { Level } from '../../utils/level'
 import { changeLevel } from '../../utils/change-level'
-import { manageLocalStroage } from '../../utils/manageLocalStrorage'
+import { manageLocalStorage } from '../../utils/manageLocalStrorage'
 
 export class SideBar extends BaseComponent {
   private sidebarHeading = new BaseComponent({
@@ -51,7 +51,7 @@ export class SideBar extends BaseComponent {
     this.createLevelStatuses()
     this.setTask(gameState.currentLevel)
     this.lintCurrentLevel(gameState.currentLevelIndex)
-    this.resetProgress.element.addEventListener('click', () => manageLocalStroage.reset())
+    this.resetProgress.element.addEventListener('click', () => manageLocalStorage.reset())
     this.hintButton.element.addEventListener('click', () => emitter.emit('show hint'))
 
     emitter.subscribe('set task', (currentLevel: Level) => this.setTask(currentLevel))

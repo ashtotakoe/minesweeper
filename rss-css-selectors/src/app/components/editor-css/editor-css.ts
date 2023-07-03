@@ -20,7 +20,7 @@ export class EditorCSS extends BaseComponent {
     parent: this.element,
     attribute: {
       className: 'editor-css__button',
-      textContent: 'submit',
+      textContent: 'Enter',
     },
   })
 
