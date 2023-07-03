@@ -1,4 +1,4 @@
-import { LevelElemName } from '../types/type'
+import { LevelElementName } from '../types/type'
 
 export interface BaseComponentProps {
   tag?: string
@@ -6,9 +6,9 @@ export interface BaseComponentProps {
   parent?: HTMLElement
 }
 
-export interface LevelElem {
-  name: LevelElemName
-  children: LevelElem[]
+export interface LevelElement {
+  name: LevelElementName
+  children: LevelElement[]
   isTarget?: boolean
   className?: string
   attributes?: Record<string, string>
@@ -20,7 +20,7 @@ export interface GameElementsConstructor {
 }
 
 export interface CreateElementTupleParam {
-  elem: LevelElem
+  element: LevelElement
   parentPlayground: HTMLElement
   parentEditor: HTMLElement
   id: number
@@ -36,7 +36,7 @@ export interface GameElementConstructor {
 export interface LevelConstructor {
   serialNumber: number
   targetsCount?: number
-  structure: LevelElem
+  structure: LevelElement
   task?: string
   isDone?: string
   hint: string

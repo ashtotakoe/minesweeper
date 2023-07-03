@@ -1,8 +1,8 @@
-import { LevelElem, LevelConstructor } from '../models/interfaces'
+import { LevelElement, LevelConstructor } from '../models/interfaces'
 
 export class Level {
   public serialNumber: number
-  public structure: LevelElem
+  public structure: LevelElement
   public task: string
   public targetsCount: number
   public isDone: string

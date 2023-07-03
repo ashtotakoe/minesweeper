@@ -1,7 +1,7 @@
-import { CreateElementTupleParam, GameElementsConstructor, LevelElem } from '../../models/interfaces'
+import { CreateElementTupleParam, GameElementsConstructor, LevelElement } from '../../models/interfaces'
 import { GameElement } from '../../utils/game-element'
 import { gameElementClasses } from '../../constants/game-element-classes'
-import { gameELementTextNodes } from '../../constants/game-element-text-nodes'
+import { gameElementTextNodes } from '../../constants/game-element-text-nodes'
 import { emitter } from '../../utils/event-emitter'
 import { BaseComponent } from '../../utils/base-component'
 
@@ -10,8 +10,8 @@ export class GameElements {
   private editor: HTMLElement
   private id = 0
 
-  private playgroundElems: GameElement[] = []
-  private editorElems: GameElement[] = []
+  private playgroundElements: GameElement[] = []
+  private editorElements: GameElement[] = []
 
   public abstractDOMModel: HTMLElement = new BaseComponent({
     tag: 'section',
@@ -20,55 +20,55 @@ export class GameElements {
   constructor({ playground, editor }: GameElementsConstructor) {
     this.playground = playground
     this.editor = editor
-    emitter.subscribe('change level', (args: LevelElem) => this.createElements(args))
+    emitter.subscribe('change level', (args: LevelElement) => this.createElements(args))
   }
 
-  public createElements(level: LevelElem): void {
+  public createElements(level: LevelElement): void {
     this.resetAll()
-    const abstractBase = this.createAbstractDOM(level, this.abstractDOMModel) // не нравится
+    const baseEntity = this.createAbstractDOM(level, this.abstractDOMModel) // не нравится
 
-    const [textBeforeBaseElem, textAfterBaseElem] = gameELementTextNodes[level.name]
+    const [textBeforeBaseElement, textAfterBaseElement] = gameElementTextNodes[level.name]
     const [playgroundElement, editorElement] = this.createElementTuple({
-      elem: level,
+      element: level,
       parentPlayground: this.playground,
       parentEditor: this.editor,
       id: this.id++,
     })
 
-    this.playgroundElems.push(playgroundElement)
-    this.editorElems.push(editorElement)
+    this.playgroundElements.push(playgroundElement)
+    this.editorElements.push(editorElement)
 
-    editorElement.element.append(textBeforeBaseElem)
+    editorElement.element.append(textBeforeBaseElement)
 
-    this.childrenIteration(level, [playgroundElement, editorElement], abstractBase)
+    this.childrenIteration(level, [playgroundElement, editorElement], baseEntity)
 
-    editorElement.element.append(textAfterBaseElem)
+    editorElement.element.append(textAfterBaseElement)
   }
 
   private childrenIteration(
-    level: LevelElem,
+    level: LevelElement,
     [playgroundElement, editorElement]: GameElement[],
-    abstractBase: HTMLElement,
+    baseEntity: HTMLElement,
   ): void {
-    level.children.forEach((elem) => {
-      const elemAbstraction = this.createAbstractDOM(elem, abstractBase)
+    level.children.forEach((element) => {
+      const elementEntity = this.createAbstractDOM(element, baseEntity)
       const [playgroundElem, editorElem] = this.createElementTuple({
-        elem,
+        element,
         id: this.id++,
         parentPlayground: playgroundElement.element,
         parentEditor: editorElement.element,
       })
 
-      const [textBeforeEditorElem, textAfterEditorElem] = this.getTextNodes(elem)
-      this.playgroundElems.push(playgroundElem)
-      this.editorElems.push(editorElem)
-      editorElem.element.append(textBeforeEditorElem)
+      const [textBeforeEditorElement, textAfterEditorElement] = this.getTextNodes(element)
+      this.playgroundElements.push(playgroundElem)
+      this.editorElements.push(editorElem)
+      editorElem.element.append(textBeforeEditorElement)
 
-      if (elem.children.length !== 0) {
-        elem.children.forEach((child) => {
-          this.createAbstractDOM(child, elemAbstraction)
+      if (element.children.length !== 0) {
+        element.children.forEach((child) => {
+          this.createAbstractDOM(child, elementEntity)
           const [playgroundChild, editorChild] = this.createElementTuple({
-            elem: child,
+            element: child,
             parentPlayground: playgroundElem.element,
             parentEditor: editorElem.element,
             id: this.id++,
@@ -76,22 +76,22 @@ export class GameElements {
 
           const [editorChildTextContent] = this.getTextNodes(child)
           Object.assign(editorChild.element, { textContent: editorChildTextContent })
-          this.playgroundElems.push(playgroundChild)
-          this.editorElems.push(editorChild)
+          this.playgroundElements.push(playgroundChild)
+          this.editorElements.push(editorChild)
         })
       }
 
-      editorElem.element.append(textAfterEditorElem)
+      editorElem.element.append(textAfterEditorElement)
     })
   }
 
-  private getTextNodes(elem: LevelElem): string[] {
-    let [openingTag] = gameELementTextNodes[elem.name]
-    const closingTag = gameELementTextNodes[elem.name][1]
+  private getTextNodes(element: LevelElement): string[] {
+    let [openingTag] = gameElementTextNodes[element.name]
+    const closingTag = gameElementTextNodes[element.name][1]
 
-    if (elem.className) {
+    if (element.className) {
       openingTag += ' class="'
-      elem.className.split(' ').forEach((className) => {
+      element.className.split(' ').forEach((className) => {
         openingTag += `${className} `
       })
 
@@ -103,13 +103,13 @@ export class GameElements {
       openingTag += '"'
     }
 
-    if (elem.attributes) {
+    if (element.attributes) {
       openingTag += ' '
 
-      Object.keys(elem.attributes).forEach((attribute) => {
-        if (elem.attributes !== undefined) {
+      Object.keys(element.attributes).forEach((attribute) => {
+        if (element.attributes !== undefined) {
           openingTag += attribute
-          const value = elem.attributes[attribute]
+          const value = element.attributes[attribute]
           if (value !== '') {
             openingTag += `="${value}"`
           }
@@ -122,79 +122,79 @@ export class GameElements {
     return [openingTag, closingTag]
   }
 
-  private createElementTuple({ elem, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
+  private createElementTuple({ element, parentPlayground, parentEditor, id }: CreateElementTupleParam): GameElement[] {
     // rename
-    const playgroundElem = new GameElement({
+    const playgroundElement = new GameElement({
       parent: parentPlayground,
       id,
       attribute: {
-        className: gameElementClasses[elem.name].playground,
+        className: gameElementClasses[element.name].playground,
       },
     })
-    const editorElem = new GameElement({
+    const editorElement = new GameElement({
       parent: parentEditor,
       id,
       attribute: {
-        className: gameElementClasses[elem.name].editor,
+        className: gameElementClasses[element.name].editor,
       },
     })
-    const gameElementTuple = [playgroundElem, editorElem]
+    const gameElementTuple = [playgroundElement, editorElement]
 
     gameElementTuple.forEach((gameElement) => {
       gameElement.element.addEventListener('mouseover', (e: Event) => this.mouseEventHandler(e))
       gameElement.element.addEventListener('mouseout', (e: Event) => this.mouseEventHandler(e))
     })
 
-    if (elem.isTarget) {
-      playgroundElem.element.classList.add('jumping')
+    if (element.isTarget) {
+      playgroundElement.element.classList.add('jumping')
     }
 
     return gameElementTuple
   }
 
-  private createAbstractDOM(elem: LevelElem, parent: HTMLElement): HTMLElement {
-    const abstraction = new BaseComponent({
-      tag: elem.name === 'base' ? 'div' : elem.name,
+  private createAbstractDOM(element: LevelElement, parent: HTMLElement): HTMLElement {
+    const entity = new BaseComponent({
+      tag: element.name === 'base' ? 'div' : element.name,
     }).element
 
-    if (elem.isTarget) {
-      abstraction.setAttribute('data-target', 'true')
+    if (element.isTarget) {
+      entity.setAttribute('data-target', 'true')
     }
 
-    if (elem.className) {
-      Object.assign(abstraction, { className: elem.className })
+    if (element.className) {
+      Object.assign(entity, { className: element.className })
     }
 
-    if (elem.attributes) {
-      Object.keys(elem.attributes).forEach((attribute) => {
-        if (elem.attributes !== undefined) {
-          abstraction.setAttribute(attribute, elem.attributes[attribute])
+    if (element.attributes) {
+      Object.keys(element.attributes).forEach((attribute) => {
+        if (element.attributes !== undefined) {
+          entity.setAttribute(attribute, element.attributes[attribute])
         }
       })
     }
 
-    parent.append(abstraction)
+    parent.append(entity)
 
-    return abstraction
+    return entity
   }
 
   private mouseEventHandler(e: Event): boolean {
-    this.playgroundElems.forEach((editorElem) => editorElem.element.classList.remove('linted'))
-    this.editorElems.forEach((editorElem) => editorElem.element.classList.remove('linted'))
+    this.playgroundElements.forEach((playgroundElement) => playgroundElement.element.classList.remove('linted'))
+    this.editorElements.forEach((editorElement) => editorElement.element.classList.remove('linted'))
 
-    const playgroundTarget = this.playgroundElems.find((gameElem) => gameElem.element === e.target)
-    const editorTarget = this.editorElems.find((gameElem) => gameElem.element === e.target)
+    const playgroundTarget = this.playgroundElements.find((gameElement) => gameElement.element === e.target)
+    const editorTarget = this.editorElements.find((gameElement) => gameElement.element === e.target)
 
     if (editorTarget?.id === 0 || playgroundTarget?.id === 0) {
       return false
     }
 
     if (playgroundTarget !== undefined) {
-      this.lintElement(playgroundTarget, this.editorElems, e)
+      this.lintElement(playgroundTarget, this.editorElements, e)
     }
 
     if (editorTarget !== undefined) {
-      this.lintElement(editorTarget, this.playgroundElems, e)
+      this.lintElement(editorTarget, this.playgroundElements, e)
     }
 
     return false
@@ -215,8 +215,8 @@ export class GameElements {
   }
 
   private resetAll(): void {
-    this.playgroundElems = []
-    this.editorElems = []
+    this.playgroundElements = []
+    this.editorElements = []
     this.id = 0
     this.playground.replaceChildren()
     this.editor.replaceChildren()
