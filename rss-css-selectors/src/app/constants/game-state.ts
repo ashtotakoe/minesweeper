@@ -20,7 +20,7 @@ class GameState {
 
   public set currentLevelIndex(level: number) {
     this.isInputFitstTimeClicked = true
-    this._currentLevelIndex = level
+    this._currentLevelIndex = level < levels.length ? level : 0
   }
 }
 
