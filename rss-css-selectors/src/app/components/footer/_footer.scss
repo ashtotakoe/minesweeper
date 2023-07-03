@@ -1,0 +1,26 @@
+.footer {
+  height: 100px;
+  width: calc(100vw - 300px);
+  margin-top: 30px;
+  border: 1px $main-text-color solid;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  * {
+    font-size: 1.2rem;
+  }
+}
+
+.footer__logo {
+  width: 205px;
+  height: 75px;
+  border-radius: 3%;
+  background: url('/src/assets/icons/rs-logo.webp') center/cover no-repeat;
+}
+
+.footer__link {
+  color: $main-text-color;
+  outline: none;
+
+}

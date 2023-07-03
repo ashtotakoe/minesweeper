@@ -8,6 +8,7 @@ import { EditorWrapper } from '../editor-wrapper/editor-wrapper'
 import { EditorCSS } from '../editor-css/editor-css'
 import { gameState } from '../../constants/game-state'
 import { GamePassedPopup } from '../game-passed-popup/game-passed-popup'
+import { Footer } from '../footer/footer'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | GameElements> {
@@ -21,6 +22,19 @@ export class Layout {
     const editorCSS = new EditorCSS(editorWrapper.element, gameElements)
     const sideBar = new SideBar(parent)
     const gamePassedPopup = new GamePassedPopup(parent)
-    return { header, main, editorWrapper, gameBoard, editorHTML, editorCSS, sideBar, gameElements, gamePassedPopup }
+    const footer = new Footer(parent)
+
+    return {
+      header,
+      main,
+      footer,
+      editorWrapper,
+      gameBoard,
+      editorHTML,
+      editorCSS,
+      sideBar,
+      gameElements,
+      gamePassedPopup,
+    }
   }
 }
