@@ -19,7 +19,7 @@
     border: 5px solid $extra-color;
   }
 
-  *.jumping {
+  &.jumping, *.jumping {
     animation: 0.3s linear 0s infinite running jumpingAnimation;
   }
 }
