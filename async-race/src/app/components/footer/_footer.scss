@@ -1,0 +1,22 @@
+.footer {
+  width: 100vw;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px;
+
+    color: $font-color;
+
+    &__github {
+      color: $font-color;
+    }
+
+    &__rss-logo {
+      background: url('/src/assets/icons/rs-logo.webp') center/cover no-repeat;
+    }
+
+  }
+}

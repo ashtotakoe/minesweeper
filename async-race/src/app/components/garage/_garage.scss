@@ -1,0 +1,10 @@
+.garage {
+  height: 600px;
+  color: $font-color;
+
+  &__cars-wrapper {
+    width: 85vw;
+    min-height: 500px;
+    border: 1px solid $font-color;
+  }
+}

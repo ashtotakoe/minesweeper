@@ -1,0 +1,11 @@
+.header {
+  // display: flex;
+  // justify-content: space-between;
+  width: 100%;
+  color: $font-color;
+
+  & > * {
+    display: inline-block;
+    margin: 15px;
+  }
+}
