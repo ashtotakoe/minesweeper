@@ -1,7 +1,7 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
-import { Car } from 'src/app/components/car/car'
+import { CarCell } from 'src/app/components/car-cell/car-cell'
 
 export class Garage extends BaseComponent {
   private heading = new BaseComponent({
@@ -38,9 +38,9 @@ export class Garage extends BaseComponent {
     })
   }
 
-  private renderCars(): Car[] | null {
+  private renderCars(): CarCell[] | null {
     if (this.carsData) {
-      return this.carsData.map((car) => new Car(this.carsWrapper.element, car))
+      return this.carsData.map((car, index) => new CarCell(this.carsWrapper.element, car, index + 1))
     }
 
     return null

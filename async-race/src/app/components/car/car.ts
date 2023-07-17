@@ -1,16 +1,10 @@
-import { CarData } from '../../models/car-data'
-import { BaseComponent } from '../../utils/base-component'
+import { CarData } from 'src/app/models/car-data'
+import { BaseComponent } from 'src/app/utils/base-component'
 
 export class Car extends BaseComponent {
   private carData: CarData
 
-  private carName = new BaseComponent({
-    tag: 'h4',
-    parent: this.element,
-    attribute: {
-      className: 'car__name',
-    },
-  })
+  public isDriving = false
 
   private carModel = new BaseComponent({
     tag: 'div',
@@ -19,31 +13,30 @@ export class Car extends BaseComponent {
       className: 'car__model',
     },
   })
-
-  private road = new BaseComponent({
-    tag: 'div',
-    parent: this.element,
-    attribute: {
-      className: 'car__road',
-    },
-  })
-
-  constructor(parent: HTMLElement, carData: CarData) {
+  constructor(parent: HTMLElement, data: CarData) {
     super({
       tag: 'div',
       parent,
       attribute: {
-        className: 'car',
+        className: 'car-cell__car car',
       },
     })
 
-    this.carData = carData
-    this.setCarName()
+    this.carData = data
   }
 
-  private setCarName(): void {
-    Object.assign(this.carName.element, {
-      textContent: this.carData.name,
-    })
+  public startDrive(calculations: Record<string, number>): void {
+    console.log('calculations')
+    console.log(calculations)
+
+    let tempLength = calculations.relativeSpeed
+    const intervalId = setInterval(() => {
+      if (!this.isDriving) {
+        clearInterval(intervalId)
+      }
+
+      this.carModel.element.style.marginLeft = `${String(Math.round(tempLength))}px`
+      tempLength += calculations.relativeSpeed
+    }, 10)
   }
 }
