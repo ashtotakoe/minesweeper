@@ -1,8 +1,10 @@
 import { CarData } from 'src/app/models/car-data'
 import { BaseComponent } from 'src/app/utils/base-component'
+import { httpFetcher } from 'src/app/utils/http-fetcher'
 
 export class Car extends BaseComponent {
   private carData: CarData
+  private id: number
 
   public isDriving = false
 
@@ -13,7 +15,7 @@ export class Car extends BaseComponent {
       className: 'car__model',
     },
   })
-  constructor(parent: HTMLElement, data: CarData) {
+  constructor(parent: HTMLElement, data: CarData, id: number) {
     super({
       tag: 'div',
       parent,
@@ -22,21 +24,23 @@ export class Car extends BaseComponent {
       },
     })
 
+    this.id = id
     this.carData = data
   }
 
-  public startDrive(calculations: Record<string, number>): void {
-    console.log('calculations')
-    console.log(calculations)
-
-    let tempLength = calculations.relativeSpeed
+  public startDrive(calculations: Record<string, number>, roadLength: number): void {
+    let passedPath = calculations.relativeSpeed
     const intervalId = setInterval(() => {
       if (!this.isDriving) {
         clearInterval(intervalId)
       }
+      if (passedPath > roadLength) {
+        this.isDriving = false
+        httpFetcher.stopEngine(this.id)
+      }
 
-      this.carModel.element.style.marginLeft = `${String(Math.round(tempLength))}px`
-      tempLength += calculations.relativeSpeed
+      this.carModel.element.style.marginLeft = `${String(Math.round(passedPath))}px`
+      passedPath += calculations.relativeSpeed
     }, 10)
   }
 }

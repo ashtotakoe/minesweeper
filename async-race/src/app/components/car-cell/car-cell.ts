@@ -1,6 +1,7 @@
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { EngineStartedData } from 'src/app/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
+import { distanceFromEndToFlag } from 'src/app/consts/distans-from-end-to-flag'
 import { CarData } from '../../models/car-data'
 import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
@@ -44,6 +45,13 @@ export class CarCell extends BaseComponent {
   })
 
   private road: BaseComponent | null = null
+  private flag = new BaseComponent({
+    tag: 'div',
+    parent: this.element,
+    attribute: {
+      className: 'car-cell__flag',
+    },
+  })
 
   constructor(parent: HTMLElement, carData: CarData, id: number) {
     super({
@@ -54,7 +62,7 @@ export class CarCell extends BaseComponent {
       },
     })
     this.carData = carData
-    this.car = new Car(this.element, carData)
+    this.car = new Car(this.element, carData, id)
     this.id = id
 
     this.setCarName()
@@ -69,11 +77,11 @@ export class CarCell extends BaseComponent {
       return false
     }
     this.car.isDriving = true
-    const roadLength = this.road.element.offsetWidth
+    const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
     httpFetcher.startEngine(this.id).then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
       const calculations = this.makeCalculations(roadLength, engineStartedData)
-      this.car.startDrive(calculations)
+      this.car.startDrive(calculations, roadLength)
 
       driveModeResponse.then((response) => {
         if (response.status === 500) {
@@ -97,9 +105,6 @@ export class CarCell extends BaseComponent {
   private makeCalculations(roadLength: number, data: EngineStartedData): Record<string, number> {
     const rideTime = Math.round(data.distance / data.velocity)
     const relativeSpeed = roadLength / (rideTime / 10)
-
-    console.log(`response`)
-    console.log(data)
 
     return { rideTime, relativeSpeed }
   }
