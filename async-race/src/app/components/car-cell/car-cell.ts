@@ -1,5 +1,6 @@
 import { httpFetcher } from 'src/app/utils/http-fetcher'
-import { EngineStartedResponse } from 'src/app/models/engine-started-response'
+import { EngineStartedData } from 'src/app/models/engine-started-response'
+import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
 import { CarData } from '../../models/car-data'
 import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
@@ -70,9 +71,17 @@ export class CarCell extends BaseComponent {
     this.car.isDriving = true
     const roadLength = this.road.element.offsetWidth
 
-    httpFetcher.startEngine(this.id).then((data: EngineStartedResponse) => {
-      const calculations = this.makeCalculations(roadLength, data)
+    httpFetcher.startEngine(this.id).then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
+      const calculations = this.makeCalculations(roadLength, engineStartedData)
       this.car.startDrive(calculations)
+
+      driveModeResponse.then((response) => {
+        if (response.status === 500) {
+          this.car.isDriving = false
+          return
+        }
+        console.log('ride is finished succesfully!')
+      })
     })
     return true
   }
@@ -85,7 +94,7 @@ export class CarCell extends BaseComponent {
     })
   }
 
-  private makeCalculations(roadLength: number, data: EngineStartedResponse): Record<string, number> {
+  private makeCalculations(roadLength: number, data: EngineStartedData): Record<string, number> {
     const rideTime = Math.round(data.distance / data.velocity)
     const relativeSpeed = roadLength / (rideTime / 10)
 

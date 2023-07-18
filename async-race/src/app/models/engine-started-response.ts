@@ -1,4 +1,4 @@
-export interface EngineStartedResponse {
+export interface EngineStartedData {
   velocity: number
   distance: number
 }
