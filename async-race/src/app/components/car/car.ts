@@ -28,19 +28,20 @@ export class Car extends BaseComponent {
     this.carData = data
   }
 
-  public startDrive(calculations: Record<string, number>, roadLength: number): void {
-    let passedPath = calculations.relativeSpeed
+  public startDrive(relativeSpeed: number, roadLength: number): void {
+    let passedPath = relativeSpeed
     const intervalId = setInterval(() => {
       if (!this.isDriving) {
         clearInterval(intervalId)
       }
+
       if (passedPath > roadLength) {
         this.isDriving = false
         httpFetcher.stopEngine(this.id)
       }
 
       this.carModel.element.style.marginLeft = `${String(Math.round(passedPath))}px`
-      passedPath += calculations.relativeSpeed
+      passedPath += relativeSpeed
     }, 10)
   }
 }

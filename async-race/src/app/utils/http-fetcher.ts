@@ -1,6 +1,7 @@
 import { API } from '../enum/api'
 import { HTTPMethods } from '../enum/http-methods'
 import { CarData } from '../models/car-data'
+import { CreateCarData } from '../models/create-car-data'
 import { EngineStartedData } from '../models/engine-started-response'
 import { StartEngineReturnProps } from '../models/start-engine-return-props'
 
@@ -32,6 +33,20 @@ class HTTPFetcher {
     const response = await fetch(`${API.path}/engine?id=${id}&status=stopped`, {
       method: HTTPMethods.PATCH,
     })
+
+    return response
+  }
+
+  public async createCar(carData: CreateCarData): Promise<Response> {
+    const requestBody = JSON.stringify(carData)
+    const response = await fetch(`${API.path}/garage`, {
+      method: HTTPMethods.POST,
+      body: requestBody,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    console.log(response)
 
     return response
   }

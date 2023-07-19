@@ -2,6 +2,7 @@ import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
 import { CarCell } from 'src/app/components/car-cell/car-cell'
+import { GarageControl } from '../garage-control/garage-control'
 
 export class Garage extends BaseComponent {
   private heading = new BaseComponent({
@@ -13,6 +14,8 @@ export class Garage extends BaseComponent {
     },
   })
 
+  private carCreator = new GarageControl(this.element)
+
   private carsWrapper = new BaseComponent({
     tag: 'div',
     parent: this.element,
@@ -21,7 +24,8 @@ export class Garage extends BaseComponent {
     },
   })
 
-  private carsData: CarData[] | undefined
+  private carsData: CarData[] | null = null
+  public cars: CarCell[] | null = null
 
   constructor(parent: HTMLElement) {
     super({
@@ -34,7 +38,7 @@ export class Garage extends BaseComponent {
 
     httpFetcher.getCars().then((cars) => {
       this.carsData = cars
-      this.renderCars()
+      this.cars = this.renderCars()
     })
   }
 

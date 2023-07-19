@@ -80,8 +80,8 @@ export class CarCell extends BaseComponent {
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
     httpFetcher.startEngine(this.id).then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
-      const calculations = this.makeCalculations(roadLength, engineStartedData)
-      this.car.startDrive(calculations, roadLength)
+      const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
+      this.car.startDrive(relativeSpeed, roadLength)
 
       driveModeResponse.then((response) => {
         if (response.status === 500) {
@@ -102,11 +102,11 @@ export class CarCell extends BaseComponent {
     })
   }
 
-  private makeCalculations(roadLength: number, data: EngineStartedData): Record<string, number> {
+  private getRelativeSpeed(roadLength: number, data: EngineStartedData): number {
     const rideTime = Math.round(data.distance / data.velocity)
     const relativeSpeed = roadLength / (rideTime / 10)
 
-    return { rideTime, relativeSpeed }
+    return relativeSpeed
   }
 
   private setCarName(): void {

@@ -6,7 +6,7 @@
   "scripts": {
     "deploy-root": "npm run build && npx gh-pages -d dist",
     "deploy-folder": "npm run build && npx gh-pages -d dist -e folder",
-    "stylelint": "stylelint **/*.scss --fix",
+    "stylelint": "stylelint '**/*.scss' --fix",
     "lint": "eslint . --color --fix",
     "build": "webpack --config webpack.prod.js",
     "start": "webpack serve --config webpack.dev.js"
