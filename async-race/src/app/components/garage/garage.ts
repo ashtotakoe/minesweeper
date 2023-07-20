@@ -50,7 +50,7 @@ export class Garage extends BaseComponent {
       })
 
       this.carsData = cars
-      this.carCells = this.carsData.map((car, index) => new CarCell(this.carsWrapper.element, car, index + 1))
+      this.carCells = this.carsData.map((carData) => new CarCell(this.carsWrapper.element, carData))
     })
   }
 }

@@ -50,6 +50,12 @@ class HTTPFetcher {
 
     return response
   }
+
+  public async deleteCar(id: number): Promise<void> {
+    await fetch(`${API.path}/garage/${id}`, {
+      method: HTTPMethods.DELETE,
+    })
+  }
 }
 
 export const httpFetcher = new HTTPFetcher()

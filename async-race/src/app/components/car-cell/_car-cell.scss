@@ -21,7 +21,8 @@
     background: $bg;
   }
 
-  &__btn {
+  &__button {
+    margin: 0 3px;
     padding: 0 7px;
   }
 
@@ -32,7 +33,7 @@
   &__flag {
     position: absolute;
     right: 65px;
-    bottom: 32px;
+    bottom: 15px;
 
     width: 2px;
     height: 20px;

@@ -3,6 +3,8 @@ import { EngineStartedData } from 'src/app/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
 import { distanceFromEndToFlag } from 'src/app/consts/distans-from-end-to-flag'
 import { RequestStatuses } from 'src/app/enum/request-statuses'
+import { gameState } from 'src/app/utils/game-state'
+import { emitter } from 'src/app/utils/event-emitter'
 import { CarData } from '../../models/car-data'
 import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
@@ -10,7 +12,6 @@ import { Car } from '../car/car'
 export class CarCell extends BaseComponent {
   private carData: CarData
   private car: Car
-  private id: number
 
   private carName = new BaseComponent({
     tag: 'h4',
@@ -19,6 +20,25 @@ export class CarCell extends BaseComponent {
       className: 'car-cell__name',
     },
   })
+
+  private deleteButton = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'car-cell__button',
+      textContent: 'delete',
+    },
+  })
+
+  private slectButton = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'car-cell__button',
+      textContent: 'select',
+    },
+  })
+
   private carControls = new BaseComponent({
     tag: 'div',
     parent: this.element,
@@ -31,7 +51,7 @@ export class CarCell extends BaseComponent {
     tag: 'button',
     parent: this.carControls.element,
     attribute: {
-      className: 'car-cell__btn',
+      className: 'car-cell__button',
       textContent: 'A',
     },
   })
@@ -40,7 +60,7 @@ export class CarCell extends BaseComponent {
     tag: 'button',
     parent: this.carControls.element,
     attribute: {
-      className: 'car-cell__btn',
+      className: 'car-cell__button',
       textContent: 'B',
     },
   })
@@ -54,7 +74,7 @@ export class CarCell extends BaseComponent {
     },
   })
 
-  constructor(parent: HTMLElement, carData: CarData, id: number) {
+  constructor(parent: HTMLElement, carData: CarData) {
     super({
       tag: 'div',
       parent,
@@ -62,15 +82,21 @@ export class CarCell extends BaseComponent {
         className: 'car-cell',
       },
     })
+
     this.carData = carData
-    this.car = new Car(this.element, carData, id)
-    this.id = id
+    this.car = new Car(this.element, carData, carData.id)
 
     this.setCarName()
     this.renderRoad()
 
     this.driveButton.element.addEventListener('click', () => this.startDrive())
     this.stopButton.element.addEventListener('click', () => this.stopDrive())
+
+    this.slectButton.element.addEventListener('click', () => {
+      gameState.modifyingCarId = this.carData.id
+    })
+
+    this.deleteButton.element.addEventListener('click', () => this.deleteCar())
   }
 
   private startDrive(): boolean {
@@ -79,20 +105,23 @@ export class CarCell extends BaseComponent {
     }
 
     this.car.isDriving = true
+    this.car.areBrakesAktivated = false
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
-    httpFetcher.startEngine(this.id).then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
-      const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
-      this.car.startDrive(relativeSpeed, roadLength)
+    httpFetcher
+      .startEngine(this.carData.id)
+      .then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
+        const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
+        this.car.startDrive(relativeSpeed, roadLength)
 
-      driveModeResponse.then((response) => {
-        if (response.status === RequestStatuses.ServerError) {
-          this.car.isDriving = false
-          return
-        }
-        console.log('ride is finished succesfully!')
+        driveModeResponse.then((response) => {
+          if (response.status === RequestStatuses.ServerError) {
+            this.car.isDriving = false
+            return
+          }
+          console.log('ride is finished succesfully!')
+        })
       })
-    })
     return true
   }
 
@@ -106,7 +135,7 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    httpFetcher.stopEngine(this.id).then((response: Response) => {
+    httpFetcher.stopEngine(this.carData.id).then((response: Response) => {
       if (response.status === RequestStatuses.Success) {
         this.car.isDriving = false
         this.car.areBrakesAktivated = true
@@ -134,6 +163,12 @@ export class CarCell extends BaseComponent {
       attribute: {
         className: 'car-cell__road',
       },
+    })
+  }
+
+  private deleteCar(): void {
+    httpFetcher.deleteCar(this.carData.id).then(() => {
+      emitter.emit('render cars')
     })
   }
 }
