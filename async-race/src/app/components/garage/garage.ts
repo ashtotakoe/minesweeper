@@ -2,6 +2,7 @@ import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
 import { CarCell } from 'src/app/components/car-cell/car-cell'
+import { emitter } from 'src/app/utils/event-emitter'
 import { GarageControl } from '../garage-control/garage-control'
 
 export class Garage extends BaseComponent {
@@ -25,7 +26,7 @@ export class Garage extends BaseComponent {
   })
 
   private carsData: CarData[] | null = null
-  public cars: CarCell[] | null = null
+  public carCells: CarCell[] | null = null
 
   constructor(parent: HTMLElement) {
     super({
@@ -35,18 +36,21 @@ export class Garage extends BaseComponent {
         className: 'garage',
       },
     })
+    emitter.subscribe('render cars', () => this.renderCars())
 
-    httpFetcher.getCars().then((cars) => {
-      this.carsData = cars
-      this.cars = this.renderCars()
-    })
+    this.renderCars()
   }
 
-  private renderCars(): CarCell[] | null {
-    if (this.carsData) {
-      return this.carsData.map((car, index) => new CarCell(this.carsWrapper.element, car, index + 1))
-    }
+  private renderCars(): void {
+    this.carsWrapper.element.replaceChildren()
 
-    return null
+    httpFetcher.getCars().then((cars) => {
+      Object.assign(this.heading.element, {
+        textContent: `Garage (${cars.length})`,
+      })
+
+      this.carsData = cars
+      this.carCells = this.carsData.map((car, index) => new CarCell(this.carsWrapper.element, car, index + 1))
+    })
   }
 }

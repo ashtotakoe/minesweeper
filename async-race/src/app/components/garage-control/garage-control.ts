@@ -1,5 +1,6 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { CarInput } from '../car-input/car-input'
+import { CreateCar } from '../create-car/create-car'
+import { ModifyCar } from '../modify-car/modify-car'
 
 export class GarageControl extends BaseComponent {
   private container = new BaseComponent({
@@ -10,9 +11,9 @@ export class GarageControl extends BaseComponent {
     },
   })
 
-  private createCar = new CarInput(this.container.element, 'create')
+  private createCar = new CreateCar(this.container.element, 'create')
 
-  private modifyCar = new CarInput(this.container.element, 'modify')
+  private modifyCar = new ModifyCar(this.container.element, 'modify')
 
   private controlButtons = new BaseComponent({
     tag: 'div',

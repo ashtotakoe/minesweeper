@@ -43,7 +43,7 @@ module.exports = {
 
   plugins: [
     new StylelintPlugin({ extensions: ['scss'], fix: true }),
-    new ESLintPlugin({ extensions: ['ts'], fix: true }),
+    new ESLintPlugin({ extensions: ['ts'] }),
     new HtmlWebpackPlugin({
       templateContent: getTemplate(),
       fileName: 'index.html',
@@ -62,9 +62,6 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.js'],
-    modules: [
-      __dirname,
-      'node_modules',
-    ],
+    modules: [__dirname, 'node_modules'],
   },
 }

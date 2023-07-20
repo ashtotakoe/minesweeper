@@ -2,6 +2,7 @@ import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { EngineStartedData } from 'src/app/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
 import { distanceFromEndToFlag } from 'src/app/consts/distans-from-end-to-flag'
+import { RequestStatuses } from 'src/app/enum/request-statuses'
 import { CarData } from '../../models/car-data'
 import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
@@ -76,6 +77,7 @@ export class CarCell extends BaseComponent {
     if (this.car.isDriving || !this.road) {
       return false
     }
+
     this.car.isDriving = true
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
@@ -84,7 +86,7 @@ export class CarCell extends BaseComponent {
       this.car.startDrive(relativeSpeed, roadLength)
 
       driveModeResponse.then((response) => {
-        if (response.status === 500) {
+        if (response.status === RequestStatuses.ServerError) {
           this.car.isDriving = false
           return
         }
@@ -95,9 +97,19 @@ export class CarCell extends BaseComponent {
   }
 
   private stopDrive(): void {
+    if (this.car.passedPath === 0) {
+      return
+    }
+
+    if (!this.car.isDriving) {
+      this.car.passedPath = 0
+      return
+    }
+
     httpFetcher.stopEngine(this.id).then((response: Response) => {
-      if (response.status === 200) {
+      if (response.status === RequestStatuses.Success) {
         this.car.isDriving = false
+        this.car.areBrakesAktivated = true
       }
     })
   }
