@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     margin: 30px;
 
     color: $font-color;
@@ -16,8 +16,9 @@
     }
 
     &__rss-logo {
+      width: 100px;
+      height: 37px;
       background: url('src/assets/icons/rs-logo.webp') center/cover no-repeat;
     }
-
   }
 }

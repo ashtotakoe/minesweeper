@@ -46,7 +46,6 @@ class HTTPFetcher {
         'Content-Type': 'application/json',
       },
     })
-    console.log(response)
 
     return response
   }

@@ -1,7 +1,7 @@
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { EngineStartedData } from 'src/app/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
-import { distanceFromEndToFlag } from 'src/app/consts/distans-from-end-to-flag'
+import { distanceFromEndToFlag } from 'src/app/consts/distance-from-end-to-flag'
 import { RequestStatuses } from 'src/app/enum/request-statuses'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
@@ -100,7 +100,7 @@ export class CarCell extends BaseComponent {
   }
 
   private startDrive(): boolean {
-    if (this.car.isDriving || !this.road) {
+    if (this.car.isDriving || !this.road || this.car.passedPath) {
       return false
     }
 

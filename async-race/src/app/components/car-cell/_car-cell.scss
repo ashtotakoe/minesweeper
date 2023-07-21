@@ -8,13 +8,13 @@
   color: $bg;
 
   background: $font-color;
-  
+
   &__controls {
     display: flex;
     justify-content: space-between;
     width: 30px;
   }
-  
+
   &__road {
     height: 2px;
     margin-top: 36px;
@@ -32,13 +32,13 @@
 
   &__flag {
     position: absolute;
+    z-index: 1;
     right: 65px;
     bottom: 15px;
 
-    width: 2px;
+    width: 18px;
     height: 20px;
 
-    background-color: black;
+    background: url('src/assets/icons/flag.svg') center/cover no-repeat;
   }
 }
-
