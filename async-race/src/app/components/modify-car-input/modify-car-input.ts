@@ -3,7 +3,7 @@ import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { emitter } from 'src/app/utils/event-emitter'
 import { CarInput } from '../car-input/car-input'
 
-export class ModifyCar extends CarInput {
+export class ModifyCarInput extends CarInput {
   constructor(parent: HTMLElement, textContent: string) {
     super(parent, textContent)
     this.submitButton.element.addEventListener('click', () => this.modifyCar())
