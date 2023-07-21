@@ -21,9 +21,11 @@ export class ModifyCarInput extends CarInput {
     const modifyingTarget = gameState.carCells.find((carCell) => carCell.carData?.id === gameState.modifyingCarId)
 
     if (modifyingTarget) {
+      const oldName = modifyingTarget.carData.name
+
       httpFetcher
         .modifyCar(modifyingTarget.carData.id, {
-          name: this.nameInput.inputValue ?? 'default name',
+          name: this.nameInput.inputValue || oldName,
           color: this.colorInput.inputValue ?? '#000000',
         })
         .then(() => emitter.emit('render cars'))

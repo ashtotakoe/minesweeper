@@ -50,6 +50,7 @@ export class Garage extends BaseComponent {
       })
 
       this.carsData = carsData
+      console.log(carsData)
       this.carCells = this.carsData.map((carData) => new CarCell(this.carsWrapper.element, carData))
       gameState.carCells = this.carCells
     })
