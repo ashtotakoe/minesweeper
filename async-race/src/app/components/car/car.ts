@@ -2,6 +2,7 @@ import { CarData } from 'src/app/models/car-data'
 import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { bringCarBackToStart } from 'src/app/utils/bring-car-back-to-start'
+import { buildSvgSprite } from 'src/app/utils/build-svg-sprite'
 
 export class Car extends BaseComponent {
   private carData: CarData
@@ -10,13 +11,7 @@ export class Car extends BaseComponent {
   public isDriving = false
   public areBrakesAktivated = false
 
-  private carModel = new BaseComponent({
-    tag: 'div',
-    parent: this.element,
-    attribute: {
-      className: 'car__model',
-    },
-  })
+  private carModel = buildSvgSprite(this.element, './icons/car.svg#car')
 
   constructor(parent: HTMLElement, data: CarData, id: number) {
     super({
@@ -29,15 +24,17 @@ export class Car extends BaseComponent {
 
     this.id = id
     this.carData = data
+
+    this.carModel.style.fill = this.carData.color
   }
 
   public get passedPath(): number {
-    const style = getComputedStyle(this.carModel.element).marginLeft
+    const style = getComputedStyle(this.carModel).marginLeft
     return Number(style.slice(0, style.length - 2))
   }
 
   public set passedPath(value: number) {
-    this.carModel.element.style.marginLeft = `${value}px`
+    this.carModel.style.marginLeft = `${value}px`
   }
 
   public startDrive(relativeSpeed: number, roadLength: number): void {

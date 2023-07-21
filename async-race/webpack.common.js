@@ -49,7 +49,12 @@ module.exports = {
       fileName: 'index.html',
       chunks: ['app'],
     }),
-    new CopyPlugin({ patterns: [{ from: './src/assets/favicon', to: './' }] }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/assets/favicon', to: './' },
+        { from: './src/assets/icons', to: './icons' },
+      ],
+    }),
   ],
 
   module: {
