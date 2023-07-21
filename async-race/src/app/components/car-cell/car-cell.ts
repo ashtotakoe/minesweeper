@@ -10,8 +10,9 @@ import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
 
 export class CarCell extends BaseComponent {
-  private carData: CarData
+  public carData: CarData
   private car: Car
+  private road: BaseComponent | null = null
 
   private carName = new BaseComponent({
     tag: 'h4',
@@ -65,7 +66,6 @@ export class CarCell extends BaseComponent {
     },
   })
 
-  private road: BaseComponent | null = null
   private flag = new BaseComponent({
     tag: 'div',
     parent: this.element,

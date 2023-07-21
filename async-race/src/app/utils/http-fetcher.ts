@@ -55,6 +55,17 @@ class HTTPFetcher {
       method: HTTPMethods.DELETE,
     })
   }
+
+  public async modifyCar(id: number, carData: CreateCarData): Promise<void> {
+    const requestBody = JSON.stringify(carData)
+    await fetch(`${API.path}/garage/${id}`, {
+      method: HTTPMethods.PUT,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+    })
+  }
 }
 
 export const httpFetcher = new HTTPFetcher()

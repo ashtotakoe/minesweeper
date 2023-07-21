@@ -3,9 +3,13 @@ import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
 import { CarCell } from 'src/app/components/car-cell/car-cell'
 import { emitter } from 'src/app/utils/event-emitter'
+import { gameState } from 'src/app/utils/game-state'
 import { GarageControl } from '../garage-control/garage-control'
 
 export class Garage extends BaseComponent {
+  private carsData: CarData[] | null = null
+  public carCells: CarCell[] | null = null
+
   private heading = new BaseComponent({
     tag: 'h1',
     parent: this.element,
@@ -24,10 +28,6 @@ export class Garage extends BaseComponent {
       className: 'garage__cars-wrapper',
     },
   })
-
-  private carsData: CarData[] | null = null
-  public carCells: CarCell[] | null = null
-
   constructor(parent: HTMLElement) {
     super({
       tag: 'div',
@@ -44,13 +44,14 @@ export class Garage extends BaseComponent {
   private renderCars(): void {
     this.carsWrapper.element.replaceChildren()
 
-    httpFetcher.getCars().then((cars) => {
+    httpFetcher.getCars().then((carsData) => {
       Object.assign(this.heading.element, {
-        textContent: `Garage (${cars.length})`,
+        textContent: `Garage (${carsData.length})`,
       })
 
-      this.carsData = cars
+      this.carsData = carsData
       this.carCells = this.carsData.map((carData) => new CarCell(this.carsWrapper.element, carData))
+      gameState.carCells = this.carCells
     })
   }
 }
