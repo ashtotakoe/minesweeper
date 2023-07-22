@@ -67,6 +67,9 @@ export class Garage extends BaseComponent {
       return
     }
 
+    gameState.isRaceGoing = true
+    gameState.finishers = []
+
     this.carCells.forEach((carCell) => {
       carCell.startDrive()
     })

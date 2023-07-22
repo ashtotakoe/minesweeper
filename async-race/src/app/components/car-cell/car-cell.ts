@@ -99,9 +99,9 @@ export class CarCell extends BaseComponent {
     this.deleteButton.element.addEventListener('click', () => this.deleteCar())
   }
 
-  public startDrive(): boolean {
+  public startDrive(): void {
     if (this.car.isDriving || !this.road || this.car.passedPath) {
-      return false
+      return
     }
 
     this.car.isDriving = true
@@ -117,12 +117,45 @@ export class CarCell extends BaseComponent {
         driveModeResponse.then((response) => {
           if (response.status === RequestStatuses.ServerError) {
             this.car.isDriving = false
+            if (this.isRaceOver()) {
+              this.showRaceResults()
+            }
             return
           }
           console.log('ride is finished succesfully!')
+
+          if (!gameState.isRaceGoing) {
+            return
+          }
+
+          gameState.finishers.push(this.car)
+          if (this.isRaceOver()) {
+            this.showRaceResults()
+          }
+          // console.log(gameState.finishers)
         })
       })
-    return true
+  }
+
+  private showRaceResults(): void {
+    gameState.isRaceGoing = false
+    console.log('race is finished')
+    console.log(gameState.finishers[0])
+  }
+
+  private isRaceOver(): boolean {
+    if (!gameState.isRaceGoing) {
+      return false
+    }
+
+    return !this.isAnyoneStillDriving()
+  }
+
+  private isAnyoneStillDriving(): boolean {
+    if (!gameState.carCells) {
+      return false
+    }
+    return gameState.carCells.some((carCell) => carCell.car.isDriving)
   }
 
   private stopDrive(): void {
