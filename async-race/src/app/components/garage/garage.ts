@@ -28,6 +28,24 @@ export class Garage extends BaseComponent {
       className: 'garage__cars-wrapper',
     },
   })
+
+  private paginationPreviousButton = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'garage__pagination-button',
+      textContent: 'before',
+    },
+  })
+
+  private paginationNextButton = new BaseComponent({
+    tag: 'button',
+    parent: this.element,
+    attribute: {
+      className: 'garage__pagination-button',
+      textContent: 'next',
+    },
+  })
   constructor(parent: HTMLElement) {
     super({
       tag: 'div',
@@ -38,21 +56,32 @@ export class Garage extends BaseComponent {
     })
     emitter.subscribe('render cars', () => this.renderCars())
 
+    this.paginationPreviousButton.element.addEventListener('click', () => this.renderPagination('previous'))
+    this.paginationNextButton.element.addEventListener('click', () => this.renderPagination('next'))
     this.renderCars()
   }
 
-  private renderCars(): void {
-    this.carsWrapper.element.replaceChildren()
+  private renderPagination(paginationType: 'previous' | 'next'): void {
+    console.log(paginationType)
+  }
 
-    httpFetcher.getCars().then((carsData) => {
+  private renderCars(): void {
+    httpFetcher.getCars({ isPaginationRequiered: true }).then((carsData) => {
+      this.carsWrapper.element.replaceChildren()
+
+      this.changeGarageCount()
+
+      this.carsData = carsData
+      this.carCells = this.carsData.map((carData) => new CarCell(this.carsWrapper.element, carData))
+      gameState.carCells = this.carCells
+    })
+  }
+
+  private changeGarageCount(): void {
+    httpFetcher.getCars({ isPaginationRequiered: false }).then((carsData) => {
       Object.assign(this.heading.element, {
         textContent: `Garage (${carsData.length})`,
       })
-
-      this.carsData = carsData
-      console.log(carsData)
-      this.carCells = this.carsData.map((carData) => new CarCell(this.carsWrapper.element, carData))
-      gameState.carCells = this.carCells
     })
   }
 }
