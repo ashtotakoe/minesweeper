@@ -3,6 +3,7 @@ import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { bringCarBackToStart } from 'src/app/utils/bring-car-back-to-start'
 import { buildSvgSprite } from 'src/app/utils/build-svg-sprite'
+import { gameState } from 'src/app/utils/game-state'
 
 export class Car extends BaseComponent {
   private carData: CarData
@@ -42,6 +43,9 @@ export class Car extends BaseComponent {
     const intervalId = setInterval(() => {
       if (!this.isDriving) {
         clearInterval(intervalId)
+        if (this.isRaceOver()) {
+          this.stopRace()
+        }
       }
 
       if (this.areBrakesAktivated) {
@@ -56,5 +60,25 @@ export class Car extends BaseComponent {
         httpFetcher.stopEngine(this.id)
       }
     }, 10)
+  }
+
+  private stopRace(): void {
+    gameState.isRaceGoing = false
+    console.log('race is finished')
+  }
+
+  private isRaceOver(): boolean {
+    if (!gameState.isRaceGoing) {
+      return false
+    }
+
+    return !this.isAnyoneStillDriving()
+  }
+
+  private isAnyoneStillDriving(): boolean {
+    if (!gameState.carCells) {
+      return false
+    }
+    return gameState.carCells.some((carCell) => carCell.car.isDriving)
   }
 }

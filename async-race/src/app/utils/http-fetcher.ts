@@ -68,6 +68,11 @@ class HTTPFetcher {
       body: requestBody,
     })
   }
+
+  public async getWinner(id: number): Promise<Response> {
+    const response = await fetch(`${API.Path}/winners/${id}`)
+    return response
+  }
 }
 
 export const httpFetcher = new HTTPFetcher()

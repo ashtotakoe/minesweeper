@@ -11,7 +11,7 @@ import { Car } from '../car/car'
 
 export class CarCell extends BaseComponent {
   public carData: CarData
-  private car: Car
+  public car: Car
   private road: BaseComponent | null = null
 
   private carName = new BaseComponent({
@@ -118,9 +118,6 @@ export class CarCell extends BaseComponent {
     const resolvedDriveModeResponse = await driveModeResponse
     if (resolvedDriveModeResponse.status === RequestStatuses.ServerError) {
       this.car.isDriving = false
-      if (this.isRaceOver()) {
-        this.stopRace()
-      }
       return
     }
     console.log('ride is finished succesfully!')
@@ -132,10 +129,6 @@ export class CarCell extends BaseComponent {
     if (this.checkIsWinner(this.car)) {
       console.log(`${this.carData.name} is the winner`)
     }
-
-    if (this.isRaceOver()) {
-      this.stopRace()
-    }
   }
 
   private checkIsWinner(car: Car): boolean {
@@ -145,26 +138,6 @@ export class CarCell extends BaseComponent {
 
     gameState.raceWinner = car
     return true
-  }
-
-  private stopRace(): void {
-    gameState.isRaceGoing = false
-    console.log('race is finished')
-  }
-
-  private isRaceOver(): boolean {
-    if (!gameState.isRaceGoing) {
-      return false
-    }
-
-    return !this.isAnyoneStillDriving()
-  }
-
-  private isAnyoneStillDriving(): boolean {
-    if (!gameState.carCells) {
-      return false
-    }
-    return gameState.carCells.some((carCell) => carCell.car.isDriving)
   }
 
   private stopDrive(): void {
