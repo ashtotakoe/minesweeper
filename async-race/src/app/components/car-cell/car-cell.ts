@@ -99,7 +99,8 @@ export class CarCell extends BaseComponent {
     this.deleteButton.element.addEventListener('click', () => this.deleteCar())
   }
 
-  public startDrive(): void {
+  // eslint-disable-next-line max-lines-per-function
+  public async startDrive(): Promise<void> {
     if (this.car.isDriving || !this.road || this.car.passedPath) {
       return
     }
@@ -108,33 +109,31 @@ export class CarCell extends BaseComponent {
     this.car.areBrakesAktivated = false
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
-    httpFetcher
-      .startEngine(this.carData.id)
-      .then(({ engineStartedData, driveModeResponse }: StartEngineReturnProps) => {
-        const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
-        this.car.startDrive(relativeSpeed, roadLength)
+    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcher.startEngine(
+      this.carData.id,
+    )
 
-        driveModeResponse.then((response) => {
-          if (response.status === RequestStatuses.ServerError) {
-            this.car.isDriving = false
-            if (this.isRaceOver()) {
-              this.showRaceResults()
-            }
-            return
-          }
-          console.log('ride is finished succesfully!')
+    const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
+    this.car.startDrive(relativeSpeed, roadLength)
 
-          if (!gameState.isRaceGoing) {
-            return
-          }
+    const resolvedDriveModeResponse = await driveModeResponse
+    if (resolvedDriveModeResponse.status === RequestStatuses.ServerError) {
+      this.car.isDriving = false
+      if (this.isRaceOver()) {
+        this.showRaceResults()
+      }
+      return
+    }
+    console.log('ride is finished succesfully!')
 
-          gameState.finishers.push(this.car)
-          if (this.isRaceOver()) {
-            this.showRaceResults()
-          }
-          // console.log(gameState.finishers)
-        })
-      })
+    if (!gameState.isRaceGoing) {
+      return
+    }
+
+    gameState.finishers.push(this.car)
+    if (this.isRaceOver()) {
+      this.showRaceResults()
+    }
   }
 
   private showRaceResults(): void {
