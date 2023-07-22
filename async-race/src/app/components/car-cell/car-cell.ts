@@ -99,7 +99,6 @@ export class CarCell extends BaseComponent {
     this.deleteButton.element.addEventListener('click', () => this.deleteCar())
   }
 
-  // eslint-disable-next-line max-lines-per-function
   public async startDrive(): Promise<void> {
     if (this.car.isDriving || !this.road || this.car.passedPath) {
       return
