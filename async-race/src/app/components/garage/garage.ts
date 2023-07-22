@@ -55,10 +55,21 @@ export class Garage extends BaseComponent {
       },
     })
     emitter.subscribe('render cars', () => this.renderCars())
+    emitter.subscribe('start race', () => this.startRace())
 
     this.paginationPreviousButton.element.addEventListener('click', () => this.renderPagination('previous'))
     this.paginationNextButton.element.addEventListener('click', () => this.renderPagination('next'))
     this.renderCars()
+  }
+
+  private startRace(): void {
+    if (!this.carCells) {
+      return
+    }
+
+    this.carCells.forEach((carCell) => {
+      carCell.startDrive()
+    })
   }
 
   private renderPagination(paginationType: 'previous' | 'next'): void {

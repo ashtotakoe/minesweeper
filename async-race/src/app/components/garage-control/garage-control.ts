@@ -64,6 +64,7 @@ export class GarageControl extends BaseComponent {
 
     this.resetRace.element.addEventListener('click', () => emitter.emit('render cars'))
     this.generateCars.element.addEventListener('click', () => this.generateMoreCars())
+    this.startRace.element.addEventListener('click', () => emitter.emit('start race'))
   }
 
   private generateMoreCars(): void {

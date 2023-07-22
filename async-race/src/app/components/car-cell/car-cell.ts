@@ -99,7 +99,7 @@ export class CarCell extends BaseComponent {
     this.deleteButton.element.addEventListener('click', () => this.deleteCar())
   }
 
-  private startDrive(): boolean {
+  public startDrive(): boolean {
     if (this.car.isDriving || !this.road || this.car.passedPath) {
       return false
     }
