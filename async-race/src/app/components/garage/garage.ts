@@ -33,7 +33,7 @@ export class Garage extends BaseComponent {
     tag: 'button',
     parent: this.element,
     attribute: {
-      className: 'garage__pagination-button',
+      className: 'garage__button',
       textContent: 'before',
     },
   })
@@ -42,7 +42,7 @@ export class Garage extends BaseComponent {
     tag: 'button',
     parent: this.element,
     attribute: {
-      className: 'garage__pagination-button',
+      className: 'garage__button',
       textContent: 'next',
     },
   })
@@ -63,10 +63,27 @@ export class Garage extends BaseComponent {
 
   private renderPagination(paginationType: 'previous' | 'next'): void {
     console.log(paginationType)
+    if (paginationType === 'next') {
+      gameState.currentGaragePage += 1
+      this.renderCars()
+      return
+    }
+
+    if (gameState.currentGaragePage === 1) {
+      return
+    }
+
+    gameState.currentGaragePage -= 1
+    this.renderCars()
   }
 
   private renderCars(): void {
     httpFetcher.getCars({ isPaginationRequiered: true }).then((carsData) => {
+      if (!carsData.length) {
+        gameState.currentGaragePage -= 1
+        return
+      }
+
       this.carsWrapper.element.replaceChildren()
 
       this.changeGarageCount()
@@ -80,7 +97,7 @@ export class Garage extends BaseComponent {
   private changeGarageCount(): void {
     httpFetcher.getCars({ isPaginationRequiered: false }).then((carsData) => {
       Object.assign(this.heading.element, {
-        textContent: `Garage (${carsData.length})`,
+        textContent: `Garage (${carsData.length} cars, currently on page ${gameState.currentGaragePage})`,
       })
     })
   }
