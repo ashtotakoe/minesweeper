@@ -68,7 +68,7 @@ export class Garage extends BaseComponent {
     }
 
     gameState.isRaceGoing = true
-    gameState.finishers = []
+    gameState.raceWinner = null
 
     this.carCells.forEach((carCell) => {
       carCell.startDrive()

@@ -6,7 +6,7 @@ class GameState {
   public currentGaragePage: number = 1
   public carCells: CarCell[] | null = null
   public isRaceGoing = false
-  public finishers: Car[] = []
+  public raceWinner: Car | null = null
 }
 
 export const gameState = new GameState()

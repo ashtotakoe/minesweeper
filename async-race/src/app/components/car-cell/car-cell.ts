@@ -119,7 +119,7 @@ export class CarCell extends BaseComponent {
     if (resolvedDriveModeResponse.status === RequestStatuses.ServerError) {
       this.car.isDriving = false
       if (this.isRaceOver()) {
-        this.showRaceResults()
+        this.stopRace()
       }
       return
     }
@@ -129,16 +129,27 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    gameState.finishers.push(this.car)
+    if (this.checkIsWinner(this.car)) {
+      console.log(`${this.carData.name} is the winner`)
+    }
+
     if (this.isRaceOver()) {
-      this.showRaceResults()
+      this.stopRace()
     }
   }
 
-  private showRaceResults(): void {
+  private checkIsWinner(car: Car): boolean {
+    if (gameState.raceWinner) {
+      return false
+    }
+
+    gameState.raceWinner = car
+    return true
+  }
+
+  private stopRace(): void {
     gameState.isRaceGoing = false
     console.log('race is finished')
-    console.log(gameState.finishers[0])
   }
 
   private isRaceOver(): boolean {
