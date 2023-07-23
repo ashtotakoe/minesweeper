@@ -6,12 +6,13 @@ import { Car } from '../car/car'
 export class WinnerCell extends BaseComponent {
   private data?: WinnerData & CarData
   private winnerCarModel: Car
+  private winnerCellElements: HTMLCollection
 
   private winnerId = new BaseComponent({
     tag: 'p',
     parent: this.element,
     attribute: {
-      className: 'winner-cell__data',
+      className: 'winner-cell__id',
     },
   })
 
@@ -50,13 +51,13 @@ export class WinnerCell extends BaseComponent {
 
     this.data = data
 
+    this.winnerCellElements = this.element.children
+
     this.setData()
 
-    this.winnerCarModel = new Car(this.element, {
-      id: this.data.id,
-      name: this.data.name,
-      color: this.data.color,
-    })
+    const { id, name, color } = this.data
+
+    this.winnerCarModel = new Car(this.element, { id, name, color })
   }
 
   private setData(): void {
@@ -64,17 +65,12 @@ export class WinnerCell extends BaseComponent {
       return
     }
 
-    Object.assign(this.winnerId.element, {
-      textContent: this.data.id,
-    })
-    Object.assign(this.winnerName.element, {
-      textContent: this.data.name,
-    })
-    Object.assign(this.winsCount.element, {
-      textContent: this.data.wins,
-    })
-    Object.assign(this.bestTime.element, {
-      textContent: this.data.time,
+    const { id, name, wins, time } = this.data
+
+    Array.from([id, name, wins, time]).forEach((value, index) => {
+      Object.assign(this.winnerCellElements[index], {
+        textContent: value,
+      })
     })
   }
 }

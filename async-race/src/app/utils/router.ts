@@ -1,4 +1,4 @@
-import { BaseComponent } from '../utils/base-component'
+import { BaseComponent } from './base-component'
 
 export class Router {
   private lastHashPath: string | null = null

@@ -1,10 +1,13 @@
 .winner-cell {
   display: flex;
-  justify-content: space-around;
-  margin: 20px;
+  justify-content: space-between;
+
+  &__id {
+    font-size: 1.2rem;
+  }
 
   &__data {
-    margin: 3px 10px;
+    width: 100px;
     font-size: 1.2rem;
   }
 

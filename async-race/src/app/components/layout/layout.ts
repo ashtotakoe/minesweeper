@@ -1,5 +1,5 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { Router } from 'src/app/models/router'
+import { Router } from 'src/app/utils/router'
 import { Header } from '../header/header'
 import { Footer } from '../footer/footer'
 import { Garage } from '../garage/garage'
@@ -8,8 +8,10 @@ import { NotFound } from '../not-found/not-found'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | Router> {
+    const garage = new Garage()
     const routes = {
-      '#garage': new Garage(),
+      '': garage,
+      '#garage': garage,
       '#winners': new WinnersLeaderBoard(),
       '#not-found': new NotFound(),
     }
@@ -24,7 +26,6 @@ export class Layout {
     })
 
     const router = new Router(routes, main.element)
-    window.location.hash = '#garage'
 
     const footer = new Footer(parent)
     return { header, router, footer }
