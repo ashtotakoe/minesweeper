@@ -62,6 +62,10 @@ class HTTPFetcher {
     await fetch(`${API.Path}/garage/${id}`, {
       method: HTTPMethods.DELETE,
     })
+
+    await fetch(`${API.Path}/winners/${id}`, {
+      method: HTTPMethods.DELETE,
+    })
   }
 
   public async modifyCar(id: number, carData: CreateCarData): Promise<void> {

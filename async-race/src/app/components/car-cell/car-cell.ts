@@ -181,9 +181,9 @@ export class CarCell extends BaseComponent {
     })
   }
 
-  private deleteCar(): void {
-    httpFetcher.deleteCar(this.carData.id).then(() => {
-      emitter.emit('render cars')
-    })
+  private async deleteCar(): Promise<void> {
+    await httpFetcher.deleteCar(this.carData.id)
+    emitter.emit('render cars')
+    emitter.emit('render winners')
   }
 }
