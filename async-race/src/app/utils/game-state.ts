@@ -7,6 +7,7 @@ class GameState {
   public carCells: CarCell[] | null = null
   public isRaceGoing = false
   public raceWinner: Car | null = null
+  public raceWinnerTime = 0
   public currentWinnersPage = 1
 }
 

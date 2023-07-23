@@ -6,15 +6,13 @@ import { buildSvgSprite } from 'src/app/utils/build-svg-sprite'
 import { gameState } from 'src/app/utils/game-state'
 
 export class Car extends BaseComponent {
-  private carData: CarData
-  private id: number
-
   public isDriving = false
   public areBrakesAktivated = false
 
+  public carData: CarData
   private carModel = buildSvgSprite(this.element, './icons/car.svg#car')
 
-  constructor(parent: HTMLElement, data: CarData, id: number) {
+  constructor(parent: HTMLElement, data: CarData) {
     super({
       tag: 'div',
       parent,
@@ -23,7 +21,6 @@ export class Car extends BaseComponent {
       },
     })
 
-    this.id = id
     this.carData = data
 
     this.carModel.style.fill = this.carData.color
@@ -57,7 +54,7 @@ export class Car extends BaseComponent {
 
       if (passedPath > roadLength) {
         this.isDriving = false
-        httpFetcher.stopEngine(this.id)
+        httpFetcher.stopEngine(this.carData.id)
       }
     }, 10)
   }

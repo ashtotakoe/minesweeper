@@ -1,3 +1,4 @@
+import { headersForPostMethod } from '../consts/headers-for-post-method'
 import { API } from '../enum/api'
 import { HTTPMethods } from '../enum/http-methods'
 import { CarData } from '../models/car-data'
@@ -44,9 +45,7 @@ class HTTPFetcher {
     const response = await fetch(`${API.Path}/garage`, {
       method: HTTPMethods.POST,
       body: requestBody,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersForPostMethod,
     })
 
     return response
@@ -62,15 +61,28 @@ class HTTPFetcher {
     const requestBody = JSON.stringify(carData)
     await fetch(`${API.Path}/garage/${id}`, {
       method: HTTPMethods.PUT,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersForPostMethod,
       body: requestBody,
     })
   }
 
   public async getWinner(id: number): Promise<Response> {
     const response = await fetch(`${API.Path}/winners/${id}`)
+    return response
+  }
+
+  public async setNewWinner(id: number, rideTime: number): Promise<Response> {
+    console.log('server time', rideTime)
+    const response = await fetch(`${API.Path}/winners`, {
+      method: HTTPMethods.POST,
+      headers: headersForPostMethod,
+      body: JSON.stringify({
+        id,
+        wins: 1,
+        time: rideTime,
+      }),
+    })
+
     return response
   }
 }

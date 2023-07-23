@@ -5,6 +5,7 @@ import { distanceFromEndToFlag } from 'src/app/consts/distance-from-end-to-flag'
 import { RequestStatuses } from 'src/app/enum/request-statuses'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
+import { saveWinner } from 'src/app/utils/save-winner'
 import { CarData } from '../../models/car-data'
 import { BaseComponent } from '../../utils/base-component'
 import { Car } from '../car/car'
@@ -84,7 +85,7 @@ export class CarCell extends BaseComponent {
     })
 
     this.carData = carData
-    this.car = new Car(this.element, carData, carData.id)
+    this.car = new Car(this.element, carData)
 
     this.setCarName()
     this.renderRoad()
@@ -112,7 +113,7 @@ export class CarCell extends BaseComponent {
       this.carData.id,
     )
 
-    const relativeSpeed = this.getRelativeSpeed(roadLength, engineStartedData)
+    const [relativeSpeed, rideTime] = this.makeCalculations(roadLength, engineStartedData)
     this.car.startDrive(relativeSpeed, roadLength)
 
     const resolvedDriveModeResponse = await driveModeResponse
@@ -126,18 +127,18 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    if (this.checkIsWinner(this.car)) {
+    if (this.checkIsWinner()) {
+      gameState.raceWinnerTime = rideTime
+      gameState.raceWinner = this.car
+      saveWinner()
+
+      console.log('winner s time ', rideTime)
       console.log(`${this.carData.name} is the winner`)
     }
   }
 
-  private checkIsWinner(car: Car): boolean {
-    if (gameState.raceWinner) {
-      return false
-    }
-
-    gameState.raceWinner = car
-    return true
+  private checkIsWinner(): boolean {
+    return !gameState.raceWinner
   }
 
   private stopDrive(): void {
@@ -158,11 +159,11 @@ export class CarCell extends BaseComponent {
     })
   }
 
-  private getRelativeSpeed(roadLength: number, data: EngineStartedData): number {
+  private makeCalculations(roadLength: number, data: EngineStartedData): number[] {
     const rideTime = Math.round(data.distance / data.velocity)
     const relativeSpeed = roadLength / (rideTime / 10)
 
-    return relativeSpeed
+    return [relativeSpeed, rideTime]
   }
 
   private setCarName(): void {
