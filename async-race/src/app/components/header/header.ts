@@ -18,6 +18,24 @@ export class Header extends BaseComponent {
     },
   })
 
+  private garageButton = new BaseComponent({
+    tag: 'button',
+    parent: this.navigation.element,
+    attribute: {
+      className: 'header__navigation-button',
+      innerHTML: 'Garage',
+    },
+  })
+
+  private winnersButton = new BaseComponent({
+    tag: 'button',
+    parent: this.navigation.element,
+    attribute: {
+      className: 'header__navigation-button',
+      innerHTML: 'Winners',
+    },
+  })
+
   constructor(parent: HTMLElement) {
     super({
       tag: 'header',
@@ -27,34 +45,17 @@ export class Header extends BaseComponent {
       },
     })
 
-    this.createNavButtons()
+    this.garageButton.element.addEventListener('click', this.navigationHandler)
+    this.winnersButton.element.addEventListener('click', this.navigationHandler)
   }
 
-  private createNavButtons(): void {
-    const garageBtn = new BaseComponent({
-      tag: 'button',
-      parent: this.navigation.element,
-      attribute: {
-        className: 'header__navigation-button',
-        innerHTML: 'to garage',
-      },
-    })
+  private navigationHandler({ target }: Event): void {
+    if (!target || !(target instanceof HTMLElement) || !target.textContent) {
+      return
+    }
 
-    const winnersBtn = new BaseComponent({
-      tag: 'button',
-      parent: this.navigation.element,
-      attribute: {
-        className: 'header__navigation-button',
-        innerHTML: 'to winners',
-      },
-    })
-
-    garageBtn.element.addEventListener('click', () => {
-      console.log('garage button clicked')
-    })
-
-    winnersBtn.element.addEventListener('click', () => {
-      console.log('winners button clicked')
+    Object.assign(window.location, {
+      hash: target.textContent.toLowerCase(),
     })
   }
 }

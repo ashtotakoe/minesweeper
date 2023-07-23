@@ -46,10 +46,9 @@ export class Garage extends BaseComponent {
       textContent: 'next',
     },
   })
-  constructor(parent: HTMLElement) {
+  constructor() {
     super({
       tag: 'div',
-      parent,
       attribute: {
         className: 'garage',
       },
@@ -78,7 +77,6 @@ export class Garage extends BaseComponent {
   }
 
   private paginationHandler(paginationType: 'previous' | 'next'): void {
-    console.log(paginationType)
     if (paginationType === 'next') {
       gameState.currentGaragePage += 1
       this.renderCars()

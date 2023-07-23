@@ -10,7 +10,7 @@ export class Footer extends BaseComponent {
         innerHTML: `
           <div class="container">
             <a class = "container__github" target= "_blank" href="https://github.com/ashtotakoe">github</a>
-            <h2 class = "container__logo">© ashtotakoe 2023</h2>
+            <h2 class = "container__author">© ashtotakoe 2023</h2>
             <a class = "container__rss-logo" target= "_blank" href="https://rs.school/js/"></a>
           </div>
     `,
