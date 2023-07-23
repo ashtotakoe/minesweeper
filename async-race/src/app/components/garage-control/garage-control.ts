@@ -2,6 +2,7 @@ import { BaseComponent } from 'src/app/utils/base-component'
 import { carsDummyData } from 'src/app/consts/cars-dummy-data'
 import { createCar } from 'src/app/utils/create-car'
 import { emitter } from 'src/app/utils/event-emitter'
+import { gameState } from 'src/app/utils/game-state'
 import { ModifyCarInput } from '../modify-car-input/modify-car-input'
 import { CreateCarInput } from '../create-car-input/create-car-input'
 
@@ -62,7 +63,18 @@ export class GarageControl extends BaseComponent {
       },
     })
 
-    this.resetRace.element.addEventListener('click', () => emitter.emit('render cars'))
+    this.resetRace.element.addEventListener('click', () => {
+      const stopRequests = gameState.carCells?.map((carCell) => carCell.stopDrive())
+
+      if (!stopRequests) {
+        return
+      }
+
+      Promise.all(stopRequests).then(() => {
+        gameState.isRaceGoing = false
+        emitter.emit('render cars')
+      })
+    })
     this.generateCars.element.addEventListener('click', () => this.generateMoreCars())
     this.startRace.element.addEventListener('click', () => emitter.emit('start race'))
   }

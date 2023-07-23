@@ -57,8 +57,8 @@ export class Garage extends BaseComponent {
     emitter.subscribe('render cars', () => this.renderCars())
     emitter.subscribe('start race', () => this.startRace())
 
-    this.paginationPreviousButton.element.addEventListener('click', () => this.renderPagination('previous'))
-    this.paginationNextButton.element.addEventListener('click', () => this.renderPagination('next'))
+    this.paginationPreviousButton.element.addEventListener('click', () => this.paginationHandler('previous'))
+    this.paginationNextButton.element.addEventListener('click', () => this.paginationHandler('next'))
     this.renderCars()
   }
 
@@ -77,7 +77,7 @@ export class Garage extends BaseComponent {
     })
   }
 
-  private renderPagination(paginationType: 'previous' | 'next'): void {
+  private paginationHandler(paginationType: 'previous' | 'next'): void {
     console.log(paginationType)
     if (paginationType === 'next') {
       gameState.currentGaragePage += 1

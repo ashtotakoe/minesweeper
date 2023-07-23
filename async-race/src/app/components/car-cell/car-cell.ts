@@ -141,7 +141,7 @@ export class CarCell extends BaseComponent {
     return !gameState.raceWinner
   }
 
-  private stopDrive(): void {
+  public async stopDrive(): Promise<void> {
     if (this.car.passedPath === 0) {
       return
     }
@@ -151,12 +151,11 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    httpFetcher.stopEngine(this.carData.id).then((response: Response) => {
-      if (response.status === RequestStatuses.Success) {
-        this.car.isDriving = false
-        this.car.areBrakesAktivated = true
-      }
-    })
+    const response = await httpFetcher.stopEngine(this.carData.id)
+    if (response.status === RequestStatuses.Success) {
+      this.car.isDriving = false
+      this.car.areBrakesAktivated = true
+    }
   }
 
   private makeCalculations(roadLength: number, data: EngineStartedData): number[] {
