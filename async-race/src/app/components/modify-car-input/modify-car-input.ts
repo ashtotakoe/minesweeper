@@ -9,7 +9,7 @@ export class ModifyCarInput extends CarInput {
     this.submitButton.element.addEventListener('click', () => this.modifyCar())
   }
 
-  private modifyCar(): void {
+  private async modifyCar(): Promise<void> {
     if (!gameState.modifyingCarId) {
       return
     }
@@ -23,12 +23,12 @@ export class ModifyCarInput extends CarInput {
     if (modifyingTarget) {
       const oldName = modifyingTarget.carData.name
 
-      httpFetcher
-        .modifyCar(modifyingTarget.carData.id, {
-          name: this.nameInput.inputValue || oldName,
-          color: this.colorInput.inputValue ?? '#000000',
-        })
-        .then(() => emitter.emit('render cars'))
+      await httpFetcher.modifyCar(modifyingTarget.carData.id, {
+        name: this.nameInput.inputValue || oldName,
+        color: this.colorInput.inputValue ?? '#000000',
+      })
+      emitter.emit('render cars')
+      emitter.emit('render winners')
     }
   }
 }

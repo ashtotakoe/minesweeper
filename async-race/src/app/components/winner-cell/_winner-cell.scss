@@ -1,3 +1,18 @@
 .winner-cell {
-  background-color: blue;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+
+  &__data {
+    margin: 3px 10px;
+    font-size: 1.2rem;
+  }
+
+  .car {
+    position: relative;
+
+    .icon {
+      transform: translateY(-15px);
+    }
+  }
 }
