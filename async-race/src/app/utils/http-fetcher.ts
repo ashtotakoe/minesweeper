@@ -5,7 +5,7 @@ import { CarData } from '../models/car-data'
 import { CreateCarData } from '../models/create-car-data'
 import { EngineStartedData } from '../models/engine-started-response'
 import { StartEngineReturnProps } from '../models/start-engine-return-props'
-import { WinnerInfoResponse } from '../models/winner-info-response'
+import { WinnerData } from '../models/winner-data'
 import { gameState } from './game-state'
 
 class HTTPFetcher {
@@ -14,6 +14,12 @@ class HTTPFetcher {
     const response = await fetch(`${API.Path}/garage${isPaginationRequiered ? query : ''}`)
     const cars = await response.json()
     return cars
+  }
+
+  public async getCar(id: number): Promise<CarData> {
+    const response = await fetch(`${API.Path}/garage/${id}`)
+    const car = await response.json()
+    return car
   }
 
   public async startEngine(id: number): Promise<StartEngineReturnProps> {
@@ -72,6 +78,12 @@ class HTTPFetcher {
     return response
   }
 
+  public async getWinners(): Promise<WinnerData[]> {
+    const respone = await fetch(`${API.Path}/winners`)
+    const winnersData = respone.json()
+    return winnersData
+  }
+
   public async setNewWinner(id: number, rideTime: number): Promise<Response> {
     console.log('server time', rideTime)
     const response = await fetch(`${API.Path}/winners`, {
@@ -89,7 +101,7 @@ class HTTPFetcher {
 
   public async updateWinnerData(id: number, rideTime: number): Promise<Response> {
     const initialDataRewspose = await fetch(`${API.Path}/winners/${id}`)
-    const initialData: WinnerInfoResponse = await initialDataRewspose.json()
+    const initialData: WinnerData = await initialDataRewspose.json()
     let { wins, time } = initialData
     wins += 1
     time = time > rideTime ? rideTime : time

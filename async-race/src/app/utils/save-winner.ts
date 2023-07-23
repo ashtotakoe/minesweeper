@@ -1,4 +1,5 @@
 import { RequestStatuses } from '../enum/request-statuses'
+import { emitter } from './event-emitter'
 import { gameState } from './game-state'
 import { httpFetcher } from './http-fetcher'
 
@@ -16,6 +17,7 @@ export const saveWinner = async (): Promise<void> => {
   if (getWinnerResponse.status === RequestStatuses.NotFound) {
     const setWinnerResponse = await httpFetcher.setNewWinner(winnerId, gameState.raceWinnerTime)
     console.log(setWinnerResponse)
+    emitter.emit('render winners')
     return
   }
   console.log(getWinnerResponse)
@@ -23,4 +25,6 @@ export const saveWinner = async (): Promise<void> => {
 
   const updateWinnerResponse = await httpFetcher.updateWinnerData(winnerId, gameState.raceWinnerTime)
   console.log(updateWinnerResponse)
+
+  emitter.emit('render winners')
 }

@@ -3,14 +3,14 @@ import { Router } from 'src/app/models/router'
 import { Header } from '../header/header'
 import { Footer } from '../footer/footer'
 import { Garage } from '../garage/garage'
-import { Winners } from '../winners/winners'
+import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
 import { NotFound } from '../not-found/not-found'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | Router> {
     const routes = {
       '#garage': new Garage(),
-      '#winners': new Winners(),
+      '#winners': new WinnersLeaderBoard(),
       '#not-found': new NotFound(),
     }
 
