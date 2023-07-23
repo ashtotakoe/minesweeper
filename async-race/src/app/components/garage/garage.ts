@@ -63,7 +63,8 @@ export class Garage extends BaseComponent {
   }
 
   private startRace(): void {
-    if (!this.carCells) {
+    if (!this.carCells || this.carCells.length === 1) {
+      console.log('sorry, there should be more than 1 car to start the race')
       return
     }
 

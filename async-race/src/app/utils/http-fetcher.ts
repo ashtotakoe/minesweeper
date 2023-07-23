@@ -5,6 +5,7 @@ import { CarData } from '../models/car-data'
 import { CreateCarData } from '../models/create-car-data'
 import { EngineStartedData } from '../models/engine-started-response'
 import { StartEngineReturnProps } from '../models/start-engine-return-props'
+import { WinnerInfoResponse } from '../models/winner-info-response'
 import { gameState } from './game-state'
 
 class HTTPFetcher {
@@ -80,6 +81,25 @@ class HTTPFetcher {
         id,
         wins: 1,
         time: rideTime,
+      }),
+    })
+
+    return response
+  }
+
+  public async updateWinnerData(id: number, rideTime: number): Promise<Response> {
+    const initialDataRewspose = await fetch(`${API.Path}/winners/${id}`)
+    const initialData: WinnerInfoResponse = await initialDataRewspose.json()
+    let { wins, time } = initialData
+    wins += 1
+    time = time > rideTime ? rideTime : time
+
+    const response = await fetch(`${API.Path}/winners/${id}`, {
+      method: HTTPMethods.PUT,
+      headers: headersForPostMethod,
+      body: JSON.stringify({
+        wins,
+        time,
       }),
     })
 

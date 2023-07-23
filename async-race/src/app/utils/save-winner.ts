@@ -11,12 +11,16 @@ export const saveWinner = async (): Promise<void> => {
     return
   }
 
-  const response = await httpFetcher.getWinner(winnerId)
-  if (response.status === RequestStatuses.NotFound) {
-    const newRes = await httpFetcher.setNewWinner(winnerId, gameState.raceWinnerTime)
-    console.log(newRes)
+  const getWinnerResponse = await httpFetcher.getWinner(winnerId)
+
+  if (getWinnerResponse.status === RequestStatuses.NotFound) {
+    const setWinnerResponse = await httpFetcher.setNewWinner(winnerId, gameState.raceWinnerTime)
+    console.log(setWinnerResponse)
     return
   }
-  console.log(response)
+  console.log(getWinnerResponse)
   console.log('same winner')
+
+  const updateWinnerResponse = await httpFetcher.updateWinnerData(winnerId, gameState.raceWinnerTime)
+  console.log(updateWinnerResponse)
 }
