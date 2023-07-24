@@ -1,9 +1,10 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { WinnerData } from 'src/app/models/winner-data'
-import { httpFetcherEngine } from 'src/app/utils/http-fetcher-engine'
+import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { emitter } from 'src/app/utils/event-emitter'
 import { winnerTableHeaders } from 'src/app/consts/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
+import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
 import { WinnerCell } from '../winner-cell/winner-cell'
 
 export class WinnersLeaderBoard extends BaseComponent {
@@ -32,9 +33,9 @@ export class WinnersLeaderBoard extends BaseComponent {
   }
 
   private async setData(): Promise<void> {
-    const winnersData: WinnerData[] = await httpFetcherEngine.getWinners()
+    const winnersData: WinnerData[] = await httpFetcherWinners.getWinners()
 
-    const carsPromises = winnersData.map((winner) => httpFetcherEngine.getCar(winner.id))
+    const carsPromises = winnersData.map((winner) => httpFetcher.getCar(winner.id))
 
     const carsData = await Promise.all(carsPromises)
 

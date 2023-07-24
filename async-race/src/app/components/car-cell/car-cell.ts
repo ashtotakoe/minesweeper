@@ -1,4 +1,4 @@
-import { httpFetcherEngine } from 'src/app/utils/http-fetcher-engine'
+import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { EngineStartedData } from 'src/app/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
 import { distanceFromEndToFlag } from 'src/app/consts/distance-from-end-to-flag'
@@ -109,7 +109,7 @@ export class CarCell extends BaseComponent {
     this.car.areBrakesAktivated = false
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
-    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcherEngine.startEngine(
+    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcher.startEngine(
       this.carData.id,
     )
 
@@ -151,7 +151,7 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    const response = await httpFetcherEngine.stopEngine(this.carData.id)
+    const response = await httpFetcher.stopEngine(this.carData.id)
     if (response.status === RequestStatuses.Success) {
       this.car.isDriving = false
       this.car.areBrakesAktivated = true
@@ -182,7 +182,7 @@ export class CarCell extends BaseComponent {
   }
 
   private async deleteCar(): Promise<void> {
-    await httpFetcherEngine.deleteCar(this.carData.id)
+    await httpFetcher.deleteCar(this.carData.id)
     emitter.emit('render cars')
     emitter.emit('render winners')
   }

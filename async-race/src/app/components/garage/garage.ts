@@ -1,5 +1,5 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { httpFetcherEngine } from 'src/app/utils/http-fetcher-engine'
+import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
 import { CarCell } from 'src/app/components/car-cell/car-cell'
 import { emitter } from 'src/app/utils/event-emitter'
@@ -92,7 +92,7 @@ export class Garage extends BaseComponent {
   }
 
   private renderCars(): void {
-    httpFetcherEngine.getCars({ isPaginationRequiered: true }).then((carsData) => {
+    httpFetcher.getCars({ isPaginationRequiered: true }).then((carsData) => {
       if (!carsData.length) {
         gameState.currentGaragePage -= 1
         return
@@ -109,7 +109,7 @@ export class Garage extends BaseComponent {
   }
 
   private changeGarageCount(): void {
-    httpFetcherEngine.getCars({ isPaginationRequiered: false }).then((carsData) => {
+    httpFetcher.getCars({ isPaginationRequiered: false }).then((carsData) => {
       Object.assign(this.heading.element, {
         textContent: `Garage (${carsData.length} cars, currently on page ${gameState.currentGaragePage})`,
       })
