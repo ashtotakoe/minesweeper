@@ -5,6 +5,7 @@ import { Winners } from 'src/app/winners/winners'
 import { Header } from '../header/header'
 import { Footer } from '../footer/footer'
 import { NotFound } from '../not-found/not-found'
+import { Popup } from '../popup/popup'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | Router> {
@@ -25,9 +26,18 @@ export class Layout {
       },
     })
 
-    const router = new Router(routes, main.element)
+    const routerElement = new BaseComponent({
+      tag: 'div',
+      parent: main.element,
+      attribute: {
+        className: 'router-element',
+      },
+    })
+    const popup = new Popup(main.element)
+    const router = new Router(routes, routerElement.element)
 
     const footer = new Footer(parent)
-    return { header, router, footer }
+
+    return { header, popup, router, footer }
   }
 }

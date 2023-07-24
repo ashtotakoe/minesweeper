@@ -48,8 +48,10 @@ export class Garage extends BaseComponent {
 
   private startRace(): void {
     if (!this.carCells || this.carCells.length === 1 || this.carCells.some((carCell) => carCell.car.passedPath !== 0)) {
-      console.log('sorry, there should be more than 1 car to start the race')
-      console.log('also all cars should be on start line')
+      emitter.emit(
+        'show popup',
+        'Sorry, there should be more than 1 car to start the race. Also all cars should be on the start line',
+      )
       return
     }
 

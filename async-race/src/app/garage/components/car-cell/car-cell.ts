@@ -134,6 +134,8 @@ export class CarCell extends BaseComponent {
 
       console.log('winner s time ', rideTime)
       console.log(`${this.carData.name} is the winner`)
+
+      emitter.emit('show popup', `${this.carData.name} is the winner! Time: ${(rideTime / 1000).toFixed(2)} seconds`)
     }
   }
 
