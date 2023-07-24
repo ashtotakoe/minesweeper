@@ -2,9 +2,9 @@ import { BaseComponent } from 'src/app/utils/base-component'
 import { Router } from 'src/app/utils/router'
 import { Header } from '../header/header'
 import { Footer } from '../footer/footer'
-import { Garage } from '../garage/garage'
+import { Garage } from '../../../features/components/garage/garage'
 import { NotFound } from '../not-found/not-found'
-import { Winners } from '../winners/winners'
+import { Winners } from '../../../features/components/winners/winners'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | Router> {

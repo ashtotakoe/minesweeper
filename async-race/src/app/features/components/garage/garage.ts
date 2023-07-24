@@ -1,11 +1,11 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { CarData } from 'src/app/models/car-data'
-import { CarCell } from 'src/app/components/car-cell/car-cell'
+import { CarCell } from 'src/app/features/components/car-cell/car-cell'
 import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'
 import { GarageControl } from '../garage-control/garage-control'
-import { Pagination } from '../pagination/pagination'
+import { Pagination } from '../../../shared/components/pagination/pagination'
 
 export class Garage extends BaseComponent {
   private carsData: CarData[] | null = null

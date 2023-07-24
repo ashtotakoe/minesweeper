@@ -6,8 +6,8 @@ import { RequestStatuses } from 'src/app/enum/request-statuses'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
 import { saveWinner } from 'src/app/utils/save-winner'
-import { CarData } from '../../models/car-data'
-import { BaseComponent } from '../../utils/base-component'
+import { CarData } from '../../../models/car-data'
+import { BaseComponent } from '../../../utils/base-component'
 import { Car } from '../car/car'
 
 export class CarCell extends BaseComponent {

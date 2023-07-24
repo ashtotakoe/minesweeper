@@ -1,6 +1,6 @@
 import { createCar } from 'src/app/utils/create-car'
 import { emitter } from 'src/app/utils/event-emitter'
-import { CarInput } from '../car-input/car-input'
+import { CarInput } from '../../../shared/components/car-input/car-input'
 
 export class CreateCarInput extends CarInput {
   constructor(parent: HTMLElement, submitTextContent: string) {

@@ -1,17 +1,19 @@
 @import 'styles/variables';
-@import 'app/components/footer/footer';
-@import 'app/components/header/header';
-@import 'app/components/garage/garage';
-@import 'app/components/car-cell/car-cell';
-@import 'app/components/car/car';
-@import 'app/components/garage-control/garage-control';
-@import 'app/components/car-input/car-input';
-@import 'app/components/winners-leader-board/winners-leader-board';
-@import 'app/components/not-found/not-found';
-@import 'app/components/winner-cell/winner-cell';
-@import 'app/components/winners/winners';
-@import 'app/components/pagination/pagination';
-@import 'app/components/winners-controls/winners-constrols';
+@import 'app/core/components/not-found/not-found';
+@import 'app/core/components/footer/footer';
+@import 'app/core/components/header/header';
+
+@import 'app/shared/components/car-input/car-input';
+@import 'app/shared/components/pagination/pagination';
+
+@import 'app/features/components/garage/garage';
+@import 'app/features/components/car-cell/car-cell';
+@import 'app/features/components/car/car';
+@import 'app/features/components/garage-control/garage-control';
+@import 'app/features/components/winners-leader-board/winners-leader-board';
+@import 'app/features/components/winner-cell/winner-cell';
+@import 'app/features/components/winners/winners';
+@import 'app/features/components/winners-controls/winners-constrols';
 
 * {
   margin: 0;

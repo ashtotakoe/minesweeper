@@ -1,5 +1,5 @@
-import { CarCell } from '../components/car-cell/car-cell'
-import { Car } from '../components/car/car'
+import { CarCell } from '../features/components/car-cell/car-cell'
+import { Car } from '../features/components/car/car'
 
 class GameState {
   public modifyingCarId: number | null = null

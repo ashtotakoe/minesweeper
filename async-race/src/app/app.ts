@@ -1,4 +1,4 @@
-import { Layout } from './components/layout/layout'
+import { Layout } from './core/components/layout/layout'
 import { BaseComponent } from './utils/base-component'
 
 class App {

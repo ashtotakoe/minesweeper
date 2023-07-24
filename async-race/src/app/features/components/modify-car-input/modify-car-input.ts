@@ -1,7 +1,7 @@
 import { gameState } from 'src/app/utils/game-state'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { emitter } from 'src/app/utils/event-emitter'
-import { CarInput } from '../car-input/car-input'
+import { CarInput } from '../../../shared/components/car-input/car-input'
 
 export class ModifyCarInput extends CarInput {
   constructor(parent: HTMLElement, textContent: string) {

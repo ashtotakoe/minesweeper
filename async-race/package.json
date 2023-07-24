@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "deploy-root": "npm run build && npx gh-pages -d dist",
-    "deploy-folder": "npm run build && npx gh-pages -d dist -e folder",
+    "deploy-folder": "npm run build && npx gh-pages -d dist -e async-race",
     "stylelint": "stylelint '**/*.scss' --fix",
     "lint": "eslint . --color --fix",
     "build": "webpack --config webpack.prod.js",

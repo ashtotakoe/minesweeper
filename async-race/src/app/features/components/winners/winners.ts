@@ -3,7 +3,7 @@ import { gameState } from 'src/app/utils/game-state'
 import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
 import { emitter } from 'src/app/utils/event-emitter'
 import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
-import { Pagination } from '../pagination/pagination'
+import { Pagination } from '../../../shared/components/pagination/pagination'
 import { WinnersControls } from '../winners-controls/winners-contrlos'
 
 export class Winners extends BaseComponent {
