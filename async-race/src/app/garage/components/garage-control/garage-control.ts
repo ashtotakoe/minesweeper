@@ -5,6 +5,7 @@ import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'
 import { ModifyCarInput } from '../modify-car-input/modify-car-input'
 import { CreateCarInput } from '../create-car-input/create-car-input'
+import { CreateCarData } from '../../models/create-car-data'
 
 export class GarageControl extends BaseComponent {
   private container = new BaseComponent({
@@ -80,10 +81,20 @@ export class GarageControl extends BaseComponent {
   }
 
   private generateMoreCars(): void {
-    carsDummyData.forEach((carData) => {
+    const randomArray = this.generateRandomData()
+
+    randomArray.forEach((carData) => {
       createCar(carData).then(() => {
         emitter.emit('render cars')
       })
     })
+  }
+
+  private generateRandomData(): CreateCarData[] {
+    const { names, colors } = carsDummyData
+    return Array.from({ length: 100 }, () => ({
+      name: names[Math.floor(Math.random() * names.length)],
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }))
   }
 }
