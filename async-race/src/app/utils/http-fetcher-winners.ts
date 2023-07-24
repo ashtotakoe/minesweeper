@@ -2,6 +2,9 @@ import { HTTPMethods } from '../enum/http-methods'
 import { WinnerData } from '../models/winner-data'
 import { API } from '../enum/api'
 import { headersForPostMethod } from '../consts/headers-for-post-method'
+import { gameState } from './game-state'
+import { PageLimits } from '../enum/page-limits'
+import { WinnerQueryParams } from '../models/winner-query-params'
 
 class HTTPFetcherWinners {
   public async getWinner(id: number): Promise<Response> {
@@ -9,8 +12,17 @@ class HTTPFetcherWinners {
     return response
   }
 
-  public async getWinners(): Promise<WinnerData[]> {
-    const respone = await fetch(`${API.Path}/winners`)
+  public async getWinners(isPaginationRequiered = false, queryParams?: WinnerQueryParams): Promise<WinnerData[]> {
+    let query = ''
+    if (isPaginationRequiered) {
+      query = `?_page=${gameState.currentWinnersPage}&_limit=${PageLimits.WinnersLimit}`
+    }
+
+    if (queryParams) {
+      query += `&_sort=${queryParams.sort}&_order=${queryParams.order}`
+    }
+
+    const respone = await fetch(`${API.Path}/winners${query}`)
     const winnersData = respone.json()
     return winnersData
   }

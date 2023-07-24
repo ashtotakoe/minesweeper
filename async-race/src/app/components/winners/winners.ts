@@ -4,6 +4,7 @@ import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
 import { emitter } from 'src/app/utils/event-emitter'
 import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
 import { Pagination } from '../pagination/pagination'
+import { WinnersControls } from '../winners-controls/winners-contrlos'
 
 export class Winners extends BaseComponent {
   private heading = new BaseComponent({
@@ -13,6 +14,8 @@ export class Winners extends BaseComponent {
       className: 'winners__heading',
     },
   })
+
+  private controls = new WinnersControls(this.element)
 
   private winnersLeaderBoard = new WinnersLeaderBoard(this.element)
 
@@ -49,6 +52,12 @@ export class Winners extends BaseComponent {
 
   private async renderWinners(): Promise<void> {
     const winnersData = await httpFetcherWinners.getWinners()
+    const winnersDataFromPage = await httpFetcherWinners.getWinners(true)
+    if (!winnersDataFromPage.length) {
+      gameState.currentWinnersPage -= 1
+      return
+    }
+
     Object.assign(this.heading.element, {
       textContent: `Winners (${winnersData.length} cars recorded, currently on page ${gameState.currentWinnersPage})`,
     })

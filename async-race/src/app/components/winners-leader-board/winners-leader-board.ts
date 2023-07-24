@@ -3,7 +3,9 @@ import { WinnerData } from 'src/app/models/winner-data'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
 import { winnerTableHeaders } from 'src/app/consts/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
+import { PageLimits } from 'src/app/enum/page-limits'
 import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
+import { gameState } from 'src/app/utils/game-state'
 import { WinnerCell } from '../winner-cell/winner-cell'
 
 export class WinnersLeaderBoard extends BaseComponent {
@@ -27,13 +29,14 @@ export class WinnersLeaderBoard extends BaseComponent {
     this.setTableHeaders()
     await this.setData()
 
-    this.winnerElements = this.combinedWinnersData.map(
-      (combinedData, index) => new WinnerCell(combinedData, this.element, index + 1),
-    )
+    this.winnerElements = this.combinedWinnersData.map((combinedData, index) => {
+      const serialNumber = (gameState.currentWinnersPage - 1) * PageLimits.WinnersLimit + index + 1
+      return new WinnerCell(combinedData, this.element, serialNumber)
+    })
   }
 
   private async setData(): Promise<void> {
-    const winnersData: WinnerData[] = await httpFetcherWinners.getWinners()
+    const winnersData: WinnerData[] = await httpFetcherWinners.getWinners(true)
 
     const carsPromises = winnersData.map((winner) => httpFetcher.getCar(winner.id))
 

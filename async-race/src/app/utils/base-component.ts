@@ -13,14 +13,14 @@ export class BaseComponent {
   }
 
   public get inputValue(): string {
-    if (this.element instanceof HTMLInputElement) {
+    if (this.element instanceof HTMLInputElement || this.element instanceof HTMLSelectElement) {
       return this.element.value
     }
     return ''
   }
 
   public set inputValue(value: string) {
-    if (this.element instanceof HTMLInputElement) {
+    if (this.element instanceof HTMLInputElement || this.element instanceof HTMLSelectElement) {
       this.element.value = value
     }
   }
