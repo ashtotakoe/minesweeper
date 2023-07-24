@@ -12,7 +12,7 @@ export class WinnerCell extends BaseComponent {
     tag: 'p',
     parent: this.element,
     attribute: {
-      className: 'winner-cell__id',
+      className: 'winner-cell__data',
     },
   })
 

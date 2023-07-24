@@ -1,7 +1,8 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { WinnerData } from 'src/app/models/winner-data'
-import { httpFetcher } from 'src/app/utils/http-fetcher'
+import { httpFetcherEngine } from 'src/app/utils/http-fetcher-engine'
 import { emitter } from 'src/app/utils/event-emitter'
+import { winnerTableHeaders } from 'src/app/consts/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
 import { WinnerCell } from '../winner-cell/winner-cell'
 
@@ -22,22 +23,44 @@ export class WinnersLeaderBoard extends BaseComponent {
   }
 
   private async renderWinners(): Promise<void> {
-    console.log('START RENDERING WINNERS...')
-
     this.element.replaceChildren()
+
+    this.setTableHeaders()
     await this.setData()
 
     this.winnerElements = this.combinedWinnersData.map((combinedData) => new WinnerCell(combinedData, this.element))
   }
 
   private async setData(): Promise<void> {
-    const winnersData: WinnerData[] = await httpFetcher.getWinners()
+    const winnersData: WinnerData[] = await httpFetcherEngine.getWinners()
 
-    const carsPromises = winnersData.map((winner) => httpFetcher.getCar(winner.id))
+    const carsPromises = winnersData.map((winner) => httpFetcherEngine.getCar(winner.id))
 
     const carsData = await Promise.all(carsPromises)
 
     this.combinedWinnersData = winnersData.map((winner, index) => Object.assign(winner, carsData[index]))
     console.log(this.combinedWinnersData)
+  }
+
+  private setTableHeaders(): void {
+    const headersRow = new BaseComponent({
+      tag: 'div',
+      parent: this.element,
+      attribute: {
+        className: 'winners-leader-board__headers-row headers-row',
+      },
+    })
+
+    winnerTableHeaders.forEach(
+      (header) =>
+        new BaseComponent({
+          tag: 'div',
+          parent: headersRow.element,
+          attribute: {
+            className: 'headers-row__header',
+            textContent: header,
+          },
+        }),
+    )
   }
 }

@@ -8,7 +8,7 @@ import { StartEngineReturnProps } from '../models/start-engine-return-props'
 import { WinnerData } from '../models/winner-data'
 import { gameState } from './game-state'
 
-class HTTPFetcher {
+class HTTPFetcherEngine {
   public async getCars({ isPaginationRequiered = true }): Promise<CarData[]> {
     const query = `?_page=${gameState.currentGaragePage}&_limit=${API.CarLimit}`
     const response = await fetch(`${API.Path}/garage${isPaginationRequiered ? query : ''}`)
@@ -64,6 +64,7 @@ class HTTPFetcher {
     })
 
     await fetch(`${API.Path}/winners/${id}`, {
+      // перенести в фетчер для винеров
       method: HTTPMethods.DELETE,
     })
   }
@@ -123,4 +124,4 @@ class HTTPFetcher {
   }
 }
 
-export const httpFetcher = new HTTPFetcher()
+export const httpFetcherEngine = new HTTPFetcherEngine()

@@ -1,5 +1,5 @@
 import { gameState } from 'src/app/utils/game-state'
-import { httpFetcher } from 'src/app/utils/http-fetcher'
+import { httpFetcherEngine } from 'src/app/utils/http-fetcher-engine'
 import { emitter } from 'src/app/utils/event-emitter'
 import { CarInput } from '../car-input/car-input'
 
@@ -23,7 +23,7 @@ export class ModifyCarInput extends CarInput {
     if (modifyingTarget) {
       const oldName = modifyingTarget.carData.name
 
-      await httpFetcher.modifyCar(modifyingTarget.carData.id, {
+      await httpFetcherEngine.modifyCar(modifyingTarget.carData.id, {
         name: this.nameInput.inputValue || oldName,
         color: this.colorInput.inputValue ?? '#000000',
       })
