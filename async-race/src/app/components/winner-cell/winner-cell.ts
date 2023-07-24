@@ -6,9 +6,10 @@ import { Car } from '../car/car'
 export class WinnerCell extends BaseComponent {
   private data?: WinnerData & CarData
   private winnerCarModel: Car
-  private winnerCellElements: HTMLCollection
+  private winnerCellElements: BaseComponent[]
+  private cellNumber: number
 
-  private winnerId = new BaseComponent({
+  private cellNumberElement = new BaseComponent({
     tag: 'p',
     parent: this.element,
     attribute: {
@@ -40,7 +41,7 @@ export class WinnerCell extends BaseComponent {
     },
   })
 
-  constructor(data: WinnerData & CarData, parent: HTMLElement) {
+  constructor(data: WinnerData & CarData, parent: HTMLElement, cellNumber: number) {
     super({
       tag: 'div',
       parent,
@@ -50,14 +51,13 @@ export class WinnerCell extends BaseComponent {
     })
 
     this.data = data
-
-    this.winnerCellElements = this.element.children
-
-    this.setData()
+    this.cellNumber = cellNumber
 
     const { id, name, color } = this.data
-
     this.winnerCarModel = new Car(this.element, { id, name, color })
+
+    this.winnerCellElements = [this.winnerName, this.winsCount, this.bestTime]
+    this.setData()
   }
 
   private setData(): void {
@@ -65,10 +65,12 @@ export class WinnerCell extends BaseComponent {
       return
     }
 
-    const { id, name, wins, time } = this.data
+    this.cellNumberElement.element.textContent = `${this.cellNumber}`
 
-    Array.from([id, name, wins, time]).forEach((value, index) => {
-      Object.assign(this.winnerCellElements[index], {
+    const { name, wins, time } = this.data
+
+    Array.from([name, wins, time]).forEach((value, index) => {
+      Object.assign(this.winnerCellElements[index].element, {
         textContent: value,
       })
     })

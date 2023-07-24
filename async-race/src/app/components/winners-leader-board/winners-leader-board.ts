@@ -27,7 +27,9 @@ export class WinnersLeaderBoard extends BaseComponent {
     this.setTableHeaders()
     await this.setData()
 
-    this.winnerElements = this.combinedWinnersData.map((combinedData) => new WinnerCell(combinedData, this.element))
+    this.winnerElements = this.combinedWinnersData.map(
+      (combinedData, index) => new WinnerCell(combinedData, this.element, index + 1),
+    )
   }
 
   private async setData(): Promise<void> {

@@ -3,6 +3,7 @@ import { gameState } from 'src/app/utils/game-state'
 import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
 import { emitter } from 'src/app/utils/event-emitter'
 import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
+import { Pagination } from '../pagination/pagination'
 
 export class Winners extends BaseComponent {
   private heading = new BaseComponent({
@@ -14,6 +15,11 @@ export class Winners extends BaseComponent {
   })
 
   private winnersLeaderBoard = new WinnersLeaderBoard(this.element)
+
+  private pagination = new Pagination(this.element, (paginationType: 'next' | 'previous') =>
+    this.pagintationHandler(paginationType),
+  )
+
   constructor() {
     super({
       tag: 'div',
@@ -23,6 +29,21 @@ export class Winners extends BaseComponent {
     })
 
     emitter.subscribe('render winners', () => this.renderWinners())
+    this.renderWinners()
+  }
+
+  private pagintationHandler(paginationType: 'next' | 'previous'): void {
+    if (paginationType === 'next') {
+      gameState.currentWinnersPage += 1
+      this.renderWinners()
+      return
+    }
+
+    if (gameState.currentWinnersPage === 1) {
+      return
+    }
+
+    gameState.currentWinnersPage -= 1
     this.renderWinners()
   }
 
