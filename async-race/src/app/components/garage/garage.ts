@@ -5,6 +5,7 @@ import { CarCell } from 'src/app/components/car-cell/car-cell'
 import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'
 import { GarageControl } from '../garage-control/garage-control'
+import { Pagination } from '../pagination/pagination'
 
 export class Garage extends BaseComponent {
   private carsData: CarData[] | null = null
@@ -29,23 +30,9 @@ export class Garage extends BaseComponent {
     },
   })
 
-  private paginationPreviousButton = new BaseComponent({
-    tag: 'button',
-    parent: this.element,
-    attribute: {
-      className: 'garage__button',
-      textContent: 'before',
-    },
-  })
-
-  private paginationNextButton = new BaseComponent({
-    tag: 'button',
-    parent: this.element,
-    attribute: {
-      className: 'garage__button',
-      textContent: 'next',
-    },
-  })
+  private pagination = new Pagination(this.element, (paginationType: 'next' | 'previous') =>
+    this.paginationHandler(paginationType),
+  )
   constructor() {
     super({
       tag: 'div',
@@ -56,8 +43,6 @@ export class Garage extends BaseComponent {
     emitter.subscribe('render cars', () => this.renderCars())
     emitter.subscribe('start race', () => this.startRace())
 
-    this.paginationPreviousButton.element.addEventListener('click', () => this.paginationHandler('previous'))
-    this.paginationNextButton.element.addEventListener('click', () => this.paginationHandler('next'))
     this.renderCars()
   }
 
