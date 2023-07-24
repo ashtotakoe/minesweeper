@@ -1,9 +1,9 @@
-import { HTTPMethods } from '../enum/http-methods'
+import { API } from 'src/app/enums/api'
+import { HTTPMethods } from 'src/app/enums/http-methods'
+import { headersForPostMethod } from 'src/app/consts/headers-for-post-method'
+import { PageLimits } from 'src/app/enums/page-limits'
+import { gameState } from 'src/app/utils/game-state'
 import { WinnerData } from '../models/winner-data'
-import { API } from '../enum/api'
-import { headersForPostMethod } from '../consts/headers-for-post-method'
-import { gameState } from './game-state'
-import { PageLimits } from '../enum/page-limits'
 import { WinnerQueryParams } from '../models/winner-query-params'
 
 class HTTPFetcherWinners {

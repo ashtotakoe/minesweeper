@@ -1,4 +1,4 @@
-import { Car } from '../features/components/car/car'
+import { Car } from 'src/app/shared/components/car/car'
 
 export const bringCarBackToStart = (car: Car): void => {
   setTimeout(() => {

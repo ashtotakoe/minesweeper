@@ -1,14 +1,14 @@
-import { headersForPostMethod } from '../consts/headers-for-post-method'
-import { API } from '../enum/api'
-import { HTTPMethods } from '../enum/http-methods'
-import { CarData } from '../models/car-data'
+import { headersForPostMethod } from '../../consts/headers-for-post-method'
+import { API } from '../../enums/api'
+import { HTTPMethods } from '../../enums/http-methods'
+import { CarData } from '../../models/car-data'
 import { CreateCarData } from '../models/create-car-data'
 import { EngineStartedData } from '../models/engine-started-response'
 import { StartEngineReturnProps } from '../models/start-engine-return-props'
-import { gameState } from './game-state'
-import { httpFetcherWinners } from './http-fetcher-winners'
+import { gameState } from '../../utils/game-state'
+import { httpFetcherWinners } from '../../winners/services/http-fetcher-winners'
 
-class HTTPFetcher {
+class HTTPFetcherGarage {
   public async getCars({ isPaginationRequiered = true }): Promise<CarData[]> {
     const query = `?_page=${gameState.currentGaragePage}&_limit=${API.CarLimit}`
     const response = await fetch(`${API.Path}/garage${isPaginationRequiered ? query : ''}`)
@@ -64,11 +64,6 @@ class HTTPFetcher {
     })
 
     await httpFetcherWinners.deleteWinner(id)
-
-    // await fetch(`${API.Path}/winners/${id}`, {
-    //   // перенести в фетчер для винеров
-    //   method: HTTPMethods.DELETE,
-    // })
   }
 
   public async modifyCar(id: number, carData: CreateCarData): Promise<void> {
@@ -81,4 +76,4 @@ class HTTPFetcher {
   }
 }
 
-export const httpFetcher = new HTTPFetcher()
+export const httpFetcherGarage = new HTTPFetcherGarage()

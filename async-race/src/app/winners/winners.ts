@@ -1,10 +1,10 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { gameState } from 'src/app/utils/game-state'
-import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
 import { emitter } from 'src/app/utils/event-emitter'
-import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
-import { Pagination } from '../../../shared/components/pagination/pagination'
-import { WinnersControls } from '../winners-controls/winners-contrlos'
+import { WinnersLeaderBoard } from './components/winners-leader-board/winners-leader-board'
+import { Pagination } from '../shared/components/pagination/pagination'
+import { WinnersControls } from './components/winners-controls/winners-contrlos'
+import { httpFetcherWinners } from './services/http-fetcher-winners'
 
 export class Winners extends BaseComponent {
   private heading = new BaseComponent({

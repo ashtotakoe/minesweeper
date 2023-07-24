@@ -1,5 +1,5 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { carsDummyData } from 'src/app/consts/cars-dummy-data'
+import { carsDummyData } from 'src/app/garage/consts/cars-dummy-data'
 import { createCar } from 'src/app/utils/create-car'
 import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'

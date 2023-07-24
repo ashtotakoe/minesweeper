@@ -1,8 +1,8 @@
 import { CarData } from 'src/app/models/car-data'
 import { BaseComponent } from 'src/app/utils/base-component'
-import { httpFetcher } from 'src/app/utils/http-fetcher'
-import { bringCarBackToStart } from 'src/app/utils/bring-car-back-to-start'
-import { buildSvgSprite } from 'src/app/utils/build-svg-sprite'
+import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { bringCarBackToStart } from 'src/app/garage/utils/bring-car-back-to-start'
+import { buildSvgSprite } from 'src/app/garage/utils/build-svg-sprite'
 import { gameState } from 'src/app/utils/game-state'
 
 export class Car extends BaseComponent {
@@ -54,7 +54,7 @@ export class Car extends BaseComponent {
 
       if (passedPath > roadLength) {
         this.isDriving = false
-        httpFetcher.stopEngine(this.carData.id)
+        httpFetcherGarage.stopEngine(this.carData.id)
       }
     }, 10)
   }

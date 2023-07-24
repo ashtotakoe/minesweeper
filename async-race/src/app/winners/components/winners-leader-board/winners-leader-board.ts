@@ -1,12 +1,12 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { WinnerData } from 'src/app/models/winner-data'
-import { httpFetcher } from 'src/app/utils/http-fetcher'
-import { winnerTableHeaders } from 'src/app/consts/winner-table-headers'
+import { WinnerData } from 'src/app/winners/models/winner-data'
+import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { winnerTableHeaders } from 'src/app/winners/consts/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
-import { PageLimits } from 'src/app/enum/page-limits'
-import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
+import { PageLimits } from 'src/app/enums/page-limits'
 import { gameState } from 'src/app/utils/game-state'
 import { WinnerCell } from '../winner-cell/winner-cell'
+import { httpFetcherWinners } from '../../services/http-fetcher-winners'
 
 export class WinnersLeaderBoard extends BaseComponent {
   private winnerElements: WinnerCell[] = []
@@ -38,7 +38,7 @@ export class WinnersLeaderBoard extends BaseComponent {
   private async setData(): Promise<void> {
     const winnersData: WinnerData[] = await httpFetcherWinners.getWinners(true)
 
-    const carsPromises = winnersData.map((winner) => httpFetcher.getCar(winner.id))
+    const carsPromises = winnersData.map((winner) => httpFetcherGarage.getCar(winner.id))
 
     const carsData = await Promise.all(carsPromises)
 

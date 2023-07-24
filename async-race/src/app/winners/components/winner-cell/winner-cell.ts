@@ -1,7 +1,7 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { WinnerData } from 'src/app/models/winner-data'
+import { WinnerData } from 'src/app/winners/models/winner-data'
 import { CarData } from 'src/app/models/car-data'
-import { Car } from '../car/car'
+import { Car } from 'src/app/shared/components/car/car'
 
 export class WinnerCell extends BaseComponent {
   private data?: WinnerData & CarData

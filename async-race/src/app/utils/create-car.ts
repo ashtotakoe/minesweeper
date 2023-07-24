@@ -1,7 +1,7 @@
-import { CreateCarData } from '../models/create-car-data'
-import { httpFetcher } from './http-fetcher'
+import { CreateCarData } from '../garage/models/create-car-data'
+import { httpFetcherGarage } from '../garage/services/http-fetcher-garage'
 
 export const createCar = async (carData: CreateCarData): Promise<Response> => {
-  const response = await httpFetcher.createCar(carData)
+  const response = await httpFetcherGarage.createCar(carData)
   return response
 }

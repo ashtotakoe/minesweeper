@@ -1,14 +1,14 @@
-import { httpFetcher } from 'src/app/utils/http-fetcher'
-import { EngineStartedData } from 'src/app/models/engine-started-response'
-import { StartEngineReturnProps } from 'src/app/models/start-engine-return-props'
-import { distanceFromEndToFlag } from 'src/app/consts/distance-from-end-to-flag'
-import { RequestStatuses } from 'src/app/enum/request-statuses'
+import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { EngineStartedData } from 'src/app/garage/models/engine-started-response'
+import { StartEngineReturnProps } from 'src/app/garage/models/start-engine-return-props'
+import { distanceFromEndToFlag } from 'src/app/garage/consts/distance-from-end-to-flag'
+import { RequestStatuses } from 'src/app/enums/request-statuses'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
 import { saveWinner } from 'src/app/utils/save-winner'
+import { Car } from 'src/app/shared/components/car/car'
 import { CarData } from '../../../models/car-data'
 import { BaseComponent } from '../../../utils/base-component'
-import { Car } from '../car/car'
 
 export class CarCell extends BaseComponent {
   public carData: CarData
@@ -109,7 +109,7 @@ export class CarCell extends BaseComponent {
     this.car.areBrakesAktivated = false
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
-    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcher.startEngine(
+    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcherGarage.startEngine(
       this.carData.id,
     )
 
@@ -151,7 +151,7 @@ export class CarCell extends BaseComponent {
       return
     }
 
-    const response = await httpFetcher.stopEngine(this.carData.id)
+    const response = await httpFetcherGarage.stopEngine(this.carData.id)
     if (response.status === RequestStatuses.Success) {
       this.car.isDriving = false
       this.car.areBrakesAktivated = true
@@ -182,7 +182,7 @@ export class CarCell extends BaseComponent {
   }
 
   private async deleteCar(): Promise<void> {
-    await httpFetcher.deleteCar(this.carData.id)
+    await httpFetcherGarage.deleteCar(this.carData.id)
     emitter.emit('render cars')
     emitter.emit('render winners')
   }

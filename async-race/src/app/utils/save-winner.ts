@@ -1,7 +1,7 @@
-import { RequestStatuses } from '../enum/request-statuses'
+import { RequestStatuses } from '../enums/request-statuses'
 import { emitter } from './event-emitter'
 import { gameState } from './game-state'
-import { httpFetcherWinners } from './http-fetcher-winners'
+import { httpFetcherWinners } from '../winners/services/http-fetcher-winners'
 
 export const saveWinner = async (): Promise<void> => {
   console.log(gameState.raceWinnerTime)
