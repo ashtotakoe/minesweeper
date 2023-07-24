@@ -17,6 +17,14 @@ export class WinnerCell extends BaseComponent {
     },
   })
 
+  private winnerid = new BaseComponent({
+    tag: 'p',
+    parent: this.element,
+    attribute: {
+      className: 'winner-cell__data',
+    },
+  })
+
   private winnerName = new BaseComponent({
     tag: 'p',
     parent: this.element,
@@ -56,7 +64,7 @@ export class WinnerCell extends BaseComponent {
     const { id, name, color } = this.data
     this.winnerCarModel = new Car(this.element, { id, name, color })
 
-    this.winnerCellElements = [this.winnerName, this.winsCount, this.bestTime]
+    this.winnerCellElements = [this.winnerName, this.winnerid, this.winsCount, this.bestTime]
     this.setData()
   }
 
@@ -67,9 +75,9 @@ export class WinnerCell extends BaseComponent {
 
     this.cellNumberElement.element.textContent = `${this.cellNumber}`
 
-    const { name, wins, time } = this.data
+    const { name, id, wins, time } = this.data
 
-    Array.from([name, wins, time]).forEach((value, index) => {
+    Array.from([name, id, wins, time]).forEach((value, index) => {
       Object.assign(this.winnerCellElements[index].element, {
         textContent: value,
       })

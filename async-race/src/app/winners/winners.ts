@@ -5,6 +5,7 @@ import { WinnersLeaderBoard } from './components/winners-leader-board/winners-le
 import { Pagination } from '../shared/components/pagination/pagination'
 import { WinnersControls } from './components/winners-controls/winners-contrlos'
 import { httpFetcherWinners } from './services/http-fetcher-winners'
+import { WinnersQueryParams } from './models/winner-query-params'
 
 export class Winners extends BaseComponent {
   private heading = new BaseComponent({
@@ -31,7 +32,7 @@ export class Winners extends BaseComponent {
       },
     })
 
-    emitter.subscribe('render winners', () => this.renderWinners())
+    emitter.subscribe('render winners', (queryParams?: WinnersQueryParams) => this.renderWinners(queryParams))
     this.renderWinners()
   }
 
@@ -50,9 +51,13 @@ export class Winners extends BaseComponent {
     this.renderWinners()
   }
 
-  private async renderWinners(): Promise<void> {
+  private async renderWinners(queryParams?: WinnersQueryParams): Promise<void> {
+    if (queryParams) {
+      gameState.queryParams = queryParams
+    }
+
     const winnersData = await httpFetcherWinners.getWinners()
-    const winnersDataFromPage = await httpFetcherWinners.getWinners(true)
+    const winnersDataFromPage = await httpFetcherWinners.getWinners(true, gameState.queryParams ?? undefined)
     if (!winnersDataFromPage.length) {
       gameState.currentWinnersPage -= 1
       return
@@ -62,6 +67,6 @@ export class Winners extends BaseComponent {
       textContent: `Winners (${winnersData.length} cars recorded, currently on page ${gameState.currentWinnersPage})`,
     })
 
-    this.winnersLeaderBoard.renderWinners()
+    this.winnersLeaderBoard.renderWinners(winnersDataFromPage)
   }
 }

@@ -1,4 +1,5 @@
 import { BaseComponent } from 'src/app/utils/base-component'
+import { emitter } from 'src/app/utils/event-emitter'
 
 export class WinnersControls extends BaseComponent {
   private sortingTypeLabel = new BaseComponent({
@@ -59,8 +60,10 @@ export class WinnersControls extends BaseComponent {
   }
 
   private submitHandler(): void {
-    console.log(this.sortingTypeInput.inputValue)
-    console.log(this.sortingOrderInput.inputValue)
+    const sort = this.sortingTypeInput.inputValue
+    const order = this.sortingOrderInput.inputValue
+
+    emitter.emit('render winners', { sort, order })
   }
 
   private setSelectOptions(): void {

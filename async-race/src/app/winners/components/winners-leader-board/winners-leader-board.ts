@@ -6,7 +6,6 @@ import { CarData } from 'src/app/models/car-data'
 import { PageLimits } from 'src/app/enums/page-limits'
 import { gameState } from 'src/app/utils/game-state'
 import { WinnerCell } from '../winner-cell/winner-cell'
-import { httpFetcherWinners } from '../../services/http-fetcher-winners'
 
 export class WinnersLeaderBoard extends BaseComponent {
   private winnerElements: WinnerCell[] = []
@@ -23,11 +22,11 @@ export class WinnersLeaderBoard extends BaseComponent {
     })
   }
 
-  public async renderWinners(): Promise<void> {
+  public async renderWinners(winnersData: WinnerData[]): Promise<void> {
     this.element.replaceChildren()
 
     this.setTableHeaders()
-    await this.setData()
+    await this.setData(winnersData)
 
     this.winnerElements = this.combinedWinnersData.map((combinedData, index) => {
       const serialNumber = (gameState.currentWinnersPage - 1) * PageLimits.WinnersLimit + index + 1
@@ -35,9 +34,7 @@ export class WinnersLeaderBoard extends BaseComponent {
     })
   }
 
-  private async setData(): Promise<void> {
-    const winnersData: WinnerData[] = await httpFetcherWinners.getWinners(true)
-
+  private async setData(winnersData: WinnerData[]): Promise<void> {
     const carsPromises = winnersData.map((winner) => httpFetcherGarage.getCar(winner.id))
 
     const carsData = await Promise.all(carsPromises)
