@@ -4,6 +4,7 @@ import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
 import { bringCarBackToStart } from 'src/app/garage/utils/bring-car-back-to-start'
 import { buildSvgSprite } from 'src/app/garage/utils/build-svg-sprite'
 import { gameState } from 'src/app/utils/game-state'
+import { emitter } from 'src/app/utils/event-emitter'
 
 export class Car extends BaseComponent {
   public isDriving = false
@@ -61,7 +62,7 @@ export class Car extends BaseComponent {
 
   private stopRace(): void {
     gameState.isRaceGoing = false
-    console.log('race is finished')
+    emitter.emit('show popup', 'race is finished!')
   }
 
   private isRaceOver(): boolean {

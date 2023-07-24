@@ -4,8 +4,6 @@ import { gameState } from './game-state'
 import { httpFetcherWinners } from '../winners/services/http-fetcher-winners'
 
 export const saveWinner = async (): Promise<void> => {
-  console.log(gameState.raceWinnerTime)
-
   const winnerId = gameState.raceWinner?.carData.id
 
   if (!winnerId) {
@@ -16,16 +14,12 @@ export const saveWinner = async (): Promise<void> => {
   const getWinnerResponse = await httpFetcherWinners.getWinner(winnerId)
 
   if (getWinnerResponse.status === RequestStatuses.NotFound) {
-    const setWinnerResponse = await httpFetcherWinners.setNewWinner(winnerId, timeInSeconds)
-    console.log(setWinnerResponse)
+    await httpFetcherWinners.setNewWinner(winnerId, timeInSeconds)
     emitter.emit('render winners')
     return
   }
-  console.log(getWinnerResponse)
-  console.log('same winner')
 
-  const updateWinnerResponse = await httpFetcherWinners.updateWinnerData(winnerId, timeInSeconds)
-  console.log(updateWinnerResponse)
+  await httpFetcherWinners.updateWinnerData(winnerId, timeInSeconds)
 
   emitter.emit('render winners')
 }

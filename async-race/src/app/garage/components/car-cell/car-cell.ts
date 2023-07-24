@@ -121,7 +121,6 @@ export class CarCell extends BaseComponent {
       this.car.isDriving = false
       return
     }
-    console.log('ride is finished succesfully!')
 
     if (!gameState.isRaceGoing) {
       return
@@ -131,9 +130,6 @@ export class CarCell extends BaseComponent {
       gameState.raceWinnerTime = rideTime
       gameState.raceWinner = this.car
       saveWinner()
-
-      console.log('winner s time ', rideTime)
-      console.log(`${this.carData.name} is the winner`)
 
       emitter.emit('show popup', `${this.carData.name} is the winner! Time: ${(rideTime / 1000).toFixed(2)} seconds`)
     }

@@ -40,7 +40,6 @@ export class WinnersLeaderBoard extends BaseComponent {
     const carsData = await Promise.all(carsPromises)
 
     this.combinedWinnersData = winnersData.map((winner, index) => Object.assign(winner, carsData[index]))
-    console.log(this.combinedWinnersData)
   }
 
   private setTableHeaders(): void {

@@ -13,8 +13,6 @@ class HTTPFetcherWinners {
   }
 
   public async getWinners(isPaginationRequiered = false, queryParams?: WinnersQueryParams): Promise<WinnerData[]> {
-    console.log(queryParams)
-
     let query = ''
     if (isPaginationRequiered) {
       query = `?_page=${gameState.currentWinnersPage}&_limit=${PageLimits.WinnersLimit}`
@@ -25,7 +23,6 @@ class HTTPFetcherWinners {
     }
 
     const respone = await fetch(`${API.Path}/winners${query}`)
-    console.log(respone.url)
     const winnersData = respone.json()
     return winnersData
   }
@@ -56,7 +53,6 @@ class HTTPFetcherWinners {
   }
 
   public async setNewWinner(id: number, rideTime: number): Promise<Response> {
-    console.log('server time', rideTime)
     const response = await fetch(`${API.Path}/winners`, {
       method: HTTPMethods.POST,
       headers: headersForPostMethod,
