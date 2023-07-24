@@ -3,8 +3,8 @@ import { Router } from 'src/app/utils/router'
 import { Header } from '../header/header'
 import { Footer } from '../footer/footer'
 import { Garage } from '../garage/garage'
-import { WinnersLeaderBoard } from '../winners-leader-board/winners-leader-board'
 import { NotFound } from '../not-found/not-found'
+import { Winners } from '../winners/winners'
 
 export class Layout {
   public init(parent: HTMLElement): Record<string, BaseComponent | Router> {
@@ -12,7 +12,7 @@ export class Layout {
     const routes = {
       '': garage,
       '#garage': garage,
-      '#winners': new WinnersLeaderBoard(),
+      '#winners': new Winners(),
       '#not-found': new NotFound(),
     }
 

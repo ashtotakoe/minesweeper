@@ -1,7 +1,6 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { WinnerData } from 'src/app/models/winner-data'
 import { httpFetcher } from 'src/app/utils/http-fetcher'
-import { emitter } from 'src/app/utils/event-emitter'
 import { winnerTableHeaders } from 'src/app/consts/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
 import { httpFetcherWinners } from 'src/app/utils/http-fetcher-winners'
@@ -12,18 +11,17 @@ export class WinnersLeaderBoard extends BaseComponent {
 
   private combinedWinnersData: (WinnerData & CarData)[] = []
 
-  constructor() {
+  constructor(parent: HTMLElement) {
     super({
       tag: 'div',
+      parent,
       attribute: {
         className: 'winners-leader-board',
       },
     })
-    this.renderWinners()
-    emitter.subscribe('render winners', () => this.renderWinners())
   }
 
-  private async renderWinners(): Promise<void> {
+  public async renderWinners(): Promise<void> {
     this.element.replaceChildren()
 
     this.setTableHeaders()
