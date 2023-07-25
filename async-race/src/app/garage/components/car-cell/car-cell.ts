@@ -1,12 +1,13 @@
-import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { garageHttpService } from 'src/app/garage/services/garage-http-service'
 import { EngineStartedData } from 'src/app/garage/models/engine-started-response'
 import { StartEngineReturnProps } from 'src/app/garage/models/start-engine-return-props'
-import { distanceFromEndToFlag } from 'src/app/garage/consts/distance-from-end-to-flag'
+import { distanceFromEndToFlag } from 'src/app/garage/constants/distance-from-end-to-flag'
 import { RequestStatuses } from 'src/app/enums/request-statuses'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
 import { saveWinner } from 'src/app/utils/save-winner'
 import { Car } from 'src/app/shared/components/car/car'
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { CarData } from '../../../models/car-data'
 import { BaseComponent } from '../../../utils/base-component'
 
@@ -32,7 +33,7 @@ export class CarCell extends BaseComponent {
     },
   })
 
-  private slectButton = new BaseComponent({
+  private selectButton = new BaseComponent({
     tag: 'button',
     parent: this.element,
     attribute: {
@@ -93,7 +94,7 @@ export class CarCell extends BaseComponent {
     this.driveButton.element.addEventListener('click', () => this.startDrive())
     this.stopButton.element.addEventListener('click', () => this.stopDrive())
 
-    this.slectButton.element.addEventListener('click', () => {
+    this.selectButton.element.addEventListener('click', () => {
       gameState.modifyingCarId = this.carData.id
     })
 
@@ -106,10 +107,10 @@ export class CarCell extends BaseComponent {
     }
 
     this.car.isDriving = true
-    this.car.areBrakesAktivated = false
+    this.car.areBrakesActivated = false
     const roadLength = this.road.element.offsetWidth - distanceFromEndToFlag
 
-    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await httpFetcherGarage.startEngine(
+    const { engineStartedData, driveModeResponse }: StartEngineReturnProps = await garageHttpService.startEngine(
       this.carData.id,
     )
 
@@ -131,7 +132,10 @@ export class CarCell extends BaseComponent {
       gameState.raceWinner = this.car
       saveWinner()
 
-      emitter.emit('show popup', `${this.carData.name} is the winner! Time: ${(rideTime / 1000).toFixed(2)} seconds`)
+      emitter.emit(
+        EmitterEvents.ShowPopup,
+        `${this.carData.name} is the winner! Time: ${(rideTime / 1000).toFixed(2)} seconds`,
+      )
     }
   }
 
@@ -140,19 +144,15 @@ export class CarCell extends BaseComponent {
   }
 
   public async stopDrive(): Promise<void> {
-    if (this.car.passedPath === 0) {
-      return
-    }
-
-    if (!this.car.isDriving) {
+    if (this.car.passedPath === 0 || !this.car.isDriving) {
       this.car.passedPath = 0
       return
     }
 
-    const response = await httpFetcherGarage.stopEngine(this.carData.id)
+    const response = await garageHttpService.stopEngine(this.carData.id)
     if (response.status === RequestStatuses.Success) {
       this.car.isDriving = false
-      this.car.areBrakesAktivated = true
+      this.car.areBrakesActivated = true
     }
   }
 
@@ -180,8 +180,8 @@ export class CarCell extends BaseComponent {
   }
 
   private async deleteCar(): Promise<void> {
-    await httpFetcherGarage.deleteCar(this.carData.id)
-    emitter.emit('render cars')
-    emitter.emit('render winners')
+    await garageHttpService.deleteCar(this.carData.id)
+    emitter.emit(EmitterEvents.RenderCars)
+    emitter.emit(EmitterEvents.RenderWinners)
   }
 }

@@ -1,11 +1,12 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { garageHttpService } from 'src/app/garage/services/garage-http-service'
 import { CarData } from 'src/app/models/car-data'
 import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'
 import { CarCell } from './components/car-cell/car-cell'
 import { Pagination } from '../shared/components/pagination/pagination'
 import { GarageControl } from './components/garage-control/garage-control'
+import { EmitterEvents } from '../enums/emitter-events'
 
 export class Garage extends BaseComponent {
   private carsData: CarData[] | null = null
@@ -49,7 +50,7 @@ export class Garage extends BaseComponent {
   private startRace(): void {
     if (!this.carCells || this.carCells.length === 1 || this.carCells.some((carCell) => carCell.car.passedPath !== 0)) {
       emitter.emit(
-        'show popup',
+        EmitterEvents.ShowPopup,
         'Sorry, there should be more than 1 car to start the race. Also all cars should be on the start line',
       )
       return
@@ -80,7 +81,7 @@ export class Garage extends BaseComponent {
   }
 
   private renderCars(): void {
-    httpFetcherGarage.getCars({ isPaginationRequiered: true }).then((carsData) => {
+    garageHttpService.getCars({ isPaginationRequired: true }).then((carsData) => {
       if (!carsData.length) {
         gameState.currentGaragePage -= 1
         return
@@ -97,7 +98,7 @@ export class Garage extends BaseComponent {
   }
 
   private changeGarageCount(): void {
-    httpFetcherGarage.getCars({ isPaginationRequiered: false }).then((carsData) => {
+    garageHttpService.getCars({ isPaginationRequired: false }).then((carsData) => {
       Object.assign(this.heading.element, {
         textContent: `Garage (${carsData.length} cars, currently on page ${gameState.currentGaragePage})`,
       })

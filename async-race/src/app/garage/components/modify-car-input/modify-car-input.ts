@@ -1,6 +1,7 @@
 import { gameState } from 'src/app/utils/game-state'
-import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { garageHttpService } from 'src/app/garage/services/garage-http-service'
 import { emitter } from 'src/app/utils/event-emitter'
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { CarInput } from '../../../shared/components/car-input/car-input'
 
 export class ModifyCarInput extends CarInput {
@@ -23,12 +24,12 @@ export class ModifyCarInput extends CarInput {
     if (modifyingTarget) {
       const oldName = modifyingTarget.carData.name
 
-      await httpFetcherGarage.modifyCar(modifyingTarget.carData.id, {
+      await garageHttpService.modifyCar(modifyingTarget.carData.id, {
         name: this.nameInput.inputValue || oldName,
         color: this.colorInput.inputValue ?? '#000000',
       })
-      emitter.emit('render cars')
-      emitter.emit('render winners')
+      emitter.emit(EmitterEvents.RenderCars)
+      emitter.emit(EmitterEvents.RenderWinners)
     }
   }
 }

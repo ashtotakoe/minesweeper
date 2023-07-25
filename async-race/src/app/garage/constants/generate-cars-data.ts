@@ -1,4 +1,4 @@
-export const carsDummyData = {
+export const generateCarsData = {
   names: [
     'Tesla Model 3',
     'Ford Focus',

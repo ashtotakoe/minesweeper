@@ -1,14 +1,15 @@
 import { CarData } from 'src/app/models/car-data'
 import { BaseComponent } from 'src/app/utils/base-component'
-import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
+import { garageHttpService } from 'src/app/garage/services/garage-http-service'
 import { bringCarBackToStart } from 'src/app/garage/utils/bring-car-back-to-start'
 import { buildSvgSprite } from 'src/app/garage/utils/build-svg-sprite'
 import { gameState } from 'src/app/utils/game-state'
 import { emitter } from 'src/app/utils/event-emitter'
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 
 export class Car extends BaseComponent {
   public isDriving = false
-  public areBrakesAktivated = false
+  public areBrakesActivated = false
 
   public carData: CarData
   private carModel = buildSvgSprite(this.element, './icons/car.svg#car')
@@ -46,7 +47,7 @@ export class Car extends BaseComponent {
         }
       }
 
-      if (this.areBrakesAktivated) {
+      if (this.areBrakesActivated) {
         bringCarBackToStart(this)
       }
 
@@ -55,14 +56,14 @@ export class Car extends BaseComponent {
 
       if (passedPath > roadLength) {
         this.isDriving = false
-        httpFetcherGarage.stopEngine(this.carData.id)
+        garageHttpService.stopEngine(this.carData.id)
       }
     }, 10)
   }
 
   private stopRace(): void {
     gameState.isRaceGoing = false
-    emitter.emit('show popup', 'race is finished!')
+    emitter.emit(EmitterEvents.ShowPopup, 'race is finished!')
   }
 
   private isRaceOver(): boolean {

@@ -1,7 +1,8 @@
 import { RequestStatuses } from '../enums/request-statuses'
 import { emitter } from './event-emitter'
 import { gameState } from './game-state'
-import { httpFetcherWinners } from '../winners/services/http-fetcher-winners'
+import { winnersHttpService } from '../winners/services/winners-http-service'
+import { EmitterEvents } from '../enums/emitter-events'
 
 export const saveWinner = async (): Promise<void> => {
   const winnerId = gameState.raceWinner?.carData.id
@@ -11,15 +12,15 @@ export const saveWinner = async (): Promise<void> => {
   }
   const timeInSeconds = Number((gameState.raceWinnerTime / 1000).toFixed(2))
 
-  const getWinnerResponse = await httpFetcherWinners.getWinner(winnerId)
+  const getWinnerResponse = await winnersHttpService.getWinner(winnerId)
 
   if (getWinnerResponse.status === RequestStatuses.NotFound) {
-    await httpFetcherWinners.setNewWinner(winnerId, timeInSeconds)
-    emitter.emit('render winners')
+    await winnersHttpService.setNewWinner(winnerId, timeInSeconds)
+    emitter.emit(EmitterEvents.RenderWinners)
     return
   }
 
-  await httpFetcherWinners.updateWinnerData(winnerId, timeInSeconds)
+  await winnersHttpService.updateWinnerData(winnerId, timeInSeconds)
 
-  emitter.emit('render winners')
+  emitter.emit(EmitterEvents.RenderWinners)
 }

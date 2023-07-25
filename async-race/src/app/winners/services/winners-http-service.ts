@@ -1,20 +1,20 @@
 import { API } from 'src/app/enums/api'
 import { HTTPMethods } from 'src/app/enums/http-methods'
-import { headersForPostMethod } from 'src/app/consts/headers-for-post-method'
+import { headersForPostMethod } from 'src/app/constants/headers-for-post-method'
 import { PageLimits } from 'src/app/enums/page-limits'
 import { gameState } from 'src/app/utils/game-state'
 import { WinnerData } from '../models/winner-data'
 import { WinnersQueryParams } from '../models/winner-query-params'
 
-class HTTPFetcherWinners {
+class WinnersHTTPService {
   public async getWinner(id: number): Promise<Response> {
     const response = await fetch(`${API.Path}/winners/${id}`)
     return response
   }
 
-  public async getWinners(isPaginationRequiered = false, queryParams?: WinnersQueryParams): Promise<WinnerData[]> {
+  public async getWinners(isPaginationRequired = false, queryParams?: WinnersQueryParams): Promise<WinnerData[]> {
     let query = ''
-    if (isPaginationRequiered) {
+    if (isPaginationRequired) {
       query = `?_page=${gameState.currentWinnersPage}&_limit=${PageLimits.WinnersLimit}`
     }
 
@@ -22,8 +22,8 @@ class HTTPFetcherWinners {
       query += `&_sort=${queryParams.sort}&_order=${queryParams.order}`
     }
 
-    const respone = await fetch(`${API.Path}/winners${query}`)
-    const winnersData = respone.json()
+    const response = await fetch(`${API.Path}/winners${query}`)
+    const winnersData = response.json()
     return winnersData
   }
 
@@ -34,8 +34,8 @@ class HTTPFetcherWinners {
   }
 
   public async updateWinnerData(id: number, rideTime: number): Promise<Response> {
-    const initialDataRewspose = await fetch(`${API.Path}/winners/${id}`)
-    const initialData: WinnerData = await initialDataRewspose.json()
+    const initialDataResponse = await fetch(`${API.Path}/winners/${id}`)
+    const initialData: WinnerData = await initialDataResponse.json()
     let { wins, time } = initialData
     wins += 1
     time = time > rideTime ? rideTime : time
@@ -67,4 +67,4 @@ class HTTPFetcherWinners {
   }
 }
 
-export const httpFetcherWinners = new HTTPFetcherWinners()
+export const winnersHttpService = new WinnersHTTPService()

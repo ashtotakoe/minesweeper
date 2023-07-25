@@ -1,5 +1,6 @@
 import { createCar } from 'src/app/utils/create-car'
 import { emitter } from 'src/app/utils/event-emitter'
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { CarInput } from '../../../shared/components/car-input/car-input'
 
 export class CreateCarInput extends CarInput {
@@ -15,7 +16,7 @@ export class CreateCarInput extends CarInput {
     }
 
     createCar(carData).then(() => {
-      emitter.emit('render cars')
+      emitter.emit(EmitterEvents.RenderCars)
     })
   }
 }

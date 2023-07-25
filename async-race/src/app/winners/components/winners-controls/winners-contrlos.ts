@@ -1,3 +1,4 @@
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { BaseComponent } from 'src/app/utils/base-component'
 import { emitter } from 'src/app/utils/event-emitter'
 
@@ -63,7 +64,7 @@ export class WinnersControls extends BaseComponent {
     const sort = this.sortingTypeInput.inputValue
     const order = this.sortingOrderInput.inputValue
 
-    emitter.emit('render winners', { sort, order })
+    emitter.emit(EmitterEvents.RenderWinners, { sort, order })
   }
 
   private setSelectOptions(): void {

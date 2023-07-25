@@ -4,7 +4,7 @@ import { emitter } from 'src/app/utils/event-emitter'
 import { WinnersLeaderBoard } from './components/winners-leader-board/winners-leader-board'
 import { Pagination } from '../shared/components/pagination/pagination'
 import { WinnersControls } from './components/winners-controls/winners-contrlos'
-import { httpFetcherWinners } from './services/http-fetcher-winners'
+import { winnersHttpService } from './services/winners-http-service'
 import { WinnersQueryParams } from './models/winner-query-params'
 
 export class Winners extends BaseComponent {
@@ -56,8 +56,8 @@ export class Winners extends BaseComponent {
       gameState.queryParams = queryParams
     }
 
-    const winnersData = await httpFetcherWinners.getWinners()
-    const winnersDataFromPage = await httpFetcherWinners.getWinners(true, gameState.queryParams ?? undefined)
+    const winnersData = await winnersHttpService.getWinners()
+    const winnersDataFromPage = await winnersHttpService.getWinners(true, gameState.queryParams ?? undefined)
     if (!winnersDataFromPage.length) {
       gameState.currentWinnersPage -= 1
       return

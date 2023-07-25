@@ -1,8 +1,9 @@
 import { BaseComponent } from 'src/app/utils/base-component'
-import { carsDummyData } from 'src/app/garage/consts/cars-dummy-data'
+import { generateCarsData } from 'src/app/garage/constants/generate-cars-data'
 import { createCar } from 'src/app/utils/create-car'
 import { emitter } from 'src/app/utils/event-emitter'
 import { gameState } from 'src/app/utils/game-state'
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { ModifyCarInput } from '../modify-car-input/modify-car-input'
 import { CreateCarInput } from '../create-car-input/create-car-input'
 import { CreateCarData } from '../../models/create-car-data'
@@ -73,11 +74,11 @@ export class GarageControl extends BaseComponent {
 
       Promise.all(stopRequests).then(() => {
         gameState.isRaceGoing = false
-        emitter.emit('render cars')
+        emitter.emit(EmitterEvents.RenderCars)
       })
     })
     this.generateCars.element.addEventListener('click', () => this.generateMoreCars())
-    this.startRace.element.addEventListener('click', () => emitter.emit('start race'))
+    this.startRace.element.addEventListener('click', () => emitter.emit(EmitterEvents.StartRace))
   }
 
   private generateMoreCars(): void {
@@ -85,13 +86,13 @@ export class GarageControl extends BaseComponent {
 
     randomArray.forEach((carData) => {
       createCar(carData).then(() => {
-        emitter.emit('render cars')
+        emitter.emit(EmitterEvents.RenderCars)
       })
     })
   }
 
   private generateRandomData(): CreateCarData[] {
-    const { names, colors } = carsDummyData
+    const { names, colors } = generateCarsData
     return Array.from({ length: 100 }, () => ({
       name: names[Math.floor(Math.random() * names.length)],
       color: colors[Math.floor(Math.random() * colors.length)],

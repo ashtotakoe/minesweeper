@@ -1,7 +1,7 @@
 import { BaseComponent } from 'src/app/utils/base-component'
 import { WinnerData } from 'src/app/winners/models/winner-data'
-import { httpFetcherGarage } from 'src/app/garage/services/http-fetcher-garage'
-import { winnerTableHeaders } from 'src/app/winners/consts/winner-table-headers'
+import { garageHttpService } from 'src/app/garage/services/garage-http-service'
+import { winnerTableHeaders } from 'src/app/winners/constants/winner-table-headers'
 import { CarData } from 'src/app/models/car-data'
 import { PageLimits } from 'src/app/enums/page-limits'
 import { gameState } from 'src/app/utils/game-state'
@@ -35,7 +35,7 @@ export class WinnersLeaderBoard extends BaseComponent {
   }
 
   private async setData(winnersData: WinnerData[]): Promise<void> {
-    const carsPromises = winnersData.map((winner) => httpFetcherGarage.getCar(winner.id))
+    const carsPromises = winnersData.map((winner) => garageHttpService.getCar(winner.id))
 
     const carsData = await Promise.all(carsPromises)
 

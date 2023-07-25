@@ -1,4 +1,4 @@
-import { headersForPostMethod } from '../../consts/headers-for-post-method'
+import { headersForPostMethod } from '../../constants/headers-for-post-method'
 import { API } from '../../enums/api'
 import { HTTPMethods } from '../../enums/http-methods'
 import { CarData } from '../../models/car-data'
@@ -6,12 +6,12 @@ import { CreateCarData } from '../models/create-car-data'
 import { EngineStartedData } from '../models/engine-started-response'
 import { StartEngineReturnProps } from '../models/start-engine-return-props'
 import { gameState } from '../../utils/game-state'
-import { httpFetcherWinners } from '../../winners/services/http-fetcher-winners'
+import { winnersHttpService } from '../../winners/services/winners-http-service'
 
-class HTTPFetcherGarage {
-  public async getCars({ isPaginationRequiered = true }): Promise<CarData[]> {
+class GarageHTTPService {
+  public async getCars({ isPaginationRequired = true }): Promise<CarData[]> {
     const query = `?_page=${gameState.currentGaragePage}&_limit=${API.CarLimit}`
-    const response = await fetch(`${API.Path}/garage${isPaginationRequiered ? query : ''}`)
+    const response = await fetch(`${API.Path}/garage${isPaginationRequired ? query : ''}`)
     const cars = await response.json()
     return cars
   }
@@ -63,7 +63,7 @@ class HTTPFetcherGarage {
       method: HTTPMethods.DELETE,
     })
 
-    await httpFetcherWinners.deleteWinner(id)
+    await winnersHttpService.deleteWinner(id)
   }
 
   public async modifyCar(id: number, carData: CreateCarData): Promise<void> {
@@ -76,4 +76,4 @@ class HTTPFetcherGarage {
   }
 }
 
-export const httpFetcherGarage = new HTTPFetcherGarage()
+export const garageHttpService = new GarageHTTPService()
