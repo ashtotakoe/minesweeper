@@ -1,3 +1,4 @@
+import { PageLimits } from 'src/app/enums/page-limits'
 import { headersForPostMethod } from '../../constants/headers-for-post-method'
 import { API } from '../../enums/api'
 import { HTTPMethods } from '../../enums/http-methods'
@@ -10,7 +11,7 @@ import { winnersHttpService } from '../../winners/services/winners-http-service'
 
 class GarageHTTPService {
   public async getCars({ isPaginationRequired = true }): Promise<CarData[]> {
-    const query = `?_page=${gameState.currentGaragePage}&_limit=${API.CarLimit}`
+    const query = `?_page=${gameState.currentGaragePage}&_limit=${PageLimits.CarsLimit}`
     const response = await fetch(`${API.Path}/garage${isPaginationRequired ? query : ''}`)
     const cars = await response.json()
     return cars

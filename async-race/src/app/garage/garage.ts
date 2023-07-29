@@ -41,8 +41,8 @@ export class Garage extends BaseComponent {
         className: 'garage',
       },
     })
-    emitter.subscribe('render cars', () => this.renderCars())
-    emitter.subscribe('start race', () => this.startRace())
+    emitter.subscribe(EmitterEvents.RenderCars, () => this.renderCars())
+    emitter.subscribe(EmitterEvents.StartRace, () => this.startRace())
 
     this.renderCars()
   }

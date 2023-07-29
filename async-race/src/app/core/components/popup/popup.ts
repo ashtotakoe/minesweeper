@@ -1,3 +1,4 @@
+import { EmitterEvents } from 'src/app/enums/emitter-events'
 import { BaseComponent } from 'src/app/utils/base-component'
 import { emitter } from 'src/app/utils/event-emitter'
 
@@ -19,7 +20,7 @@ export class Popup extends BaseComponent {
       },
     })
 
-    emitter.subscribe('show popup', (message: string) => this.showPopup(message))
+    emitter.subscribe(EmitterEvents.ShowPopup, (message: string) => this.showPopup(message))
   }
 
   private showPopup(message: string): void {

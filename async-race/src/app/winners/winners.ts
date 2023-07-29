@@ -6,6 +6,7 @@ import { Pagination } from '../shared/components/pagination/pagination'
 import { WinnersControls } from './components/winners-controls/winners-contrlos'
 import { winnersHttpService } from './services/winners-http-service'
 import { WinnersQueryParams } from './models/winner-query-params'
+import { EmitterEvents } from '../enums/emitter-events'
 
 export class Winners extends BaseComponent {
   private heading = new BaseComponent({
@@ -32,7 +33,9 @@ export class Winners extends BaseComponent {
       },
     })
 
-    emitter.subscribe('render winners', (queryParams?: WinnersQueryParams) => this.renderWinners(queryParams))
+    emitter.subscribe(EmitterEvents.RenderWinners, (queryParams?: WinnersQueryParams) =>
+      this.renderWinners(queryParams),
+    )
     this.renderWinners()
   }
 
