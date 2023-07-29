@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./reveal.css" />
+    <link rel="stylesheet" href="./theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <h3>GRASP</h3>
+          </section>
+
+          <section>
+            <h4>what is grasp?</h4>
+            <p class="fragment fade-up">
+              General Responsibility Assignment Software Patterns
+            </p>
+          </section>
+          <section>
+            <img
+              data-src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F2016-conference.less.works%2Fimages%2Fcraig-larman.jpg&f=1&nofb=1&ipt=f4715cae78c25d75631d5e0d287d9dcbf3ebe8986ff8eaa8f1a8905171c968fc&ipo=images"
+            />
+            <p>
+              where published by Craig Larman in his book "Applying UML and
+              patterns" (1997)
+            </p>
+          </section>
+        </section>
+
+        <section>Let's explore some patterns!</section>
+
+        <section>
+          <section>
+            <h4>Information expert</h4>
+            <p class="fragment fade-up">
+              The class should receive only the information that is necessary
+              for its operation
+            </p>
+          </section>
+
+          <section>
+            <pre>
+            <code data-line-numbers="0-9||11-16" lang="typescript">
+class Garage {
+  private carsCount = 1;
+  private cars: Car[] = []
+  private carsColors = ['blue', 'green', 'white']
+
+  constructor() {
+    this.createCars()
+  }
+
+  private createCars() {
+    for (let i = 0; i < carsCount; i++){
+      cars.push(new Car(this.carColors[i]))
+    }
+  }
+}
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre>
+              <code>
+class Car {
+  private color
+
+  constructor(color: string){
+    this.color = color
+  }
+}
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <h4>Low Coupling and High Cohesion</h4>
+          <p class="fragment fade-up">
+            Each module should not have a lot of information about other modules
+            and should focus on one specific task
+          </p>
+          <p class="fragment fade-up">
+            In other words classes should be independent and solve a specific
+            problem
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h4>creator</h4>
+          </section>
+
+          <section>
+            <ul>
+              <li class="fragment fade-up">
+                Instances of B contain or compositely aggregate instances of A
+              </li>
+              <li class="fragment fade-up">
+                Instances of B record instances of A
+              </li>
+              <li class="fragment fade-up">
+                Instances of B closely use instances of A
+              </li>
+              <li class="fragment fade-up">
+                Instances of B have the initializing information for instances
+                of A and pass it on creation
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <pre>
+            <code data-line-numbers="0-9||11-16|17-23" lang="typescript">
+class Garage {
+  private carsCount = 1;
+  private cars: Car[] = []
+  private carsColors = ['blue', 'green', 'white']
+
+  constructor() {
+    this.createCars()
+  }
+
+  private createCars() {
+    for (let i = 0; i < carsCount; i++){
+      cars.push(new Car(this.carColors[i]))
+    }
+  }
+
+  private startRace() {
+    this.cars.forEach((car) => {
+      car.getSpeed()
+    })
+  }
+}
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre>
+              <code>
+class Car {
+  private color
+
+  constructor(color: string){
+    this.color = color
+  }
+
+  public getSpeed(): string {
+    const speed = Math.floor(Math.random() * 150)
+    return `my speed is ${speed}`
+  }
+}
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <h4>controller</h4>
+          <img
+            class="fragment fade-in"
+            data-src="https://4.bp.blogspot.com/-CVyZ1HnHFzc/WxNyRcQAv_I/AAAAAAAACYY/zmNG1chDqhAFK70OOz_cuyJdZX1-43jpgCLcBGAs/s640/controler.png"
+          />
+          <p class="fragment fade-in">
+            Controller is responsible to deliver events to corresponding classes
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h4>Pure fabrication</h4>
+            <p class="fragment fade-in">
+              A pure fabrication is a class that does not represent a concept in
+              the problem domain, specially made up to achieve low coupling,
+              high cohesion, and the reuse potential thereof derived (when a
+              solution presented by the information expert pattern does not).
+            </p>
+          </section>
+          <section>
+            <p>Why do we need it?</p>
+
+            <ul>
+              <li class="fragment fade-in">make Copupling lower</li>
+              <li class="fragment fade-in">make Cohesion higher</li>
+              <li class="fragment fade-in">
+                makes code reusable (according to DRY)
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <p>example of pure fabrication</p>
+            <p class="fragment fade-in">services in Angular</p>
+          </section>
+        </section>
+
+        <section>
+          <h3>Polymorphism</h3>
+          <p class="fragment fade-in">
+            class interfaces can obtain couple of usecases depending on types of
+            passed params
+          </p>
+        </section>
+
+        <section>
+          <h3>indirection</h3>
+          <p class="fragment fade-in">
+            To achieve low copling between two objects we can assign the
+            responsibility of mediation between them to an intermediate object.
+          </p>
+        </section>
+
+        <section>
+          <h3>protected variations</h3>
+          <p class="fragment fade-in">Helps us to keep some parts of the aplication unchanged when the changes appeared using interfaces</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="./reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
