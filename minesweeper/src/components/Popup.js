@@ -1,4 +1,4 @@
-import { Component } from '../utils/component';
+import { Component } from '../utils/Component';
 import { rebuildTemplate } from '../utils/rebuild-template';
 import { minesweeperState } from '../utils/minesweeper-state';
 import { minesweeperComponents } from '../utils/minesweeper-components';

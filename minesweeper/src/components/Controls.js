@@ -1,4 +1,4 @@
-import { Component } from '../utils/component';
+import { Component } from '../utils/Component';
 import { minesweeperComponents } from '../utils/minesweeper-components';
 import { minesweeperState } from '../utils/minesweeper-state';
 import { toggleClass } from '../utils/toggle-class';

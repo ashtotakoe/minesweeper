@@ -1,4 +1,4 @@
-import { Component } from '../utils/component';
+import { Component } from '../utils/Component';
 import { minesweeperState } from '../utils/minesweeper-state';
 import { setClass } from '../utils/set-class';
 import { getRandomIndex } from '../utils/get-random-index';

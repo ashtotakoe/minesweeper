@@ -2,7 +2,7 @@ import './assets/styles/normalize.scss';
 import './assets/styles/style.scss';
 import { minesweeperState } from './utils/minesweeper-state';
 import { Template } from './components/Template';
-import { Component } from './utils/component';
+import { Component } from './utils/Component';
 import { setClassTemplate } from './utils/set-class';
 import { Header } from './components/Header';
 import { minesweeperComponents } from './utils/minesweeper-components';
